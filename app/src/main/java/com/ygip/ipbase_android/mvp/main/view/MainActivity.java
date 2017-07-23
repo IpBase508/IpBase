@@ -20,6 +20,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.base.XFragmentAdapter;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
+import lt.lemonlabs.android.expandablebuttonmenu.ExpandableButtonMenu;
+import lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay;
 
 public class MainActivity extends XActivity<MainPresent> {
     @BindView(R.id.viewPager)
@@ -32,6 +34,8 @@ public class MainActivity extends XActivity<MainPresent> {
     RadioButton rbtnProjects;
     @BindView(R.id.rbtn_me)
     RadioButton rbtnMe;
+    @BindView(R.id.button_menu)
+    ExpandableMenuOverlay menuOverlay;
     private MemberFragment memberFragment;
     private DynamicFragment dynamicFragment;
     private ProjectsFragment projectsFragment;
@@ -91,6 +95,24 @@ public class MainActivity extends XActivity<MainPresent> {
         fragments.add(dynamicFragment);
         fragments.add(projectsFragment);
         fragments.add(mineFragment);
+
+        menuOverlay.setOnMenuButtonClickListener(new ExpandableButtonMenu.OnMenuButtonClick() {
+            @Override
+            public void onClick(ExpandableButtonMenu.MenuButton action) {
+                switch (action) {
+                    case MID:
+                        // do stuff and dismiss
+                        menuOverlay.getButtonMenu().toggle();
+                        break;
+                    case LEFT:
+                        // do stuff
+                        break;
+                    case RIGHT:
+                        // do stuff
+                        break;
+                }
+            }
+        });
     }
 
     @Override

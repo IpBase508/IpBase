@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ebm="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/C6">
@@ -85,7 +86,7 @@
         android:layout_above="@+id/rg"
         android:background="@color/C4"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_more"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
@@ -94,12 +95,29 @@
         android:gravity="center"
         android:background="@color/C6">
 
-        <ImageView
-            android:id="@+id/iv_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_more"/>
+        <lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay
+            android:id="@+id/button_menu"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@null"
+            android:src="@drawable/ic_more"
+            ebm:dimAmount="0.8"
+            ebm:mainButtonSize="0.25"
+            ebm:otherButtonSize="0.22"
+            ebm:distanceY="0.17"
+            ebm:distanceX="0.28"
+            ebm:bottomPad="0.02"
+            ebm:closeButtonSrc="@drawable/ic_more"
+            ebm:leftButtonSrc="@drawable/ic_more"
+            ebm:midButtonSrc="@drawable/ic_more"
+            ebm:rightButtonSrc="@drawable/ic_more"
+            ebm:leftButtonText="@string/action_left"
+            ebm:midButtonText="@string/action_mid"
+            ebm:rightButtonText="@string/action_right"
+            />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
