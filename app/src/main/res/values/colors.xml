@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="C0">#5d9ff5</color><!--主色-->
+    <color name="C1">#313843</color><!--标题强调色；凸显颜色-->
+    <color name="C2">#647080</color><!--正文色，文字按钮颜色-->
+    <color name="C3">#979da5</color><!--次级正文颜色-->
+    <color name="C4">#d8dee5</color><!--分割线颜色-->
+    <color name="C5">#cccccc</color><!--输入框提示字颜色-->
+    <color name="C6">#ffffff</color><!--背景色-->
+    <color name="C7">#f0f0f0</color><!--忘记密码输入框提示字颜色-->
+    <color name="C8">#7f7f7f</color><!--提供组织选择的弹框为半透明颜色-->
+    <color name="C9">#fe6941</color>
+
+    <color name ="grayf0f">#f0f0f0</color>
+
+    <color name="graye6e">#e6e6e6</color>
+
+    <color name="gray7f7">#7f7f7f</color>
+</resources>

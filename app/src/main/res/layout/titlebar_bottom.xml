@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/C6">
+
+    <RadioGroup
+        android:id="@+id/rg"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@color/C6">
+
+        <RadioButton
+            android:id="@+id/rbtn_member"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/sel_bottom_member"
+            android:drawablePadding="6dp"
+            android:text="成员"
+            android:textColor="@drawable/sel_bottombar_txt"
+            android:textSize="@dimen/T5"/>
+
+        <RadioButton
+            android:id="@+id/rbtn_dynamic"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="6dp"
+            android:drawableTop="@drawable/sel_bottom_member"
+            android:gravity="center"
+            android:text="动态"
+            android:textColor="@drawable/sel_bottombar_txt"
+            android:textSize="@dimen/T5" />
+
+        <!-- 下面这个ImageView用来占位的 -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/rbtn_projects"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:button="@null"
+            android:drawableTop="@drawable/sel_bottom_member"
+            android:drawablePadding="4dp"
+            android:text="项目"
+            android:textColor="@drawable/sel_bottombar_txt"
+            android:textSize="@dimen/T5"/>
+
+        <RadioButton
+            android:id="@+id/rbtn_me"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:button="@null"
+            android:drawableTop="@drawable/sel_bottom_member"
+            android:drawablePadding="6dp"
+            android:text="我的"
+            android:textColor="@drawable/sel_bottombar_txt"
+            android:textSize="@dimen/T5"/>
+
+    </RadioGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_above="@+id/rg"
+        android:background="@color/C4"/>
+
+    <LinearLayout
+        android:id="@+id/ll_more"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:background="@color/C6">
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_more"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
