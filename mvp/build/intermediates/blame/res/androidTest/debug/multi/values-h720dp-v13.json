@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "F:\\MyProjects\\Ipbase-Android\\mvp\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
+        "outputFile": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 117
                 },
                 "from": {
-                    "file": "C:\\Users\\XQM\\.android\\build-cache\\e8e8625972d3f9c9cffd8f442e140a5cf983a192\\output\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "file": "C:\\Users\\lockyluo\\.android\\build-cache\\15b7e723a68f2f6d7e43b62dfe86f29ec9c41bbe\\output\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

@@ -66,19 +66,23 @@ dependencies {
     compile rootProject.ext.dependencies["MPAndroidChart"]
     compile rootProject.ext.dependencies["fastjson"]
     compile project(':mvp')
-    testCompile 'junit:junit:4.12'
     compile rootProject.ext.dependencies["SwipeDelMenuLayout"]
     compile files('libs/MobCommons-2016.1201.1839.jar')
     compile files('libs/MobTools-2016.1201.1839.jar')
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.contrarywind:Android-PickerView:3.2.5'
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.github.sd6352051.niftydialogeffects:niftydialogeffects:1.0.0@aar'
     compile 'com.squareup.picasso:picasso:2.3.2'
-    compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'co.lemonlabs:expandable-button-menu:1.0.0'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    compile 'com.orhanobut:logger:2.1.1'
+    testCompile 'junit:junit:4.12'
 }

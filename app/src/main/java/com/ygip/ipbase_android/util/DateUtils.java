@@ -11,6 +11,15 @@ import java.util.Map;
 public class DateUtils {
 
     /**
+     * 获取当前系统时间
+     */
+    public static String getCurrentTime() {
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String date = sDateFormat.format(new Date());
+        return date;
+    }
+
+    /**
      * 获取SimpleDateFormat
      *
      * @param parttern 日期格式
@@ -44,8 +53,8 @@ public class DateUtils {
     private static String addZero(int num) {
         if (num >= 0 && num < 10) {
             return "0" + num;
-        }else{
-            return num+"";
+        } else {
+            return num + "";
         }
     }
 
