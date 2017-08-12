@@ -28,10 +28,18 @@ public class ToastUtils {
             mToast.setText(text);
         }
         mToast.show();
+        Log.i("lockyToast", "--------------------------------");
         Log.i("lockyToast", text);
     }
 
-    public static void showLong(String text) {
-        Toast.makeText(App.getInstance(), text, Toast.LENGTH_LONG).show();
+    public static void showLong(Context context,String text) {
+        if (mToast == null) {
+            mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+        } else {
+            mToast.setText(text);
+        }
+        mToast.show();
+        Log.i("lockyToast", "--------------------------------");
+        Log.i("lockyToast", text);
     }
 }

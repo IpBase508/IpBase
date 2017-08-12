@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 
 import java.io.Serializable;
 
@@ -13,6 +15,7 @@ import java.io.Serializable;
 
 /**
  * Created by lockyluo on 2017/7/29.
+ * activity启动工具
  * 减少代码量
  */
 
@@ -24,7 +27,7 @@ public class StartActivityUtil {
         intent = new Intent(context, clazz);
 
         if(androidLogAdapter==null){
-            androidLogAdapter=new AndroidLogAdapter();
+            androidLogAdapter=new AndroidLogAdapter(getFormatStrategy());
             Logger.addLogAdapter(androidLogAdapter);
         }
         Logger.d("startActivity without data");
@@ -39,10 +42,18 @@ public class StartActivityUtil {
         intent.putExtras(bundle);
 
         if(androidLogAdapter==null){
-            androidLogAdapter=new AndroidLogAdapter();
+            androidLogAdapter=new AndroidLogAdapter(getFormatStrategy());
             Logger.addLogAdapter(androidLogAdapter);
         }
         Logger.d("startActivity with data");
         context.startActivity(intent);
+    }
+
+    private static FormatStrategy getFormatStrategy(){
+        FormatStrategy formatStrategy= PrettyFormatStrategy
+                .newBuilder()
+                .tag("locky part").build();
+        return  formatStrategy;
+
     }
 }

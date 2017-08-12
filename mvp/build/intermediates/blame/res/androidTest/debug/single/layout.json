@@ -12,12 +12,12 @@
         "source": "C:\\Users\\lockyluo\\.android\\build-cache\\15b7e723a68f2f6d7e43b62dfe86f29ec9c41bbe\\output\\res\\layout\\abc_select_dialog_material.xml"
     },
     {
-        "merged": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_tab_icon.xml",
-        "source": "C:\\Users\\lockyluo\\.android\\build-cache\\8e144815a3da2101953930055e5eef243ee0f329\\output\\res\\layout\\design_layout_tab_icon.xml"
-    },
-    {
         "merged": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_menu_layout.xml",
         "source": "C:\\Users\\lockyluo\\.android\\build-cache\\15b7e723a68f2f6d7e43b62dfe86f29ec9c41bbe\\output\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_tab_icon.xml",
+        "source": "C:\\Users\\lockyluo\\.android\\build-cache\\8e144815a3da2101953930055e5eef243ee0f329\\output\\res\\layout\\design_layout_tab_icon.xml"
     },
     {
         "merged": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_mode_bar.xml",
@@ -48,12 +48,12 @@
         "source": "C:\\Users\\lockyluo\\.android\\build-cache\\15b7e723a68f2f6d7e43b62dfe86f29ec9c41bbe\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
-        "merged": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_text_input_password_icon.xml",
-        "source": "C:\\Users\\lockyluo\\.android\\build-cache\\8e144815a3da2101953930055e5eef243ee0f329\\output\\res\\layout\\design_text_input_password_icon.xml"
-    },
-    {
         "merged": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item_subheader.xml",
         "source": "C:\\Users\\lockyluo\\.android\\build-cache\\8e144815a3da2101953930055e5eef243ee0f329\\output\\res\\layout\\design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_text_input_password_icon.xml",
+        "source": "C:\\Users\\lockyluo\\.android\\build-cache\\8e144815a3da2101953930055e5eef243ee0f329\\output\\res\\layout\\design_text_input_password_icon.xml"
     },
     {
         "merged": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",

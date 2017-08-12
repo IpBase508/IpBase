@@ -10,14 +10,20 @@ import android.widget.TextView;
 import com.ygip.ipbase_android.R;
 import com.ygip.ipbase_android.mvp.projects.model.Project;
 import com.ygip.ipbase_android.mvp.projects.presenter.ProjectDetailPresenter;
+import com.ygip.ipbase_android.util.ToastUtils;
 
 import butterknife.BindView;
 
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.kit.Kits;
+import cn.droidlover.xdroidmvp.mvp.VDelegate;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
 
 public class ProjectDetailActivity extends XActivity<ProjectDetailPresenter> {
+    public Project getProject() {
+        return project;
+    }
+
     private Project project;
 
     @BindView(R.id.titlebar_tv_title)
@@ -38,13 +44,19 @@ public class ProjectDetailActivity extends XActivity<ProjectDetailPresenter> {
             titlebarTvTitle.setText("项目详情");
         }else {
             titlebarTvTitle.setText(project.getProjectName()+"项目");
+            getP().loadData();
         }
 
         titlebarLlLeft.setVisibility(View.VISIBLE);
         titlebarLlRight.setVisibility(View.VISIBLE);
+        titlebarTvRight.setVisibility(View.VISIBLE);
+        titlebarTvRight.setText("保存");
     }
 
 
+    public void toast(String str){
+        ToastUtils.show(context,str);
+    }
 
     @Override
     public int getLayoutId() {

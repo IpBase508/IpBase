@@ -1,9 +1,9 @@
 package com.ygip.ipbase_android.mvp.projects.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
-
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
-import cn.droidlover.xrecyclerview.LoadMoreUIHandler;
 import cn.droidlover.xrecyclerview.RecyclerItemCallback;
-import cn.droidlover.xrecyclerview.SimpleLoadMoreFooter;
 import cn.droidlover.xrecyclerview.XRecyclerContentLayout;
 import cn.droidlover.xrecyclerview.XRecyclerView;
 
@@ -35,6 +35,7 @@ import cn.droidlover.xrecyclerview.XRecyclerView;
  */
 
 public class ProjectsFragment extends XLazyFragment<ProjectPresenter> {
+
     @BindView(R.id.titlebar_tv_title)
     TextView titlebarTvTitle;
     @BindView(R.id.titlebar_ll_left)
@@ -47,8 +48,11 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> {
     TextView titlebarTvRight;
     @BindView(R.id.xRecyclerContentLayout_projects)
     XRecyclerContentLayout xRecyclerContentLayoutProjects;
+
+    Unbinder unbinder;
     private ProjectAdapter adapter;
     private Project project;
+    private List<Project> projects = new ArrayList<>();
     public List<View> footerViewList;
 
     public List<View> getFooterViewList() {
@@ -63,13 +67,15 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> {
         this.projects = projects;
     }
 
-    private List<Project> projects = new ArrayList<>();
+
 
 
     @Override
     public void initData(Bundle savedInstanceState) {
         titlebarTvTitle.setText("项目");
-
+        titlebarLlRight.setVisibility(View.VISIBLE);
+        titlebarTvRight.setVisibility(View.VISIBLE);
+        titlebarTvRight.setText("添加");
         projects = getP().loadData();
         initAdapter();
     }
@@ -93,6 +99,7 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> {
             @Override
             public void onRefresh() {
                 getP().refreshData(1, xRecyclerContentLayoutProjects, adapter, projects);
+                xRecyclerView.setPage(1,2);
                 //ToastUtils.show(context, "正在刷新");
             }
 
@@ -136,4 +143,27 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> {
     }
 
 
+
+    @OnClick(R.id.titlebar_tv_title)
+    public void onTitlebarTvTitleClicked() {
+    }
+
+    @OnClick(R.id.titlebar_ll_left)
+    public void onTitlebarLlLeftClicked() {
+    }
+
+    @OnClick(R.id.titlebar_iv_right)
+    public void onTitlebarIvRightClicked() {
+        StartActivityUtil.start(context,NewProjectActivity.class);
+    }
+
+    @OnClick(R.id.titlebar_ll_right)
+    public void onTitlebarLlRightClicked() {
+        StartActivityUtil.start(context,NewProjectActivity.class);
+    }
+
+    @OnClick(R.id.titlebar_tv_right)
+    public void onTitlebarTvRightClicked() {
+        StartActivityUtil.start(context,NewProjectActivity.class);
+    }
 }

@@ -47,9 +47,17 @@ public class Project implements Serializable{
         this.screenShots = screenShots;
     }
 
+    public int getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(int projectType) {
+        this.projectType = projectType;
+    }
     private String logo;
     private String projectName;
     private String[] members;
     private String finishedDate;
     private String[] screenShots;
+    private int projectType;
 }
