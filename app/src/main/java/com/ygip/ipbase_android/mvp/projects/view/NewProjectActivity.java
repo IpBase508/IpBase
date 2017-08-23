@@ -1,15 +1,19 @@
 package com.ygip.ipbase_android.mvp.projects.view;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,13 +21,16 @@ import com.orhanobut.logger.Logger;
 import com.ygip.ipbase_android.R;
 import com.ygip.ipbase_android.mvp.projects.model.Project;
 import com.ygip.ipbase_android.mvp.projects.presenter.NewProjectPresenter;
+import com.ygip.ipbase_android.util.DateUtils;
 import com.ygip.ipbase_android.util.DialogUtils;
 import com.ygip.ipbase_android.util.ToastUtils;
 import com.ygip.ipbase_android.util.ViewDelegateByLocky;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.kit.Kits;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
@@ -32,11 +39,16 @@ import me.iwf.photopicker.widget.MultiPickResultView;
 public class NewProjectActivity extends XActivity<NewProjectPresenter> {
 
     ViewDelegateByLocky vDelegate;
-    @BindView(R.id.newproject_project_name)
+    @BindView(R.id.newProject_projectName)
     EditText newprojectProjectName;
+    @BindView(R.id.newProject_DatePicker)
+    DatePicker newProjectDatePicker;
+    @BindView(R.id.newProject_scrollview)
+    ScrollView newProjectScrollview;
     private ArrayList<String> logo = new ArrayList<>();
     private Project project;
     public static boolean isSaved = false;
+    private Calendar calendar=Calendar.getInstance();
 
     @BindView(R.id.newproject_sp_project_type)
     Spinner newprojectSpProjectType;
@@ -54,22 +66,32 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
     LinearLayout titlebarLlRight;
     @BindView(R.id.titlebar_tv_right)
     TextView titlebarTvRight;
-    @BindView(R.id.new_project_select_logo)
+    @BindView(R.id.newProject_select_logo)
     MultiPickResultView newProjectSelectLogo;
+
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_new_project;
+    }
 
     @Override
     public void initData(Bundle savedInstanceState) {
 
         initView();
         project = getP().loadData(context);
-        if (!Kits.Empty.check(project)) {
+        if (project!=null) {
             try {
                 newprojectProjectName.setText(project.getProjectName());
                 newprojectSpProjectType.setSelection(project.getProjectType());
                 Logger.d(project.getLogo());
-                ArrayList<String> list=new ArrayList<>();
-                list.add(project.getLogo());
-                newProjectSelectLogo.showPics(list);
+
+                if(project.getLogo()!=null)
+                {
+                    ArrayList<String> list = new ArrayList<>();
+                    list.add(project.getLogo());
+                    newProjectSelectLogo.showPics(list);
+                }
             } catch (Exception e) {
                 Logger.e(e.getMessage());
             }
@@ -85,7 +107,7 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
         titlebarTvRight.setVisibility(View.VISIBLE);
         titlebarTvRight.setText("保存");
 
-        newProjectSelectLogo.init(context, 1, MultiPickResultView.ACTION_SELECT, logo);//图片选择器
+        newProjectSelectLogo.init(context, 8, MultiPickResultView.ACTION_SELECT, logo);//图片选择器
         getRxPermissions()
                 .request(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .subscribe(granded -> {
@@ -93,8 +115,8 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
                         newProjectSelectLogo.setVisibility(View.VISIBLE);//有sd权限则显示选择器
                     } else {
                         newProjectSelectLogo.setVisibility(View.GONE);
-                        ToastUtils.show(context, "sd卡权限被拒绝，无法访问图片");
-                        finish();
+                        ToastUtils.show("sd卡权限被拒绝，无法访问图片");
+                        //finish();
                     }
                 });
 
@@ -109,6 +131,14 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
 
             }
         });
+
+
+        newProjectDatePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+            }
+        });
     }
 
     private boolean checkNull() {
@@ -116,17 +146,16 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
                 && newprojectSpProjectType.getSelectedItemPosition() != 0
                 && newProjectSelectLogo.getPhotos() != null
                 ) {
-            try
-            {
+            try {
                 newProjectSelectLogo.getPhotos().get(0);
                 return false;
-            }catch (Exception e){
+            } catch (Exception e) {
                 Logger.e(e.getMessage());
-                ToastUtils.show(context,"信息未填写完整");
+                ToastUtils.show("未选择图片");
             }
 
-        }else {
-            ToastUtils.show(context,"信息未填写完整");
+        } else {
+            ToastUtils.show("信息未填写完整");
         }
         return true;
     }
@@ -138,10 +167,6 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
         logo = newProjectSelectLogo.getPhotos();//获取返回的图片地址
     }
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_new_project;
-    }
 
     @Override
     public NewProjectPresenter newP() {
@@ -155,10 +180,32 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
         return vDelegate;
     }
 
+
+    private Project buildData() {
+        if (!checkNull()) {
+            project = new Project();
+            project.setProjectName(newprojectProjectName.getText().toString());
+
+            try {
+                logo = newProjectSelectLogo.getPhotos();
+                project.setLogo(logo.get(0));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            project.setProjectType(newprojectSpProjectType.getSelectedItemPosition());
+            return project;
+        }
+        return null;
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            DialogUtils.dialogFinish(context);
+            if (!isSaved) {
+                DialogUtils.dialogFinish(context);
+            } else {
+                finish();
+            }
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -189,7 +236,7 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
 
     @OnClick(R.id.titlebar_tv_right)
     public void onTitlebarTvRightClicked() {
-        if(buildData()!=null){
+        if (buildData() != null) {
             getP().save(project);
             isSaved = true;
         }
@@ -201,16 +248,18 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
 
     }
 
-    private Project buildData(){
-        if(!checkNull()){
-            project = new Project();
-            project.setProjectName(newprojectProjectName.getText().toString());
-            project.setLogo(logo.get(0));
-            project.setProjectType(newprojectSpProjectType.getSelectedItemPosition());
-            return project;
-        }
-        return null;
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isSaved=false;
+    }
 }

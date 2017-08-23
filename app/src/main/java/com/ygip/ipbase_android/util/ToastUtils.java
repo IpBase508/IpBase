@@ -12,14 +12,22 @@ import com.ygip.ipbase_android.App;
  */
 
 public class ToastUtils {
-    public static void show(String text) {
-        Toast.makeText(App.getInstance(), text, Toast.LENGTH_SHORT).show();
-    }
-
     /**
      * 可覆盖前一条消息显示的toast工具
      */
     private static Toast mToast;//控制toast时间
+
+    public static void show(String text) {
+        if (mToast == null) {
+            mToast = Toast.makeText(App.getInstance(), text, Toast.LENGTH_SHORT);
+        } else {
+            mToast.setText(text);
+        }
+        mToast.show();
+        Log.i("lockyToast", "--------------------------------");
+        Log.i("lockyToast", text);
+    }
+
 
     public static void show(Context context, String text) {
         if (mToast == null) {
@@ -32,9 +40,20 @@ public class ToastUtils {
         Log.i("lockyToast", text);
     }
 
-    public static void showLong(Context context,String text) {
+    public static void showLong(Context context, String text) {
         if (mToast == null) {
             mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+        } else {
+            mToast.setText(text);
+        }
+        mToast.show();
+        Log.i("lockyToast", "--------------------------------");
+        Log.i("lockyToast", text);
+    }
+
+    public static void showLong(String text) {
+        if (mToast == null) {
+            mToast = Toast.makeText(App.getInstance(), text, Toast.LENGTH_LONG);
         } else {
             mToast.setText(text);
         }

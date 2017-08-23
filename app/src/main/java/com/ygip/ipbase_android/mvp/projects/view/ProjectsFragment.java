@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.zxing.activity.WeChatCaptureActivity;
+import com.google.zxing.listener.ResultListener;
 import com.ygip.ipbase_android.R;
 import com.ygip.ipbase_android.mvp.projects.adapter.ProjectAdapter;
 import com.ygip.ipbase_android.mvp.projects.model.Project;
@@ -34,7 +36,7 @@ import cn.droidlover.xrecyclerview.XRecyclerView;
  * Created by lockyluo on 2017/7/28.
  */
 
-public class ProjectsFragment extends XLazyFragment<ProjectPresenter> {
+public class ProjectsFragment extends XLazyFragment<ProjectPresenter> implements ResultListener{
 
     @BindView(R.id.titlebar_tv_title)
     TextView titlebarTvTitle;
@@ -129,6 +131,12 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> {
     }
 
     @Override
+    public void onResult(String s) {
+        ToastUtils.show(s);
+
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.fragment_projects;
     }
@@ -146,6 +154,7 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> {
 
     @OnClick(R.id.titlebar_tv_title)
     public void onTitlebarTvTitleClicked() {
+        WeChatCaptureActivity.init(context,ProjectsFragment.this,0,"");
     }
 
     @OnClick(R.id.titlebar_ll_left)

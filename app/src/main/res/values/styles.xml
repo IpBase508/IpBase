@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/C9</item>
         <item name="colorPrimaryDark">@color/C9</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/C9</item>
     </style>
 
     <style name="floatlabelededittext">
@@ -16,5 +16,7 @@
         <item name="colorControlNormal">@color/C3</item>
         <item name="colorControlActivated">@color/C0</item>
     </style>
-
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/T2</item>
+    </style>
 </resources>

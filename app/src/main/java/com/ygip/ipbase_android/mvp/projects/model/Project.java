@@ -60,4 +60,14 @@ public class Project implements Serializable{
     private String finishedDate;
     private String[] screenShots;
     private int projectType;
+
+    public String getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(String finishDate) {
+        this.finishDate = finishDate;
+    }
+
+    private String finishDate;
 }

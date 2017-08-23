@@ -1,41 +1,43 @@
 package com.ygip.ipbase_android.mvp.mine.view;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.ygip.ipbase_android.R;
 import com.ygip.ipbase_android.mvp.mine.presenter.MinePresenter;
+import com.ygip.ipbase_android.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by lockyluo on 2017/7/28.
  */
 
 public class MineFragment extends XLazyFragment<MinePresenter> {
-    @BindView(R.id.titlebar_tv_title)
-    TextView titlebarTvTitle;
-    @BindView(R.id.titlebar_ll_left)
-    LinearLayout titlebarLlLeft;
-    @BindView(R.id.titlebar_iv_right)
-    ImageView titlebarIvRight;
-    @BindView(R.id.titlebar_ll_right)
-    LinearLayout titlebarLlRight;
-    @BindView(R.id.titlebar_tv_right)
-    TextView titlebarTvRight;
+
+    @BindView(R.id.iv_mine_head)
+    CircleImageView ivMineHead;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbar;
+    @BindView(R.id.mine_ConstraintLayout)
+    CoordinatorLayout mineConstraintLayout;
+    Unbinder unbinder;
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        titlebarTvTitle.setText("我的");
+        toolbar.setTitle("我的");
     }
 
     @Override
@@ -54,4 +56,20 @@ public class MineFragment extends XLazyFragment<MinePresenter> {
 
 
 
+
+
+
+
+    public void toast(String s){
+        ToastUtils.show(s);
+    }
+
+    @OnClick(R.id.iv_mine_head)
+    public void onIvMineHeadClicked() {
+        toast("iv_mine_head");
+    }
+
+    @OnClick(R.id.toolbar)
+    public void onToolbarClicked() {
+    }
 }

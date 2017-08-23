@@ -10,7 +10,7 @@ import android.os.Vibrator;
 
 public class MyVibrator {
     private static Vibrator vibrator;
-    private static final long defaultTime=150;
+    private static final long defaultTime=170L;
 
     public static void vibrate(Context context) {
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);

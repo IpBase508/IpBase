@@ -8,6 +8,7 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+import com.ygip.ipbase_android.App;
 
 import java.io.Serializable;
 
@@ -21,14 +22,13 @@ import java.io.Serializable;
 
 public class StartActivityUtil {
     private static Intent intent;
-    private static AndroidLogAdapter androidLogAdapter;
 
     public static void start(Context context, Class clazz) {
         intent = new Intent(context, clazz);
 
-        if(androidLogAdapter==null){
-            androidLogAdapter=new AndroidLogAdapter(getFormatStrategy());
-            Logger.addLogAdapter(androidLogAdapter);
+        if(App.androidLogAdapter==null){
+            App.androidLogAdapter=new AndroidLogAdapter(getFormatStrategy());
+            Logger.addLogAdapter(App.androidLogAdapter);
         }
         Logger.d("startActivity without data");
         context.startActivity(intent);
@@ -41,9 +41,9 @@ public class StartActivityUtil {
         bundle.putSerializable("data", data);
         intent.putExtras(bundle);
 
-        if(androidLogAdapter==null){
-            androidLogAdapter=new AndroidLogAdapter(getFormatStrategy());
-            Logger.addLogAdapter(androidLogAdapter);
+        if(App.androidLogAdapter==null){
+            App.androidLogAdapter=new AndroidLogAdapter(getFormatStrategy());
+            Logger.addLogAdapter(App.androidLogAdapter);
         }
         Logger.d("startActivity with data");
         context.startActivity(intent);
@@ -54,6 +54,5 @@ public class StartActivityUtil {
                 .newBuilder()
                 .tag("locky part").build();
         return  formatStrategy;
-
     }
 }

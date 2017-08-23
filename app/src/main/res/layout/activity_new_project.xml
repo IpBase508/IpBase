@@ -11,6 +11,7 @@
     <include layout="@layout/titlebar"></include>
 
     <ScrollView
+        android:id="@+id/newProject_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -36,7 +37,7 @@
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/newproject_project_name"
+                    android:id="@+id/newProject_projectName"
                     style="@style/AppTheme"
                     android:layout_width="match_parent"
                     android:layout_height="35sp"
@@ -60,7 +61,7 @@
                     android:textSize="15sp" />
 
                 <me.iwf.photopicker.widget.MultiPickResultView
-                    android:id="@+id/new_project_select_logo"
+                    android:id="@+id/newProject_select_logo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -126,8 +127,25 @@
                     android:layout_height="35sp" />
 
 
-            </LinearLayout>
 
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <DatePicker
+                    android:id="@+id/newProject_DatePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"
+                    ></DatePicker>
+
+            </LinearLayout>
         </LinearLayout>
 
 
