@@ -24,8 +24,8 @@ public class ToastUtils {
             mToast.setText(text);
         }
         mToast.show();
-        Log.i("lockyToast", "--------------------------------");
-        Log.i("lockyToast", text);
+        Log.i("Toast", "--------------------------------");
+        Log.i("Toast", text);
     }
 
 
@@ -39,21 +39,20 @@ public class ToastUtils {
         Log.i("lockyToast", "--------------------------------");
         Log.i("lockyToast", text);
     }
-
-    public static void showLong(Context context, String text) {
+    public static void showLong(String text) {
         if (mToast == null) {
-            mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+            mToast = Toast.makeText(App.getInstance(), text, Toast.LENGTH_LONG);
         } else {
             mToast.setText(text);
         }
         mToast.show();
-        Log.i("lockyToast", "--------------------------------");
-        Log.i("lockyToast", text);
+        Log.i("Toast", "--------------------------------");
+        Log.i("Toast", text);
     }
 
-    public static void showLong(String text) {
+    public static void showLong(Context context, String text) {
         if (mToast == null) {
-            mToast = Toast.makeText(App.getInstance(), text, Toast.LENGTH_LONG);
+            mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
         } else {
             mToast.setText(text);
         }

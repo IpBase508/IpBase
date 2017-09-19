@@ -1,9 +1,7 @@
 package com.ygip.ipbase_android.mvp.projects.view;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
@@ -36,7 +33,7 @@ import cn.droidlover.xrecyclerview.XRecyclerView;
  * Created by lockyluo on 2017/7/28.
  */
 
-public class ProjectsFragment extends XLazyFragment<ProjectPresenter> implements ResultListener{
+public class ProjectsFragment extends XLazyFragment<ProjectPresenter> {
 
     @BindView(R.id.titlebar_tv_title)
     TextView titlebarTvTitle;
@@ -51,11 +48,11 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> implements
     @BindView(R.id.xRecyclerContentLayout_projects)
     XRecyclerContentLayout xRecyclerContentLayoutProjects;
 
-    Unbinder unbinder;
     private ProjectAdapter adapter;
     private Project project;
     private List<Project> projects = new ArrayList<>();
     public List<View> footerViewList;
+    public static final String tag = "ProjectsFragment";
 
     public List<View> getFooterViewList() {
         return footerViewList;
@@ -68,8 +65,6 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> implements
     public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
-
-
 
 
     @Override
@@ -101,7 +96,7 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> implements
             @Override
             public void onRefresh() {
                 getP().refreshData(1, xRecyclerContentLayoutProjects, adapter, projects);
-                xRecyclerView.setPage(1,2);
+                xRecyclerView.setPage(1, 2);
                 //ToastUtils.show(context, "正在刷新");
             }
 
@@ -117,7 +112,7 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> implements
             @Override
             public void onItemClick(int position, Project model, int tag, ProjectAdapter.ViewHolder holder) {
                 super.onItemClick(position, model, tag, holder);
-                StartActivityUtil.start(context, ProjectDetailActivity.class, adapter.getDataSource().get(position));
+                StartActivityUtil.startWithData(context, ProjectDetailActivity.class, adapter.getDataSource().get(position));
             }
 
             @Override
@@ -130,11 +125,6 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> implements
 
     }
 
-    @Override
-    public void onResult(String s) {
-        ToastUtils.show(s);
-
-    }
 
     @Override
     public int getLayoutId() {
@@ -151,10 +141,14 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> implements
     }
 
 
-
     @OnClick(R.id.titlebar_tv_title)
     public void onTitlebarTvTitleClicked() {
-        WeChatCaptureActivity.init(context,ProjectsFragment.this,0,"");
+        WeChatCaptureActivity.init(context, new ResultListener() {
+            @Override
+            public void onResult(String s) {
+                ToastUtils.show(tag + ":" + s);
+            }
+        }, getResources().getColor(R.color.colorPrimary), "二维码扫描");
     }
 
     @OnClick(R.id.titlebar_ll_left)
@@ -163,16 +157,16 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> implements
 
     @OnClick(R.id.titlebar_iv_right)
     public void onTitlebarIvRightClicked() {
-        StartActivityUtil.start(context,NewProjectActivity.class);
+        StartActivityUtil.startWithData(context, NewProjectActivity.class);
     }
 
     @OnClick(R.id.titlebar_ll_right)
     public void onTitlebarLlRightClicked() {
-        StartActivityUtil.start(context,NewProjectActivity.class);
+        StartActivityUtil.startWithData(context, NewProjectActivity.class);
     }
 
     @OnClick(R.id.titlebar_tv_right)
     public void onTitlebarTvRightClicked() {
-        StartActivityUtil.start(context,NewProjectActivity.class);
+        StartActivityUtil.startWithData(context, NewProjectActivity.class);
     }
 }

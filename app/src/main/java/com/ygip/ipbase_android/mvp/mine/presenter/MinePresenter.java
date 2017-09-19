@@ -9,4 +9,5 @@ import cn.droidlover.xdroidmvp.mvp.XPresent;
  */
 
 public class MinePresenter extends XPresent<MineFragment>{
+
 }

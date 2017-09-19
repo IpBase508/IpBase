@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by lockyluo on 2017/7/28.
  */
 
-public class Project implements Serializable{
+public class Project implements Serializable {
     public String getLogo() {
         return logo;
     }
@@ -54,6 +54,7 @@ public class Project implements Serializable{
     public void setProjectType(int projectType) {
         this.projectType = projectType;
     }
+
     private String logo;
     private String projectName;
     private String[] members;
@@ -61,13 +62,5 @@ public class Project implements Serializable{
     private String[] screenShots;
     private int projectType;
 
-    public String getFinishDate() {
-        return finishDate;
-    }
 
-    public void setFinishDate(String finishDate) {
-        this.finishDate = finishDate;
-    }
-
-    private String finishDate;
 }

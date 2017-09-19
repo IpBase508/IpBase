@@ -3,9 +3,12 @@ package com.ygip.ipbase_android.mvp.projects.model;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
+import com.ygip.ipbase_android.mvp.projects.listener.ProjectDataListener;
+import com.ygip.ipbase_android.util.SharedPrefUtils;
 import com.ygip.ipbase_android.util.ToastUtils;
 import com.ygip.ipbase_android.util.ViewDelegateByLocky;
 
@@ -13,22 +16,13 @@ import cn.droidlover.xdroidmvp.kit.Kits;
 
 /**
  * Created by lockyluo on 2017/8/3.
+ * 封装通过url传输javaBean的方法
  */
 
 public class ProjectModel {
-    private static ViewDelegateByLocky viewDelegateByLocky;
-    private static Context context;
+
     private static Thread thread;
     private static ProjectModel projectModel;
-
-    public static void setViewDelegateByLocky(ViewDelegateByLocky viewDelegateByLocky) {
-        ProjectModel.viewDelegateByLocky = viewDelegateByLocky;
-    }
-
-    public static void setContext(Context context) {
-        ProjectModel.context = context;
-    }
-
 
     public static ProjectModel getInstance() {
         if (projectModel == null) {
@@ -38,54 +32,51 @@ public class ProjectModel {
     }
 
 
-    public Project getData(Context context,ViewDelegateByLocky viewDelegateByLocky) {
+    public Project getData(Context context, ProjectDataListener projectDataListener) {
         Project project = new Project();
+        if (projectDataListener != null) {
+            projectDataListener.onStart();
+        }
         try {
-            SharedPreferences sp = context.getSharedPreferences("local_data", Context.MODE_PRIVATE);
-            String data=sp.getString("project_local", "");
+
+            String data = SharedPrefUtils.load("project_local");
             Logger.d(data);
-            if(data.equals("")){
-                return project;
+            if (data.equals("")) {
+                return null;
             }
             project = (new Gson()).fromJson(data, Project.class);
 
         } catch (Exception e) {
             Logger.e(e.getMessage());
         } finally {
-            viewDelegateByLocky.toastShort("model loaded");
+            if (projectDataListener != null) {
+                projectDataListener.onFinish();
+            }
             return project;
         }
     }
 
-    private void saveLocalData(Project project) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("local_data", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor;
-        {
-            String data = (new Gson()).toJson(project);
-            editor = sharedPreferences.edit();
-            editor.putString("project_local", data);
-            editor.commit();
-            ToastUtils.show(context,"model save local");
+    private void saveLocalData(Project project, Context context, @Nullable ProjectDataListener projectDataListener) {
+        if (projectDataListener != null) {
+            projectDataListener.onStart();
+        }
+
+        String data = (new Gson()).toJson(project);
+        SharedPrefUtils.save("project_local", data);
+        if (projectDataListener != null) {
+            projectDataListener.onFinish();
         }
     }
 
-    public void UploadData(Project project, ViewDelegateByLocky viewDelegateByLocky) {
+    public void UploadData(Project project, Context context, @Nullable ProjectDataListener projectDataListener) {
 
-        context = viewDelegateByLocky.getContext();
         if (thread != null) {
             thread.interrupt();
         }
 
-        thread = new Thread(() -> {
-
-            saveLocalData(project);
-
-            ((Activity) context).runOnUiThread(() ->
-                    {
-                        //viewDelegateByLocky.toastShort("model已上传")
-                    }
-            );
-        });
+        thread = new Thread(() ->
+                saveLocalData(project, context, projectDataListener)
+        );
         thread.start();
 
     }

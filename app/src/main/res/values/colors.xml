@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#fe6941</color>
+    <color name="colorPrimaryDark">#fe6941</color>
+    <color name="colorAccent">#fe6941</color>
 
     <color name="C0">#5d9ff5</color><!--主色-->
     <color name="C1">#313843</color><!--标题强调色；凸显颜色-->

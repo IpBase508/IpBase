@@ -8,7 +8,19 @@
         "source": "C:\\Users\\lockyluo\\.android\\build-cache\\8e144815a3da2101953930055e5eef243ee0f329\\output\\res\\anim-v21\\design_appbar_state_list_animator.xml"
     },
     {
+        "merged": "G:\\AndroidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
+        "source": "D:\\.android\\build-cache\\09c76e5ba49fa174093d04c1cf971d9990d75ce7\\output\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "G:\\AndroidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
+        "source": "D:\\.android\\build-cache\\09c76e5ba49fa174093d04c1cf971d9990d75ce7\\output\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
+    },
+    {
         "merged": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
         "source": "C:\\Users\\lockyluo\\.android\\build-cache\\8e144815a3da2101953930055e5eef243ee0f329\\output\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "G:\\AndroidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim-v21\\design_appbar_state_list_animator.xml",
+        "source": "D:\\.android\\build-cache\\09c76e5ba49fa174093d04c1cf971d9990d75ce7\\output\\res\\anim-v21\\design_appbar_state_list_animator.xml"
     }
 ]

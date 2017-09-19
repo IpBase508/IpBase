@@ -44,10 +44,10 @@ android {
         }
     }
 
-    dexOptions {
-        incremental true
-        javaMaxHeapSize "4g"
-    }
+//    dexOptions {
+//        incremental true
+//        javaMaxHeapSize "4g"
+//    }
 }
 
 repositories {
@@ -84,6 +84,10 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.orhanobut:logger:2.1.1'
     compile 'com.github.iamlocky:LockyPhotoPicker:1.0.0'
-    compile 'com.github.iamlocky:ZxingLite:1.0.0'
+    compile ('com.github.iamlocky:ZxingLite:1.0.1',{
+        exclude group: 'com.android.support', module:'appcompat-v7'
+    })
+    compile 'org.projectlombok:lombok:1.16.18'
+    compile 'com.squareup.okhttp3:okhttp:3.9.0'
     testCompile 'junit:junit:4.12'
 }

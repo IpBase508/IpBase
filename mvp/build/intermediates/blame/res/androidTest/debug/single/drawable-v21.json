@@ -12,11 +12,31 @@
         "source": "C:\\Users\\lockyluo\\.android\\build-cache\\15b7e723a68f2f6d7e43b62dfe86f29ec9c41bbe\\output\\res\\drawable-v21\\abc_edit_text_material.xml"
     },
     {
+        "merged": "G:\\AndroidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\design_bottom_navigation_item_background.xml",
+        "source": "D:\\.android\\build-cache\\09c76e5ba49fa174093d04c1cf971d9990d75ce7\\output\\res\\drawable-v21\\design_bottom_navigation_item_background.xml"
+    },
+    {
+        "merged": "G:\\AndroidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\notification_action_background.xml",
+        "source": "D:\\.android\\build-cache\\089abd78a84bc88cf2af89ca3847b19d7e180570\\output\\res\\drawable-v21\\notification_action_background.xml"
+    },
+    {
         "merged": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\design_bottom_navigation_item_background.xml",
         "source": "C:\\Users\\lockyluo\\.android\\build-cache\\8e144815a3da2101953930055e5eef243ee0f329\\output\\res\\drawable-v21\\design_bottom_navigation_item_background.xml"
     },
     {
+        "merged": "G:\\AndroidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_action_bar_item_background_material.xml",
+        "source": "D:\\.android\\build-cache\\089abd78a84bc88cf2af89ca3847b19d7e180570\\output\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "G:\\AndroidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_edit_text_material.xml",
+        "source": "D:\\.android\\build-cache\\089abd78a84bc88cf2af89ca3847b19d7e180570\\output\\res\\drawable-v21\\abc_edit_text_material.xml"
+    },
+    {
         "merged": "F:\\androidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_action_bar_item_background_material.xml",
         "source": "C:\\Users\\lockyluo\\.android\\build-cache\\15b7e723a68f2f6d7e43b62dfe86f29ec9c41bbe\\output\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "G:\\AndroidProjects\\IpBase\\mvp\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_btn_colored_material.xml",
+        "source": "D:\\.android\\build-cache\\089abd78a84bc88cf2af89ca3847b19d7e180570\\output\\res\\drawable-v21\\abc_btn_colored_material.xml"
     }
 ]

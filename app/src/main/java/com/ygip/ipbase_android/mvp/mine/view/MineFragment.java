@@ -1,6 +1,8 @@
 package com.ygip.ipbase_android.mvp.mine.view;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
@@ -8,8 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.JsonArray;
+import com.orhanobut.logger.Logger;
 import com.ygip.ipbase_android.R;
+import com.ygip.ipbase_android.mvp.mine.model.MineModel;
 import com.ygip.ipbase_android.mvp.mine.presenter.MinePresenter;
+import com.ygip.ipbase_android.mvp.universalModel.OnResponseListener;
+import com.ygip.ipbase_android.mvp.universalModel.UniversalModel;
 import com.ygip.ipbase_android.util.ToastUtils;
 
 import butterknife.BindView;
@@ -33,11 +40,11 @@ public class MineFragment extends XLazyFragment<MinePresenter> {
     CollapsingToolbarLayout collapsingToolbar;
     @BindView(R.id.mine_ConstraintLayout)
     CoordinatorLayout mineConstraintLayout;
-    Unbinder unbinder;
 
     @Override
     public void initData(Bundle savedInstanceState) {
         toolbar.setTitle("我的");
+
     }
 
     @Override
@@ -56,17 +63,21 @@ public class MineFragment extends XLazyFragment<MinePresenter> {
 
 
 
-
-
-
-
     public void toast(String s){
         ToastUtils.show(s);
     }
-
+    static UniversalModel universalModel=new UniversalModel();
     @OnClick(R.id.iv_mine_head)
     public void onIvMineHeadClicked() {
-        toast("iv_mine_head");
+        universalModel.login(context);
+        (new Handler()).postDelayed(()->{
+            universalModel.getMemberList(context, null, new OnResponseListener() {
+                @Override
+                public void onFinish(JsonArray jsonElements, Exception e) {
+                    Logger.t("MineFragment").d(jsonElements.get(0).getAsJsonObject().get("department"));
+                }
+            });
+        },500);
     }
 
     @OnClick(R.id.toolbar)
