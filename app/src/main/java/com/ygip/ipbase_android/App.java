@@ -25,7 +25,7 @@ public class App extends MultiDexApplication {
         }
     }
 
-    private static FormatStrategy getFormatStrategy(){
+    private FormatStrategy getFormatStrategy(){
         FormatStrategy formatStrategy= PrettyFormatStrategy
                 .newBuilder()
                 .tag("locky Log").build();

@@ -1,12 +1,12 @@
 package com.ygip.ipbase_android.mvp.universalModel;
 
-import com.google.gson.JsonArray;
+import com.ygip.ipbase_android.mvp.universalModel.bean.UniversalResponseBeanList;
 
 /**
  * Created by LockyLuo on 2017/9/20.
- * 成功则返回JsonArray，否则返回Exception
+ * 成功则返回List<JsonObject></>，否则返回Exception
  */
 
 public interface OnResponseListener {
-    void onFinish(JsonArray jsonElements,Exception e);
+    void onFinish(UniversalResponseBeanList responseBean, Exception e);
 }

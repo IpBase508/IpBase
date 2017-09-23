@@ -1,4 +1,4 @@
-package com.ygip.ipbase_android.mvp.universalModel;
+package com.ygip.ipbase_android.mvp.universalModel.bean;
 
 import lombok.Data;
 
@@ -7,6 +7,7 @@ import lombok.Data;
  */
 @Data
 public class LoginUser {
+    String phoneNumber;
     String memberName;
     String password;
 }

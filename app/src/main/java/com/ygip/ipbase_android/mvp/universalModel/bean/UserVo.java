@@ -1,4 +1,4 @@
-package com.ygip.ipbase_android.mvp.universalModel;
+package com.ygip.ipbase_android.mvp.universalModel.bean;
 
 import lombok.Data;
 

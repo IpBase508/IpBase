@@ -1,55 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mine_ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    >
+    android:fitsSystemWindows="true">
 
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        >
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/C9"
-
-
-            app:expandedTitleGravity="bottom|center_horizontal"
             app:collapsedTitleGravity="left"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+
+            app:contentScrim="@color/C9"
+            app:expandedTitleGravity="bottom|center_horizontal"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_mine_head"
-                android:fitsSystemWindows="true"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:layout_marginBottom="33dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="33dp"
+                android:fitsSystemWindows="true"
                 android:src="@drawable/jidilogo"
                 app:civ_border_color="@android:color/white"
                 app:civ_border_width="5dp" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-
                 style="@style/Toolbar.TitleText"
+                android:layout_width="match_parent"
+
+                android:layout_height="50dp"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                />
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -65,6 +60,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+
+                android:id="@+id/mine_progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:indeterminate="false"
+                android:visibility="gone" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -640,9 +645,6 @@
                 </LinearLayout>
 
             </FrameLayout>
-
-
-
 
 
         </LinearLayout>

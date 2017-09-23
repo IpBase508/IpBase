@@ -105,7 +105,9 @@ public class DynamicFragment extends XLazyFragment<MemberPresent> implements Bas
 
     @Override
     public void onDestroyView() {
-        slider.stopAutoCycle();
+        if (slider!=null) {
+            slider.stopAutoCycle();
+        }
         super.onDestroyView();
     }
 }
