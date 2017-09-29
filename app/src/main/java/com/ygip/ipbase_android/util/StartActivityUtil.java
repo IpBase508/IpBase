@@ -23,15 +23,16 @@ import java.io.Serializable;
 public class StartActivityUtil {
     private static Intent intent;
 
+
     /**
      * @param context
      * @param clazz
      */
-    public static void startWithData(Activity context, Class clazz) {
+    public static void start(Activity context, Class clazz) {
         intent = new Intent(context, clazz);
 
         getLogAdapter();
-        Logger.d("startActivity without data");
+        Logger.d("startActivity");
         context.startActivity(intent);
     }
 

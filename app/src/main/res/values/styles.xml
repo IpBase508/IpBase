@@ -16,7 +16,10 @@
         <item name="colorControlNormal">@color/C3</item>
         <item name="colorControlActivated">@color/C0</item>
     </style>
+
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">@dimen/T2</item>
     </style>
+
+
 </resources>

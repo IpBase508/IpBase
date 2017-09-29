@@ -21,7 +21,9 @@ import com.ygip.ipbase_android.mvp.universalModel.UniversalModel;
 import com.ygip.ipbase_android.mvp.universalModel.bean.UniversalResponseBeanList;
 import com.ygip.ipbase_android.mvp.universalModel.bean.UpdateUserLevel;
 import com.ygip.ipbase_android.mvp.universalModel.bean.UserVo;
+import com.ygip.ipbase_android.util.BitmapUtils;
 import com.ygip.ipbase_android.util.FileUtils;
+import com.ygip.ipbase_android.util.ToastUtils;
 
 import java.io.File;
 
@@ -41,7 +43,7 @@ public class MinePresenter extends XPresent<MineFragment> {
         LoginUser loginUser = new LoginUser();
         loginUser.setMemberName("张三");//这里set手机号也行
         loginUser.setPassword("123456789");
-        universalModel.login(getV().getActivity(), loginUser, new OnResponseListener() {
+        universalModel.login(loginUser, new OnResponseListener() {
             @Override
             public void onFinish(UniversalResponseBeanList responseBean, Exception e) {
                 if (e == null) {
@@ -70,6 +72,9 @@ public class MinePresenter extends XPresent<MineFragment> {
 
     public void postFileData(Uri uri, CircleImageView iv, ProgressBar progressBar) {//-----------postFile
         File file = FileUtils.Uri2File(getV().getContext(), uri);
+        if (file.length()>1024*1024){
+            file=BitmapUtils.getSmallerImageFile(getV().getActivity(),uri);
+        }
         universalModel.postFileData(ApiUrl.Post.POST_IMAGE_URL, file,
                 new ProgressListener() {
                     @Override
@@ -82,6 +87,8 @@ public class MinePresenter extends XPresent<MineFragment> {
                                 }
                                 progressBar.setMax((int)totalLength);
                                 progressBar.setProgress((int)(progressLength));
+                            }else {
+                                ToastUtils.show("等待服务器处理");
                             }
                         });
                         Logger.d("--progress:" + progressLength + "---" + totalLength);

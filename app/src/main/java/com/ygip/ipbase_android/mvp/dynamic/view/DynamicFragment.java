@@ -14,13 +14,13 @@ import com.ygip.ipbase_android.mvp.member.present.MemberPresent;
 import java.util.HashMap;
 
 import butterknife.BindView;
-import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
+import cn.droidlover.xdroidmvp.mvp.XFragment;
 
 /**
  * Created by XQM on 2017/7/23.
  */
 
-public class DynamicFragment extends XLazyFragment<MemberPresent> implements BaseSliderView.OnSliderClickListener,
+public class DynamicFragment extends XFragment<MemberPresent> implements BaseSliderView.OnSliderClickListener,
         ViewPagerEx.OnPageChangeListener {
     @BindView(R.id.titlebar_tv_title)
     TextView titlebarTvTitle;

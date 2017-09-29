@@ -8,9 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -19,10 +16,8 @@ import com.ygip.ipbase_android.mvp.mine.presenter.MinePresenter;
 import com.ygip.ipbase_android.util.ToastUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
-import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
+import cn.droidlover.xdroidmvp.mvp.XFragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -31,7 +26,7 @@ import io.reactivex.functions.Consumer;
  * Created by lockyluo on 2017/7/28.
  */
 
-public class MineFragment extends XLazyFragment<MinePresenter> {
+public class MineFragment extends XFragment<MinePresenter> {
     public final static int PICK_IMAGE_REQUEST_CODE = 1004;
 
     @BindView(R.id.iv_mine_head)
@@ -49,11 +44,10 @@ public class MineFragment extends XLazyFragment<MinePresenter> {
     @Override
     public void initData(Bundle savedInstanceState) {
         toolbar.setTitle("我的");
-
+        initView();
     }
 
     public void initView() {
-
         RxPermissions rxPermissions=new RxPermissions(context);
         rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
             @Override

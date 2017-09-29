@@ -3,4 +3,12 @@
     <string name="action_left">新建项目</string>
     <string name="action_mid">发布动态</string>
     <string name="action_right">安排值班</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="student_innovation_practise_base">Student Innovation Practise Base</string>
+    <string name="ipbase">学生创新实践基地</string>
+    <string name="gzucm">广州中医药大学</string>
+    <string name="school">医学信息工程学院</string>
 </resources>

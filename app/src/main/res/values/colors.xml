@@ -3,7 +3,7 @@
     <color name="colorPrimary">#fe6941</color>
     <color name="colorPrimaryDark">#fe6941</color>
     <color name="colorAccent">#fe6941</color>
-
+    <color name="app_color">#fe6941</color>
     <color name="C0">#5d9ff5</color><!--主色-->
     <color name="C1">#313843</color><!--标题强调色；凸显颜色-->
     <color name="C2">#647080</color><!--正文色，文字按钮颜色-->
@@ -14,10 +14,12 @@
     <color name="C7">#f0f0f0</color><!--忘记密码输入框提示字颜色-->
     <color name="C8">#7f7f7f</color><!--提供组织选择的弹框为半透明颜色-->
     <color name="C9">#fe6941</color>
-
-    <color name ="grayf0f">#f0f0f0</color>
+    <color name="white">#ffffff</color>
+    <color name="grayf0f">#f0f0f0</color>
 
     <color name="graye6e">#e6e6e6</color>
 
     <color name="gray7f7">#7f7f7f</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

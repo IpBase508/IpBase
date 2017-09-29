@@ -1,18 +1,12 @@
 package com.ygip.ipbase_android.mvp.projects.model;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 import com.ygip.ipbase_android.mvp.projects.listener.ProjectDataListener;
 import com.ygip.ipbase_android.util.SharedPrefUtils;
-import com.ygip.ipbase_android.util.ToastUtils;
-import com.ygip.ipbase_android.util.ViewDelegateByLocky;
-
-import cn.droidlover.xdroidmvp.kit.Kits;
 
 /**
  * Created by lockyluo on 2017/8/3.

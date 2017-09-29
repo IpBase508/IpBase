@@ -49,7 +49,7 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
             bindEvent();
 
             // 改变状态栏颜色
-            StatusBarUtils.setStatusBarColor(this, R.color.app_color);
+            StatusBarUtils.setStatusBarColor(this, R.color.white);
         }
         initData(savedInstanceState);
     }

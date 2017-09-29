@@ -1,6 +1,9 @@
 package com.ygip.ipbase_android.mvp.universalModel;
 
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -69,11 +72,10 @@ public class UniversalModel {
     }
 
     /**
-     * @param activity
      * @param loginUser        传入带数据的LoginUser（手机号/姓名+密码）
      * @param responseListener
      */
-    public void login(Activity activity, LoginUser loginUser, OnResponseListener responseListener) {
+    public void login(LoginUser loginUser, OnResponseListener responseListener) {
         client = new OkHttpClient.Builder().connectTimeout(1000, TimeUnit.MINUTES)
                 .readTimeout(1000, TimeUnit.MINUTES)
                 .writeTimeout(1000, TimeUnit.MINUTES).build();
@@ -85,10 +87,10 @@ public class UniversalModel {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                responseListener.onFinish(null, e);
-                activity.runOnUiThread(() -> {
-                    ToastUtils.show("登录失败 " + e.getMessage());
-                });
+                if (responseListener!=null) {
+                    responseListener.onFinish(null, e);
+                }
+
             }
 
             @Override
@@ -100,11 +102,10 @@ public class UniversalModel {
                     user = loginBean.getUser();
                     token = loginBean.getToken();
 
-                    responseListener.onFinish(null, null);
-                    activity.runOnUiThread(() -> {
-                        ToastUtils.show("欢迎 " + user.getMemberName());
-                        Logger.d(token);
-                    });
+                    if (responseListener!=null) {
+                        responseListener.onFinish(null, null);
+                    }
+                    Logger.d(token);
 
                     if (token != null) {
                         loginUser.setPassword(AES.Encrypt(loginUser.getPassword(), AKey.s));
@@ -112,7 +113,9 @@ public class UniversalModel {
                     }
 
                 } catch (Exception e) {
-                    responseListener.onFinish(null, e);
+                    if (responseListener!=null) {
+                        responseListener.onFinish(null, e);
+                    }
                     e.printStackTrace();
                 }
             }
@@ -124,7 +127,7 @@ public class UniversalModel {
      * @param jsonData         要发的json数据
      * @param responseListener 返回 List<JsonObject> 数据
      */
-    public void postData(String apiUrl_Post, Object jsonData, OnResponseListener responseListener) {
+    public void postData(String apiUrl_Post, Object jsonData, @NonNull OnResponseListener responseListener) {
         client = new OkHttpClient();
         requestBuilder = new Request.Builder().url(apiUrl_Post);
         if (token == null) {
@@ -172,7 +175,7 @@ public class UniversalModel {
      * @param progressListener     监听进度
      * @param fileResponseListener 获取返回url
      */
-    public void postFileData(String apiUrl_Post, File fileData, ProgressListener progressListener, OnFileResponseListener fileResponseListener) {
+    public void postFileData(String apiUrl_Post, File fileData,@NonNull  ProgressListener progressListener,@NonNull  OnFileResponseListener fileResponseListener) {
         client = new OkHttpClient.Builder().connectTimeout(5000, TimeUnit.MINUTES)
                 .readTimeout(3000, TimeUnit.MINUTES)
                 .writeTimeout(3000, TimeUnit.MINUTES).build();
@@ -222,7 +225,7 @@ public class UniversalModel {
      * @param jsonData         要修改的json数据/string
      * @param responseListener 返回 List<JsonObject> 数据
      */
-    public void putData(String apiUrl_Put, Object jsonData, OnResponseListener responseListener) {
+    public void putData(String apiUrl_Put, Object jsonData,@NonNull  OnResponseListener responseListener) {
         client = new OkHttpClient();
         requestBuilder = new Request.Builder().url(apiUrl_Put);
         if (token == null) {
@@ -268,7 +271,7 @@ public class UniversalModel {
      * @param conditions       筛选条件
      * @param responseListener 返回 List<JsonObject> 数据
      */
-    public void getData(String apiUrl_Get, String[] conditions, OnResponseListener responseListener) {
+    public void getData(String apiUrl_Get, String[] conditions,@NonNull  OnResponseListener responseListener) {
         StringBuffer stringBuffer = new StringBuffer();
         if (conditions == null) {
             stringBuffer.append("all=true");
@@ -316,7 +319,7 @@ public class UniversalModel {
      * @param id               要删除的id
      * @param responseListener
      */
-    public void delData(String apiUrl_Del, String id, OnResponseListener responseListener) {
+    public void delData(String apiUrl_Del, String id,@NonNull  OnResponseListener responseListener) {
         client = new OkHttpClient();
         requestBuilder = new Request.Builder().url(apiUrl_Del + id);
         if (token == null) {

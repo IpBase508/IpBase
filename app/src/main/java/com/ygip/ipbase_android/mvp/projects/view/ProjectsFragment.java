@@ -22,8 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
-import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
+import cn.droidlover.xdroidmvp.mvp.XFragment;
 import cn.droidlover.xrecyclerview.RecyclerItemCallback;
 import cn.droidlover.xrecyclerview.XRecyclerContentLayout;
 import cn.droidlover.xrecyclerview.XRecyclerView;
@@ -33,7 +32,7 @@ import cn.droidlover.xrecyclerview.XRecyclerView;
  * Created by lockyluo on 2017/7/28.
  */
 
-public class ProjectsFragment extends XLazyFragment<ProjectPresenter> {
+public class ProjectsFragment extends XFragment<ProjectPresenter> {
 
     @BindView(R.id.titlebar_tv_title)
     TextView titlebarTvTitle;
@@ -157,16 +156,16 @@ public class ProjectsFragment extends XLazyFragment<ProjectPresenter> {
 
     @OnClick(R.id.titlebar_iv_right)
     public void onTitlebarIvRightClicked() {
-        StartActivityUtil.startWithData(context, NewProjectActivity.class);
+        StartActivityUtil.start(context, NewProjectActivity.class);
     }
 
     @OnClick(R.id.titlebar_ll_right)
     public void onTitlebarLlRightClicked() {
-        StartActivityUtil.startWithData(context, NewProjectActivity.class);
+        StartActivityUtil.start(context, NewProjectActivity.class);
     }
 
     @OnClick(R.id.titlebar_tv_right)
     public void onTitlebarTvRightClicked() {
-        StartActivityUtil.startWithData(context, NewProjectActivity.class);
+        StartActivityUtil.start(context, NewProjectActivity.class);
     }
 }

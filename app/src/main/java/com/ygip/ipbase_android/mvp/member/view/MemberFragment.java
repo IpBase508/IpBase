@@ -16,7 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import cn.droidlover.xdroidmvp.kit.Kits;
-import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
+import cn.droidlover.xdroidmvp.mvp.XFragment;
 import cn.droidlover.xrecyclerview.RecyclerItemCallback;
 import cn.droidlover.xrecyclerview.XRecyclerContentLayout;
 import cn.droidlover.xrecyclerview.XRecyclerView;
@@ -25,7 +25,7 @@ import cn.droidlover.xrecyclerview.XRecyclerView;
  * Created by XQM on 2017/7/23.
  */
 
-public class MemberFragment extends XLazyFragment<MemberPresent> {
+public class MemberFragment extends XFragment<MemberPresent> {
     @BindView(R.id.titlebar_tv_title)
     TextView titlebarTvTitle;
     @BindView(R.id.xRecyclerContentLayout)

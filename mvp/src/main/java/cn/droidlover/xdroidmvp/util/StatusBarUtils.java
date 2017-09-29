@@ -39,6 +39,26 @@ public class StatusBarUtils {
         }
     }
 
+    public static void setStatusBarTrueColor(Activity aty, int color){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            ViewGroup decorViewGroup = (ViewGroup) aty.getWindow().getDecorView();
+            View statusBarView = new View(aty);
+            int statusBarHeight = getStatusBarHeight(aty);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, statusBarHeight);
+            params.gravity = Gravity.TOP;
+            statusBarView.setLayoutParams(params);
+            statusBarView.setBackgroundColor(color);
+            decorViewGroup.addView(statusBarView);
+
+            ViewGroup mContentView = (ViewGroup) aty.findViewById(Window.ID_ANDROID_CONTENT);
+            View mChildView = mContentView.getChildAt(0);
+            if (mChildView != null) {
+                //注意不是设置 ContentView 的 FitsSystemWindows, 而是设置 ContentView 的第一个子 View . 预留出系统 View 的空间.
+                mChildView.setFitsSystemWindows(true);
+            }
+        }
+    }
+
     private static int getStatusBarHeight(Context context) {
         int statusBarHeight = 0;
         Resources res = context.getResources();

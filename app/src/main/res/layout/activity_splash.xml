@@ -1,0 +1,90 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.ygip.ipbase_android.mvp.login.view.SplashActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+        <ImageView
+            android:id="@+id/logo"
+
+            android:layout_width="200sp"
+            android:layout_height="200sp"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+
+            />
+        <LinearLayout
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/gray7f7"
+                android:text="@string/gzucm"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                />
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/gray7f7"
+                android:text="@string/school"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/T5"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+
+                />
+            <TextView
+                android:alpha="0.7"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:text="@string/ipbase"
+                android:layout_width="match_parent"
+                android:textSize="23sp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+
+                />
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/gray7f7"
+                android:text="@string/student_innovation_practise_base"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/T5"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                />
+            <TextView
+                android:textColor="@android:color/holo_blue_dark"
+                android:alpha="0.7"
+                android:gravity="center"
+                android:text="Copyright 2017"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/T5"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                />
+        </LinearLayout>
+
+
+
+    </FrameLayout>
+
+</FrameLayout>

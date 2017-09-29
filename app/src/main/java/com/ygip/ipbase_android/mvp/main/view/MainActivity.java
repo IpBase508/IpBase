@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 
 import com.ygip.ipbase_android.R;
@@ -11,7 +12,9 @@ import com.ygip.ipbase_android.mvp.dynamic.view.DynamicFragment;
 import com.ygip.ipbase_android.mvp.main.present.MainPresent;
 import com.ygip.ipbase_android.mvp.member.view.MemberFragment;
 import com.ygip.ipbase_android.mvp.mine.view.MineFragment;
+import com.ygip.ipbase_android.mvp.projects.view.NewProjectActivity;
 import com.ygip.ipbase_android.mvp.projects.view.ProjectsFragment;
+import com.ygip.ipbase_android.util.StartActivityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +50,7 @@ public class MainActivity extends XActivity<MainPresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+
         initFragment();
         adapter = new XFragmentAdapter(getSupportFragmentManager(), fragments, titles);
         viewPager.setAdapter(adapter);
@@ -67,6 +71,7 @@ public class MainActivity extends XActivity<MainPresent> {
 
             }
         });
+        viewPager.setCurrentItem(0, true);
     }
 
     private void changeTabView(int position) {
@@ -106,9 +111,12 @@ public class MainActivity extends XActivity<MainPresent> {
                         break;
                     case LEFT:
                         // do stuff
+                        StartActivityUtil.start(context, NewProjectActivity.class);
+                        menuOverlay.getButtonMenu().toggle();
                         break;
                     case RIGHT:
                         // do stuff
+                        menuOverlay.getButtonMenu().toggle();
                         break;
                 }
             }
@@ -130,16 +138,16 @@ public class MainActivity extends XActivity<MainPresent> {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rbtn_member:
-                viewPager.setCurrentItem(0, false);
+                viewPager.setCurrentItem(0, true);
                 break;
             case R.id.rbtn_dynamic:
-                viewPager.setCurrentItem(1, false);
+                viewPager.setCurrentItem(1, true);
                 break;
             case R.id.rbtn_projects:
-                viewPager.setCurrentItem(2, false);
+                viewPager.setCurrentItem(2, true);
                 break;
             case R.id.rbtn_me:
-                viewPager.setCurrentItem(3, false);
+                viewPager.setCurrentItem(3, true);
                 break;
             case R.id.ll_more:
                 break;

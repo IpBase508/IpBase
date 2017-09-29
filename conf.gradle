@@ -9,7 +9,7 @@ ext {
             versionCode      : 1,
             versionName      : '1.0.0',
 
-            VSupportSdk      : '25.0.0',
+            VSupportSdk      : '25.3.1',
             VRetrofitSdk     : "2.2.0",
             VOkhttp          : "3.4.2",
             VRxlifecycle     : "2.0.1"

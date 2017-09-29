@@ -8,16 +8,16 @@ package cn.droidlover.xstatecontroller;
 
 public final class R {
     public static final class attr {
-        public static final int x_contentLayoutId = 0x7f010140;
-        public static final int x_emptyLayoutId = 0x7f010142;
-        public static final int x_errorLayoutId = 0x7f010143;
-        public static final int x_loadingLayoutId = 0x7f010141;
+        public static final int x_contentLayoutId = 0x7f010143;
+        public static final int x_emptyLayoutId = 0x7f010145;
+        public static final int x_errorLayoutId = 0x7f010146;
+        public static final int x_loadingLayoutId = 0x7f010144;
     }
     public static final class string {
-        public static final int app_name = 0x7f050021;
+        public static final int app_name = 0x7f060021;
     }
     public static final class styleable {
-        public static final int[] XStateController = { 0x7f010140, 0x7f010141, 0x7f010142, 0x7f010143 };
+        public static final int[] XStateController = { 0x7f010143, 0x7f010144, 0x7f010145, 0x7f010146 };
         public static final int XStateController_x_contentLayoutId = 0;
         public static final int XStateController_x_emptyLayoutId = 2;
         public static final int XStateController_x_errorLayoutId = 3;
