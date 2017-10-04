@@ -20,6 +20,7 @@
     <color name="graye6e">#e6e6e6</color>
 
     <color name="gray7f7">#7f7f7f</color>
-
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <color name="holo_blue_light">#ff33b5e5</color>
     <color name="black_overlay">#66000000</color>
 </resources>

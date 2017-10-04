@@ -3,7 +3,9 @@ package com.ygip.ipbase_android.mvp.login.present;
 import android.app.Activity;
 
 import com.google.gson.Gson;
+import com.orhanobut.logger.Logger;
 import com.ygip.ipbase_android.mvp.login.view.LoginActivity;
+import com.ygip.ipbase_android.mvp.login.view.SplashActivity;
 import com.ygip.ipbase_android.mvp.main.view.MainActivity;
 import com.ygip.ipbase_android.mvp.universalModel.AKey;
 import com.ygip.ipbase_android.mvp.universalModel.OnResponseListener;
@@ -32,7 +34,8 @@ public class LoginPresent extends XPresent<ICommon> {
                 activity.runOnUiThread(()->{
                     ToastUtils.show("登录失败 " + e.getMessage());
                 });
-                StartActivityUtil.start(activity, LoginActivity.class);
+                getV().startActivity(LoginActivity.class);
+
             }else {
                 activity.runOnUiThread(()->{
                     try {
@@ -41,8 +44,7 @@ public class LoginPresent extends XPresent<ICommon> {
                         e1.printStackTrace();
                     }
                 });
-
-                StartActivityUtil.start(activity, MainActivity.class);
+                getV().startActivity(MainActivity.class);
             }
         }
     };
@@ -50,7 +52,13 @@ public class LoginPresent extends XPresent<ICommon> {
     public void login(Activity activity, LoginUser loginUser){
         this.activity=activity;
         if (loginUser==null) {
-            universalModel.login(getUser(),responseListener);
+            loginUser=getUser();
+            if (loginUser!=null)
+            {
+                Logger.d(loginUser);
+                universalModel.login(getUser(),responseListener);
+            }else
+                getV().startActivity(LoginActivity.class);
         } else {
             universalModel.login(loginUser,responseListener);
         }
@@ -63,7 +71,17 @@ public class LoginPresent extends XPresent<ICommon> {
             try {
                 userVo=(new Gson()).fromJson(user,UserVo.class);
                 LoginUser loginUser=new LoginUser();
+                if(userVo==null)
+                    return null;
                 loginUser.setPhoneNumber(userVo.getPhoneNumber());
+                loginUser.setMemberName(userVo.getMemberName());
+
+                if(loginUser.getPhoneNumber()!=null){
+                    loginUser.setMemberName(null);
+                }else if(loginUser.getMemberName()!=null){
+                    loginUser.setPhoneNumber(null);
+                }
+
                 loginUser.setPassword(AES.Decrypt(userVo.getPassword(), AKey.s));
                 return loginUser;
             } catch (Exception e) {

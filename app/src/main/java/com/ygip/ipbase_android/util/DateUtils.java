@@ -9,13 +9,18 @@ import java.util.List;
 import java.util.Map;
 
 public class DateUtils {
-
+    public static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     /**
      * 获取当前系统时间
      */
     public static String getCurrentTime() {
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
         String date = sDateFormat.format(new Date());
+        return date;
+    }
+    public static String getThisTime(long time) {
+
+        String date = sDateFormat.format(time);
         return date;
     }
 

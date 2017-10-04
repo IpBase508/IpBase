@@ -32,7 +32,7 @@ public class StartActivityUtil {
         intent = new Intent(context, clazz);
 
         getLogAdapter();
-        Logger.d("startActivity");
+        Logger.d(context.getLocalClassName()+" startActivity"+clazz.getName());
         context.startActivity(intent);
     }
 

@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.orhanobut.logger.Logger;
+import com.ygip.ipbase_android.mvp.login.view.LoginActivity;
 import com.ygip.ipbase_android.mvp.universalModel.bean.FileResponseBean;
 import com.ygip.ipbase_android.mvp.universalModel.bean.LoginBean;
 import com.ygip.ipbase_android.mvp.universalModel.bean.LoginResponseBean;
@@ -18,6 +19,7 @@ import com.ygip.ipbase_android.mvp.universalModel.bean.UniversalResponseBean;
 import com.ygip.ipbase_android.mvp.universalModel.bean.UserVo;
 import com.ygip.ipbase_android.util.AES;
 import com.ygip.ipbase_android.util.SharedPrefUtils;
+import com.ygip.ipbase_android.util.StartActivityUtil;
 import com.ygip.ipbase_android.util.ToastUtils;
 
 import java.io.File;
@@ -69,6 +71,17 @@ public class UniversalModel {
 
     public static UserVo getUser() {
         return user;
+    }
+
+    /**
+     * 注销
+     * @param activity
+     */
+    public static void logout(Activity activity){
+        Logger.d("log out");
+        SharedPrefUtils.Clear();
+        StartActivityUtil.start(activity, LoginActivity.class);
+        activity.finish();
     }
 
     /**
@@ -170,6 +183,7 @@ public class UniversalModel {
     }
 
     /**
+     * 注意，上传前应压缩文件至1m左右，避免服务器处理时间太长连接中断
      * @param apiUrl_Post          文件上传接口
      * @param fileData             文件
      * @param progressListener     监听进度

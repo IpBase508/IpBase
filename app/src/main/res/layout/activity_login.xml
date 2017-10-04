@@ -11,11 +11,11 @@
 
     <ImageView
         android:id="@+id/img_login"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:layout_gravity="center"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="70dp"/>
+        android:layout_marginBottom="30dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,6 +32,7 @@
             android:layout_height="25dp" />
 
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:id="@+id/edt_account_bg"
             android:layout_toRightOf="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
                 android:textColorHint="@color/C3"
                 android:textColor="@color/C2"
                 android:textSize="@dimen/T3"
-                android:hint="账号" />
+                android:hint="手机号" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
     </RelativeLayout>
 
@@ -65,12 +66,14 @@
             android:layout_height="25dp" />
 
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:id="@+id/edt_password_bg"
             android:layout_toRightOf="@+id/image1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp12"
             float:fletPaddingBottom="5dp"
-            float:fletTextAppearance="@style/floatlabelededittext">
+            float:fletTextAppearance="@style/floatlabelededittext"
+            >
             <EditText
                 android:id="@+id/edt_password"
                 android:theme="@style/MyEditText"
@@ -84,18 +87,66 @@
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
     </RelativeLayout>
 
+    <RadioGroup
+        android:id="@+id/login_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/dp10"
+        >
+        <RadioButton
+            android:id="@+id/radio_button_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机号"
+            android:textColor="@color/gray7f7"
+            android:layout_marginRight="@dimen/dp10"
+            />
+        <RadioButton
+            android:id="@+id/radio_button_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名"
+            android:textColor="@color/gray7f7"
+            />
+    </RadioGroup>
     <Button
-        android:background="@android:color/holo_blue_light"
+        android:layout_marginLeft="@dimen/dp12"
+        android:layout_marginRight="@dimen/dp12"
+        android:background="@color/C9"
         android:id="@+id/btn_login"
         android:gravity="center"
         android:layout_gravity="center"
         android:textColor="@color/C6"
         android:text="登录"
+        android:textSize="@dimen/T3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/dp12"
+        android:layout_marginRight="@dimen/dp12"
+        android:background="@color/holo_blue_light"
+        android:id="@+id/btn_register"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/C6"
+        android:text="申请注册"
+        android:textSize="@dimen/T3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
-
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+        <include layout="@layout/copyright"></include>
+    </LinearLayout>
 
 
 </LinearLayout>

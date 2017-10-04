@@ -1,5 +1,6 @@
 package com.ygip.ipbase_android.mvp.projects.model;
 
+
 import com.ygip.ipbase_android.mvp.universalModel.bean.UserVo;
 
 import lombok.Data;
@@ -16,12 +17,14 @@ public class ProjectVo {
     String detail;
     String creatorId;
     UserVo announcer;//项目创建者
-    Integer projectType;//项目类型：0为app，1为网站，2为其他
+    Integer projectType;//项目类型：0为app，1为网站，2为科研类项目，3为其他
     Long createTime;
     Long updateTime;
     Long deadLine;
-    List<String> projectUserIds;
-    List<UserVo> userVoList;
-    String imageUrl;
+    UserVo userVo;
+    List<String> imageUrl;
+    ProjectImageVo projectImageVo;
     Boolean delete;
+    List<String> userIds;
+    List<ProjectTeamVo> projectTeamVoList;
 }

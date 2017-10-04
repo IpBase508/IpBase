@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="bottom"
+    android:gravity="bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:alpha="0.7"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:text="@string/ipbase"
+        android:layout_width="match_parent"
+        android:textSize="23sp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+
+        />
+    <TextView
+        android:gravity="center"
+        android:textColor="@color/gray7f7"
+        android:text="@string/student_innovation_practise_base"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/T5"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        />
+    <TextView
+        android:textColor="@color/holo_blue_dark"
+        android:alpha="0.7"
+        android:gravity="center"
+        android:text="Copyright 2017"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/T5"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        />
+</LinearLayout>

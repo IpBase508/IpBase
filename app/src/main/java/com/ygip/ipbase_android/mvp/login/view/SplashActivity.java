@@ -1,6 +1,7 @@
 package com.ygip.ipbase_android.mvp.login.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,6 +13,7 @@ import com.ygip.ipbase_android.R;
 import com.ygip.ipbase_android.mvp.login.present.ICommon;
 import com.ygip.ipbase_android.mvp.login.present.LoginPresent;
 import com.ygip.ipbase_android.util.GlideCircleTransform;
+import com.ygip.ipbase_android.util.StartActivityUtil;
 
 import butterknife.BindView;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
@@ -32,11 +34,12 @@ public class SplashActivity extends XActivity<LoginPresent> implements ICommon{
         Glide.with(this)
                 .load(R.drawable.jidilogo)
                 .transform(new GlideCircleTransform(this))
-                .crossFade(300)
+                .crossFade(450)
                 .into(logo);
         (new Handler(Looper.getMainLooper())).postDelayed(()->{
             getP().login(context,null);
-        },350);
+        },460);
+
     }
 
 
@@ -44,7 +47,10 @@ public class SplashActivity extends XActivity<LoginPresent> implements ICommon{
     public Activity getActivity() {
         return context;
     }
-
+    @Override
+    public void startActivity(Class clazz) {
+        StartActivityUtil.start(context,clazz);
+    }
     @Override
     public LoginPresent newP() {
         return new LoginPresent();

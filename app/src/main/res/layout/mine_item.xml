@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mine_menu_item"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:background="@drawable/touch_bg"
+    android:gravity="center"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:layout_marginLeft="@dimen/dp12"
+        android:layout_marginRight="@dimen/dp12"
+        android:id="@+id/tv_mine_item_title"
+        android:layout_width="@dimen/T3X5"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:text="我的"
+        android:visibility="gone"
+        android:textSize="@dimen/T3" />
+    <TextView
+        android:id="@+id/tv_mine_item_content"
+
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:text="我的"
+        android:textSize="@dimen/T3" />
+</LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/mine_item_btn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="end"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:alpha="0.7"
+            android:rotation="180"
+            android:src="?attr/actionModeCloseDrawable" />
+    </LinearLayout>
+
+
+</FrameLayout>
