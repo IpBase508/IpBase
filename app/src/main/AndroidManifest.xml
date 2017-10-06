@@ -9,6 +9,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -32,16 +36,39 @@
         <activity
             android:name=".mvp.login.view.LoginActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".mvp.main.view.MainActivity" />
-        <activity android:name=".mvp.projects.view.ProjectDetailActivity" />
-        <activity android:name=".mvp.projects.view.NewProjectActivity" />
+        <activity
+            android:name=".mvp.main.view.MainActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mvp.projects.view.ProjectDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mvp.projects.view.NewProjectActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme" />
         <activity
             android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme" />
-        <activity android:name=".mvp.mine.view.SettingActivity"></activity>
+        <activity
+            android:name=".mvp.mine.view.SettingActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".mvp.mine.view.ChangePasswordActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mvp.mine.view.ChangeInfoActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".mvp.universalView.CheckPhoneNumActivity"></activity>
     </application>
 
 </manifest>

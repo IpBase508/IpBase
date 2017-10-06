@@ -19,11 +19,14 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
+import com.mob.MobSDK;
+import com.orhanobut.logger.Logger;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.ygip.ipbase_android.R;
 import com.ygip.ipbase_android.mvp.mine.adapter.MineAdapter;
 import com.ygip.ipbase_android.mvp.mine.presenter.MineCommon;
 import com.ygip.ipbase_android.mvp.mine.presenter.MinePresenter;
+import com.ygip.ipbase_android.mvp.universalModel.AKey;
 import com.ygip.ipbase_android.util.StartActivityUtil;
 import com.ygip.ipbase_android.util.ToastUtils;
 
@@ -34,6 +37,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.droidlover.xdroidmvp.mvp.XFragment;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+import cn.smssdk.gui.RegisterPage;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -66,13 +72,37 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
 
     private MineAdapter adapter;
     private ArrayList<String> data = new ArrayList<>();
-
+    private EventHandler eventHandler;
+    static boolean phoneNumberChecked=false;
+    private RegisterPage registerPage;
     @Override
     public void initData(Bundle savedInstanceState) {
         toolbar.setTitle("我的");
         data = new ArrayList<>();
         initView();
+
+        eventHandler=new EventHandler(){
+            @Override
+            public void afterEvent(int event, int result, Object data) {
+                if (data instanceof Throwable) {
+                    Throwable throwable = (Throwable)data;
+                    String msg = throwable.getMessage();
+                    ToastUtils.show(msg);
+                } else {
+                    if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                        // 处理
+                        phoneNumberChecked=true;
+                        Logger.d(data);
+                    }
+                }
+            }
+        };
+
+
+
+
     }
+
 
     public void initView() {
         permission();
@@ -157,8 +187,9 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {//懒加载数据
         if (isVisibleToUser) {
-            data = getP().getMineData(0);
+            data = getP().getMineData(MineAdapter.MINE);
             adapter.updateData(data);
+
         }
 
         super.setUserVisibleHint(isVisibleToUser);

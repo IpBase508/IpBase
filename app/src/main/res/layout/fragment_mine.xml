@@ -10,6 +10,7 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
+
         android:layout_height="256dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -21,13 +22,17 @@
             android:fitsSystemWindows="true"
             app:collapsedTitleGravity="left"
 
-
             app:contentScrim="@color/C9"
             app:expandedTitleGravity="bottom|center_horizontal"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-
-
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar.TitleText"
+                android:layout_width="match_parent"
+                android:minHeight="50dp"
+                android:layout_height="50dp"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_mine_head"
@@ -58,22 +63,18 @@
                 app:progress_text_size="25sp"
                 />
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Toolbar.TitleText"
-                android:layout_width="match_parent"
-
-                android:layout_height="50dp"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
             <ImageButton
                 android:id="@+id/mine_setting_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerInside"
                 android:layout_gravity="end"
                 android:background="@color/transparent"
                 app:layout_collapseMode="pin"
                 android:src="@android:drawable/ic_menu_preferences" />
+
+
+
 
         </android.support.design.widget.CollapsingToolbarLayout>
 

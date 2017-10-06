@@ -5,8 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.dinuscxj.progressbar.CircleProgressBar;
@@ -15,17 +13,18 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.orhanobut.logger.Logger;
 import com.ygip.ipbase_android.R;
-import com.ygip.ipbase_android.mvp.mine.view.MineFragment;
+import com.ygip.ipbase_android.mvp.mine.adapter.MineAdapter;
 import com.ygip.ipbase_android.mvp.universalModel.ApiUrl;
 import com.ygip.ipbase_android.mvp.universalModel.OnFileResponseListener;
+import com.ygip.ipbase_android.mvp.universalModel.OnResponseListener;
 import com.ygip.ipbase_android.mvp.universalModel.ProgressListener;
+import com.ygip.ipbase_android.mvp.universalModel.UniversalModel;
 import com.ygip.ipbase_android.mvp.universalModel.bean.FileResponseBean;
 import com.ygip.ipbase_android.mvp.universalModel.bean.LoginUser;
-import com.ygip.ipbase_android.mvp.universalModel.OnResponseListener;
-import com.ygip.ipbase_android.mvp.universalModel.UniversalModel;
 import com.ygip.ipbase_android.mvp.universalModel.bean.UniversalResponseBeanList;
 import com.ygip.ipbase_android.mvp.universalModel.bean.UpdateUserLevel;
 import com.ygip.ipbase_android.mvp.universalModel.bean.UserVo;
+import com.ygip.ipbase_android.mvp.universalView.CheckPhoneNumActivity;
 import com.ygip.ipbase_android.util.BitmapUtils;
 import com.ygip.ipbase_android.util.DateUtils;
 import com.ygip.ipbase_android.util.FileUtils;
@@ -35,6 +34,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import cn.droidlover.xdroidmvp.mvp.XPresent;
+import cn.smssdk.EventHandler;
+import cn.smssdk.gui.RegisterPage;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -50,15 +51,28 @@ public class MinePresenter extends XPresent<MineCommon> {
             .serializeNulls()
             .create();
     int progress;
+    private RegisterPage registerPage;
 
-    public ArrayList<String> getMineData(int i){
+    public void showPhoneVaildate(){
+        getV().startActivity(CheckPhoneNumActivity.class);
+    }
+
+    public void checkPhoneNumber(EventHandler eventHandler){
+        registerPage=new RegisterPage();
+        registerPage.setRegisterCallback(eventHandler);
+        registerPage.show(getV().getActivity());
+
+    }
+
+    public ArrayList<String> getMineData(@MineAdapter.Mode int i){
         userVo=UniversalModel.getUser();
         data.clear();
-        if(i==0){
+        if(i==MineAdapter.MINE){
 
             data.add(userVo.getMemberName());
             data.add(userVo.getDepartment());
             data.add("消息");
+            data.add("修改密码");
             data.add("退出登录");
         }else {
 //            data.add(userVo.getUserId());
@@ -270,7 +284,7 @@ public class MinePresenter extends XPresent<MineCommon> {
             @Override
             public void onFinish(UniversalResponseBeanList responseBean, Exception e) {
                 if (e == null) {
-                    userVo = (new Gson()).fromJson(responseBean.getData().get(0), UserVo.class);
+                    userVo = gson.fromJson(responseBean.getData().get(0), UserVo.class);
                     Logger.t("getData").d(responseBean);
                     putData();
                 } else {

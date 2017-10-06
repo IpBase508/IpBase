@@ -2,10 +2,12 @@ package com.ygip.ipbase_android;
 
 import android.support.multidex.MultiDexApplication;
 
+import com.mob.MobSDK;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+import com.ygip.ipbase_android.mvp.universalModel.AKey;
 
 /**
  * Created by XQM on 2017/7/14.
@@ -19,6 +21,7 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        MobSDK.init(instance, AKey.s1,AKey.s2);//短信sdk
         if(androidLogAdapter==null){
             androidLogAdapter=new AndroidLogAdapter(getFormatStrategy());
             Logger.addLogAdapter(androidLogAdapter);

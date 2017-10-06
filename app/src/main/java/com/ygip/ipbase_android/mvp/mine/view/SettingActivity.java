@@ -27,6 +27,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
+import cn.smssdk.EventHandler;
+import cn.smssdk.gui.RegisterPage;
 
 public class SettingActivity extends XActivity<MinePresenter> implements MineCommon{
     @BindView(R.id.titlebar_tv_title)
@@ -47,7 +49,7 @@ public class SettingActivity extends XActivity<MinePresenter> implements MineCom
     @Override
     public void initData(Bundle savedInstanceState) {
         initView();
-        data=getP().getMineData(1);
+        data=getP().getMineData(MineAdapter.SETTING);
 
         if (adapter == null) {
             adapter = new MineAdapter(data,MineAdapter.SETTING,context);
@@ -96,6 +98,7 @@ public class SettingActivity extends XActivity<MinePresenter> implements MineCom
     public void startActivity(Class clazz) {
         StartActivityUtil.start(context,clazz);
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ipbase-Android</string>
+    <string name="app_name">ipbase</string>
     <string name="action_left">新建项目</string>
     <string name="action_mid">发布动态</string>
     <string name="action_right">安排值班</string>

@@ -14,9 +14,12 @@ import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.ygip.ipbase_android.R;
+import com.ygip.ipbase_android.mvp.mine.view.ChangeInfoActivity;
+import com.ygip.ipbase_android.mvp.mine.view.ChangePasswordActivity;
 import com.ygip.ipbase_android.mvp.universalModel.UniversalModel;
 import com.ygip.ipbase_android.util.DialogUtils;
 import com.ygip.ipbase_android.util.OnDialogListener;
+import com.ygip.ipbase_android.util.StartActivityUtil;
 import com.ygip.ipbase_android.util.ToastUtils;
 
 import java.lang.annotation.Retention;
@@ -88,7 +91,11 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ViewHolder> {
                 case 2:{
                     break;
                 }
-                case 3:{//logout
+                case 3:{//改密码
+                    StartActivityUtil.start(activity, ChangePasswordActivity.class);
+                    break;
+                }
+                case 4:{//logout
                     DialogUtils.dialogDefault(activity, "确认注销？", new OnDialogListener() {
                         @Override
                         public void positive() {
@@ -105,6 +112,7 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ViewHolder> {
                 }
             }
         }else {
+            StartActivityUtil.start(activity, ChangeInfoActivity.class);
             switch (i){
                 case 0:{
                     break;
@@ -121,9 +129,7 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ViewHolder> {
                 case 4:{
                     break;
                 }
-                case 5:{
-                    break;
-                }
+
             }
         }
     }
