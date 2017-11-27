@@ -1,5 +1,6 @@
 package com.ygip.ipbase_android.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,6 +8,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
+
+import cn.droidlover.xdroidmvp.kit.Kits;
 
 public class DateUtils {
     public static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -20,8 +24,59 @@ public class DateUtils {
     }
     public static String getThisTime(long time) {
 
-        String date = sDateFormat.format(time);
+        String date = null;
+        try {
+            date = sDateFormat.format(time);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return date;
+    }
+
+    public static Long getThisDate(String time) {
+
+        Date date = null;
+        try {
+            date = sDateFormat.parse(time);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return date.getTime();
+    }
+
+    public static String transform(String from) {
+        String to = "";
+
+        SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        // SimpleDateFormat simple = new
+        // SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // 本地时区
+        Calendar nowCal = Calendar.getInstance();
+        TimeZone localZone = nowCal.getTimeZone();
+        // 设定SDF的时区为本地
+        simple.setTimeZone(localZone);
+
+        SimpleDateFormat simple1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        // SimpleDateFormat simple1 = new
+        // SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // 设置 DateFormat的时间区域为GMT
+        simple1.setTimeZone(TimeZone.getTimeZone("GMT"));
+
+        // 把字符串转化为Date对象，然后格式化输出这个Date
+        Date fromDate = new Date();
+        try {
+            // 时间string解析成GMT时间
+            try {
+                fromDate = simple1.parse(from);
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
+            // GMT时间转成当前时区的时间
+            to = simple.format(fromDate);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return to;
     }
 
     /**

@@ -9,11 +9,13 @@ import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 import com.ygip.ipbase_android.mvp.universalModel.AKey;
 
+import org.litepal.LitePalApplication;
+
 /**
  * Created by XQM on 2017/7/14.
  */
 
-public class App extends MultiDexApplication {
+public class App extends LitePalApplication {
     private static App instance;
     public static AndroidLogAdapter androidLogAdapter;
 

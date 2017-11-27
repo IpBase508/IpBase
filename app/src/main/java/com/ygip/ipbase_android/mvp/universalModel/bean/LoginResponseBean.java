@@ -1,5 +1,4 @@
 package com.ygip.ipbase_android.mvp.universalModel.bean;
-import com.google.gson.JsonObject;
 
 import lombok.Data;
 

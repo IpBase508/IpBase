@@ -6,14 +6,10 @@
     android:layout_height="match_parent">
 
     <include layout="@layout/titlebar"/>
-    <com.daimajia.slider.library.SliderLayout
-        android:id="@+id/slider"
-        custom:indicator_visibility="visible"
-        custom:pager_animation_span="1000"
-        custom:auto_cycle="true"
-        custom:pager_animation="Accordion"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"/>
+<cn.droidlover.xrecyclerview.XRecyclerContentLayout
+    android:id="@+id/recyclerContentLayout_dynamic"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+</cn.droidlover.xrecyclerview.XRecyclerContentLayout>
 </LinearLayout>

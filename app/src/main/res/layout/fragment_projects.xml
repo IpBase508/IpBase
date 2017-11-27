@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include layout="@layout/titlebar"/>
-    <cn.droidlover.xrecyclerview.XRecyclerContentLayout
-        android:id="@+id/xRecyclerContentLayout_projects"
-        android:text="项目"
-        android:gravity="center"
-        app:recyclerScrollbarStyle="outsideOverlay"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/titlebar" />
+
+        <cn.droidlover.xrecyclerview.XRecyclerContentLayout
+            android:id="@+id/xRecyclerContentLayout_projects"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="项目"
+            app:recyclerScrollbarStyle="outsideOverlay" />
+    </LinearLayout>
+    <scut.carson_ho.searchview.SearchView
+        android:id="@+id/searchview_project"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:visibility="gone"
+        ></scut.carson_ho.searchview.SearchView>
+</FrameLayout>

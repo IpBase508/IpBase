@@ -12,24 +12,30 @@
         android:layout_centerInParent="true"
         android:singleLine="true"
         android:text="标题"
-        android:textSize="@dimen/T2"
-        android:textColor="@color/C6" />
+        android:textColor="@color/C6"
+        android:textSize="@dimen/T2" />
 
     <!-- 返回 -->
     <LinearLayout
         android:id="@+id/titlebar_ll_left"
         android:layout_width="48dp"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="invisible"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_my_bg"
+        android:gravity="center"
+        android:visibility="invisible">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"/>
+            android:id="@+id/titlebar_iv_left"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:maxHeight="36dp"
+            android:maxWidth="36dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back"
+            android:tint="@color/white" />
 
     </LinearLayout>
 
@@ -38,17 +44,20 @@
         android:id="@+id/titlebar_ll_right"
         android:layout_width="48dp"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
+        android:background="@drawable/btn_my_bg"
         android:gravity="center"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <!-- 右侧图片 -->
         <ImageView
             android:id="@+id/titlebar_iv_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:scaleType="centerInside"
+            android:tint="@color/white" />
 
     </LinearLayout>
 
@@ -57,15 +66,15 @@
         android:id="@+id/titlebar_tv_right"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
+        android:clickable="true"
         android:gravity="center"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:textSize="14sp"
-        android:clickable="true"
         android:textColor="@color/C6"
+        android:textSize="14sp"
         android:visibility="gone" />
 
 </RelativeLayout>

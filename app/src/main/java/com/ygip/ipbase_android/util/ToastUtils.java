@@ -18,6 +18,8 @@ public class ToastUtils {
     private static Toast mToast;//控制toast时间
 
     public static void show(String text) {
+        if (text==null)
+            text="";
         if (mToast == null) {
             mToast = Toast.makeText(App.getInstance(), text, Toast.LENGTH_SHORT);
         } else {
@@ -30,6 +32,8 @@ public class ToastUtils {
 
 
     public static void show(Context context, String text) {
+        if (text==null)
+            text="";
         if (mToast == null) {
             mToast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
         } else {
@@ -40,6 +44,8 @@ public class ToastUtils {
         Log.i("lockyToast", text);
     }
     public static void showLong(String text) {
+        if (text==null)
+            text="";
         if (mToast == null) {
             mToast = Toast.makeText(App.getInstance(), text, Toast.LENGTH_LONG);
         } else {
@@ -51,6 +57,8 @@ public class ToastUtils {
     }
 
     public static void showLong(Context context, String text) {
+        if (text==null)
+            text="";
         if (mToast == null) {
             mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
         } else {

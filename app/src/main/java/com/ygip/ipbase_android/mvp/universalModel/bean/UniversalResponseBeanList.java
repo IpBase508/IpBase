@@ -1,5 +1,4 @@
 package com.ygip.ipbase_android.mvp.universalModel.bean;
-import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -11,10 +10,10 @@ import lombok.Data;
  */
 
 @Data
-public class UniversalResponseBeanList {
+public class UniversalResponseBeanList<T> {
     private String msg;//信息
     private int code;
-    private List<JsonObject> data;//里面是jsonObjects数据
+    private List<T> data;//里面是jsonObjects数据
     private Boolean success;
     private String error;
 }

@@ -44,14 +44,20 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
         context = this;
 
         if (getLayoutId() > 0) {
+
+            // 改变状态栏颜色
+
             setContentView(getLayoutId());
             bindUI(null);
             bindEvent();
+            setStatusBarColor();
 
-            // 改变状态栏颜色
-            StatusBarUtils.setStatusBarColor(this, R.color.white);
         }
         initData(savedInstanceState);
+    }
+
+    public void setStatusBarColor(){
+        StatusBarUtils.setStatusBarColor(this, R.color.white);
     }
 
     @Override

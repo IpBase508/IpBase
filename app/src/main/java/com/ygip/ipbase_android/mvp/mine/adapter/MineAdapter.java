@@ -2,33 +2,44 @@ package com.ygip.ipbase_android.mvp.mine.adapter;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.IntDef;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.orhanobut.logger.Logger;
 import com.ygip.ipbase_android.R;
+import com.ygip.ipbase_android.mvp.mine.presenter.MinePresenter;
 import com.ygip.ipbase_android.mvp.mine.view.ChangeInfoActivity;
 import com.ygip.ipbase_android.mvp.mine.view.ChangePasswordActivity;
+import com.ygip.ipbase_android.mvp.universalModel.ApiUrl;
+import com.ygip.ipbase_android.mvp.universalModel.OnResponseListener;
 import com.ygip.ipbase_android.mvp.universalModel.UniversalModel;
+import com.ygip.ipbase_android.mvp.universalModel.bean.UniversalResponseBean;
+import com.ygip.ipbase_android.mvp.universalModel.bean.UserVo;
 import com.ygip.ipbase_android.util.DialogUtils;
-import com.ygip.ipbase_android.util.OnDialogListener;
+import com.ygip.ipbase_android.util.FileUtils;
 import com.ygip.ipbase_android.util.StartActivityUtil;
 import com.ygip.ipbase_android.util.ToastUtils;
+import com.ygip.ipbase_android.util.listener.OnDialogListener;
 
+import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 /**
@@ -37,23 +48,34 @@ import butterknife.OnClick;
 
 public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ViewHolder> {
 
-    public static final int MINE=1;
-    public static final int SETTING=2;
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({MINE,SETTING})
-    public @interface Mode {}
+    public static final int MINE = 1;
+    public static final int SETTING = 2;
+    private static String dbPath;
 
-    public @Mode int mode;
+    String dept;
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({MINE, SETTING})
+    public @interface Mode {
+    }
+
+    public
+    @Mode
+    int mode;
 
 
     private ArrayList<String> data;
     private Activity activity;
 
-
+    /**
+     * 这里偷懒，设置和我的界面都共用一个adapter，用mode区分是哪一个界面
+     * @param data
+     * @param mode
+     * @param activity
+     */
     public MineAdapter(ArrayList<String> data, @Mode int mode, Activity activity) {
         this.data = data;
-        this.mode=mode;
-        this.activity=activity;
+        this.mode = mode;
+        this.activity = activity;
     }
 
     public void updateData(ArrayList<String> data) {
@@ -66,40 +88,97 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ViewHolder> {
         return data == null ? 0 : data.size();
     }
 
-    public String getTitle(int i){
-        String s="";
-        switch (i){
-            case 0:s=("姓名:");break;
-            case 1:s=("部门:");break;
-            case 2:s=("手机号:");break;
-            case 3:s=("权限级别:");break;
-            case 4:s=("注册时间:");break;
+    public String getTitle(int i) {
+        String s = "";
+        switch (i) {
+            case 0:
+                s = ("姓名:");
+                break;
+            case 1:
+                s = ("部门:");
+                break;
+            case 2:
+                s = ("年级:");
+                break;
+            case 3:
+                s = ("手机号:");
+                break;
+            case 4:
+                s = ("权限级别:");
+                break;
+            case 5:
+                s = ("注册时间:");
+                break;
         }
         return s;
     }
 
-    public void doAction(@Mode int type, int i){
-        Logger.d(type+" "+i);
-        if (type==MINE){
-            switch (i){
-                case 0:{
-                    break;
-                }
-                case 1:{
-                    break;
-                }
-                case 2:{
-                    break;
-                }
-                case 3:{//改密码
-                    StartActivityUtil.start(activity, ChangePasswordActivity.class);
-                    break;
-                }
-                case 4:{//logout
-                    DialogUtils.dialogDefault(activity, "确认注销？", new OnDialogListener() {
+    public View initChooseDeptSpinner(){
+        LayoutInflater layoutInflater = LayoutInflater.from(activity);
+        View view = layoutInflater.inflate(R.layout.spinnerview, null);
+        return view;
+    }
+
+    public void doAction(@Mode int type, int i) {
+        Logger.d(type + " " + i);
+        if (type == MINE) {//----------我的界面
+            if (i == 1) {
+                if (UniversalModel.getUser().getUserLevel() >= 2) {
+                    String[] depts=activity.getResources().getStringArray(R.array.departments);
+                    View view=initChooseDeptSpinner();
+                    Spinner spChooseDept=(Spinner)view.findViewById(R.id.sp_choose_dept);
+                    spChooseDept.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            if (position!=0) {
+                                dept=depts[position];
+                            }else {
+                                dept=null;
+                            }
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                    DialogUtils.dialogWithView(activity, "更改部门", view, new OnDialogListener() {
                         @Override
                         public void positive() {
-                            UniversalModel.logout(activity);
+                            if (dept!=null) {
+                                UserVo userVo=new UserVo();
+                                userVo.setUserId(UniversalModel.getUser().getUserId());
+                                userVo.setDepartment(dept);
+                                JsonObject jsonObject=MinePresenter.User2Object(userVo);
+                                UniversalModel universalModel=new UniversalModel();
+                                universalModel.putData(ApiUrl.Put.PUT_USER_URL, jsonObject,MinePresenter.onPutListener);
+                            }else {
+                                new Handler(Looper.getMainLooper()).post(()->ToastUtils.show("未选择部门"));
+                            }
+                        }
+
+                        @Override
+                        public void negative() {
+
+                        }
+                    });
+                }
+            }
+            if (i == getItemCount() - 3) {//改密码
+                ChangePasswordActivity.setTitle("修改密码");
+                ChangePasswordActivity.setPhoneNumber(UniversalModel.getUser().getPhoneNumber());
+                StartActivityUtil.start(activity, ChangePasswordActivity.class);
+            }
+            if (i == getItemCount() - 2) {//清除缓存
+                try {
+                    DialogUtils.dialogDefault(activity, "确认清除？这将会退出app", new OnDialogListener() {
+                        @Override
+                        public void positive() {
+                            dbPath = activity.getFilesDir().getParentFile().getAbsolutePath() + "/databases";
+                            FileUtils.deleteAllFiles(new File(dbPath));
+                            ToastUtils.show("清除成功");
+                            activity.finish();
+                            System.exit(0);
                         }
 
                         @Override
@@ -108,29 +187,53 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ViewHolder> {
                         }
                     });
 
-                    break;
-                }
-            }
-        }else {
-            StartActivityUtil.start(activity, ChangeInfoActivity.class);
-            switch (i){
-                case 0:{
-                    break;
-                }
-                case 1:{
-                    break;
-                }
-                case 2:{
-                    break;
-                }
-                case 3:{
-                    break;
-                }
-                case 4:{
-                    break;
-                }
 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            if (i == getItemCount() - 1) {//logout
+                DialogUtils.dialogDefault(activity, "确认注销？", new OnDialogListener() {
+                    @Override
+                    public void positive() {
+                        UniversalModel.logout(activity);
+                    }
+
+                    @Override
+                    public void negative() {
+
+                    }
+                });
+            }
+        } else {//----------设置界面
+
+            switch (i) {
+                case 0: {
+                    ChangeInfoActivity.title="姓名";
+                    StartActivityUtil.start(activity, ChangeInfoActivity.class);
+                    break;
+                }
+                case 1: {
+                    break;
+                }
+                case 2: {
+                    ChangeInfoActivity.title="年级";
+                    StartActivityUtil.start(activity, ChangeInfoActivity.class);
+                    break;
+                }
+                case 3: {
+                    ChangeInfoActivity.title="手机号";
+                    StartActivityUtil.start(activity, ChangeInfoActivity.class);
+                    break;
+                }
+                case 4: {
+                    break;
+                }
+                case 5: {
+                    break;
+                }
+            }
+
         }
     }
 
@@ -149,12 +252,12 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ViewHolder> {
         holder.tvMineItemContent.setText(data.get(position));
 
 
-        if (mode==SETTING) {//设置界面
+        if (mode == SETTING) {//设置界面
             holder.tvMineItemTitle.setVisibility(View.VISIBLE);
             holder.mineItemBtn.setVisibility(View.VISIBLE);
             holder.tvMineItemTitle.setText(getTitle(position));
 
-        }else{//我的界面
+        } else {//我的界面
             holder.tvMineItemTitle.setVisibility(View.GONE);
             holder.mineItemBtn.setVisibility(View.GONE);
 
@@ -166,8 +269,8 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ViewHolder> {
         holder.mineMenuItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.show(holder.tvMineItemContent.getText().toString());
-                doAction(mode,position);
+//                ToastUtils.show(holder.tvMineItemContent.getText().toString());
+                doAction(mode, position);
             }
         });
     }

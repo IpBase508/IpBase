@@ -12,4 +12,5 @@ import cn.droidlover.xdroidmvp.mvp.IView;
 public interface ICommon extends IView<LoginPresent> {
     Activity getActivity();
     void startActivity(Class clazz);
+    void show(String s);
 }

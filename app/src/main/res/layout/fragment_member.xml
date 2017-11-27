@@ -1,16 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/titlebar"/>
-
-    <cn.droidlover.xrecyclerview.XRecyclerContentLayout
-        android:id="@+id/xRecyclerContentLayout"
-        android:text="成员"
-        android:gravity="center"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/titlebar" />
+
+        <cn.droidlover.xrecyclerview.XRecyclerContentLayout
+            android:id="@+id/xRecyclerContentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:text="成员" />
+    </LinearLayout>
+
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/sp_dept_member"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:text="部门筛选"
+
+        app:arrowTint="@color/white"
+        app:textTint="@color/white" />
+
+    <scut.carson_ho.searchview.SearchView
+        android:id="@+id/searchview_member"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:visibility="gone"></scut.carson_ho.searchview.SearchView>
+
+</FrameLayout>

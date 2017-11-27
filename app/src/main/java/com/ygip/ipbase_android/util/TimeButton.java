@@ -23,7 +23,12 @@ import java.util.TimerTask;
         private OnClickListener mOnclickListener;
         private Timer t;
         private TimerTask tt;
-        private long time;
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    private long time;
         private Context mContext;
 
         public TimeButton(Context context) {
@@ -45,6 +50,10 @@ import java.util.TimerTask;
 
         public TimeButton getInstance(){
             return this;
+        }
+
+        public void onDestory(){
+            clearTimer();
         }
 
         @SuppressLint("HandlerLeak")

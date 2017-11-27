@@ -6,64 +6,103 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.ygip.ipbase_android.mvp.universalView.CheckPhoneNumActivity">
+
     <include layout="@layout/titlebar"></include>
 
     <LinearLayout
-        android:paddingLeft="@dimen/dp12"
-        android:paddingRight="@dimen/dp12"
+        android:id="@+id/check_view_uncheck"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical"
-        >
+        android:paddingLeft="@dimen/dp12"
+        android:paddingRight="@dimen/dp12">
+
         <LinearLayout
-            android:layout_marginTop="@dimen/dp12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dp12"
             android:gravity="center"
-            >
+            android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/check_edt_phoneNumber"
-                android:hint="输入手机号码"
-                android:gravity="center"
-                android:background="@android:drawable/editbox_background_normal"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="50sp"
-                android:textSize="@dimen/T3"
-                />
+                android:layout_weight="1"
+                android:background="@android:drawable/editbox_background_normal"
+                android:gravity="center"
+                android:hint="输入手机号码"
+                android:textSize="@dimen/T3" />
+
             <com.ygip.ipbase_android.util.TimeButton
                 android:id="@+id/check_btn_getsms"
-                android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="46sp"
                 android:background="@drawable/btn_my_selector"
+                android:padding="5dp"
                 android:text="获取验证码按钮"
                 android:textColor="@color/white"
                 android:textSize="@dimen/T3" />
         </LinearLayout>
+
         <EditText
             android:id="@+id/check_edt_smscode"
-            android:layout_marginTop="@dimen/dp12"
-            android:hint="输入验证码"
-            android:gravity="center"
-            android:background="@android:drawable/editbox_background_normal"
             android:layout_width="match_parent"
             android:layout_height="50sp"
-            android:textSize="@dimen/T3"
-            />
+            android:layout_marginTop="@dimen/dp12"
+            android:background="@android:drawable/editbox_background_normal"
+            android:gravity="center"
+            android:hint="输入验证码"
+            android:inputType="number"
+            android:textSize="@dimen/T3" />
 
         <Button
             android:id="@+id/check_btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
             android:layout_marginTop="5dp"
+            android:background="@drawable/btn_my_bg"
             android:text="确认"
             android:textColor="@color/white"
-            android:textSize="@dimen/T3"
-            android:background="@drawable/btn_my_bg"
+            android:textSize="@dimen/T3" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/check_view_isChecked"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/dp12"
+        android:layout_marginRight="@dimen/dp12"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/__picker_checkbox_marked" />
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp12"
+            android:gravity="center"
+            android:text="验证成功"
+            android:textSize="25dp" />
 
-
+        <Button
+            android:id="@+id/check_btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/btn_my_bg"
+            android:text="确认"
+            android:textColor="@color/white"
+            android:textSize="@dimen/T3" />
     </LinearLayout>
 
 </LinearLayout>

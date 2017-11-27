@@ -1,7 +1,12 @@
 package com.ygip.ipbase_android.mvp.universalModel.bean;
 
+import org.litepal.crud.DataSupport;
+
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -10,7 +15,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProjectImageVo {
+@EqualsAndHashCode(callSuper = false)
+public class ProjectImageVo extends DataSupport implements Serializable {
     String id;
     String image;
     String projectId;

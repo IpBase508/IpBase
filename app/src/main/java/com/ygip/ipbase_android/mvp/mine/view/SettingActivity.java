@@ -2,6 +2,8 @@ package com.ygip.ipbase_android.mvp.mine.view;
 
 
 import android.app.Activity;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.tbruyelle.rxpermissions2.Permission;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.ygip.ipbase_android.R;
 import com.ygip.ipbase_android.mvp.mine.adapter.MineAdapter;
 import com.ygip.ipbase_android.mvp.mine.presenter.MineCommon;
@@ -29,6 +33,8 @@ import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
 import cn.smssdk.EventHandler;
 import cn.smssdk.gui.RegisterPage;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 public class SettingActivity extends XActivity<MinePresenter> implements MineCommon{
     @BindView(R.id.titlebar_tv_title)
@@ -46,6 +52,7 @@ public class SettingActivity extends XActivity<MinePresenter> implements MineCom
     private MineAdapter adapter;
     private ArrayList<String> data = new ArrayList<>();
     private boolean isChange=false;
+
     @Override
     public void initData(Bundle savedInstanceState) {
         initView();
@@ -61,6 +68,7 @@ public class SettingActivity extends XActivity<MinePresenter> implements MineCom
         recyclerViewSetting.setAdapter(adapter);
         recyclerViewSetting.setItemAnimator(new DefaultItemAnimator());
         recyclerViewSetting.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+
     }
 
     void initView(){
@@ -69,13 +77,12 @@ public class SettingActivity extends XActivity<MinePresenter> implements MineCom
         titlebarLlRight.setVisibility(View.VISIBLE);
     }
 
+
+
     @Override
     protected void onResume() {
-        if (adapter == null) {
-            adapter = new MineAdapter(data,MineAdapter.SETTING,context);
-        } else {
-            adapter.updateData(data);
-        }
+        data=getP().getMineData(MineAdapter.SETTING);
+        adapter.updateData(data);
         super.onResume();
     }
 

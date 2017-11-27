@@ -15,7 +15,6 @@ import com.ygip.ipbase_android.util.SharedPrefUtils;
 
 public class ProjectModel {
 
-    private static Thread thread;
     private static ProjectModel projectModel;
 
     public static ProjectModel getInstance() {
@@ -26,11 +25,9 @@ public class ProjectModel {
     }
 
 
-    public Project getData(Context context, ProjectDataListener projectDataListener) {
-        Project project = new Project();
-        if (projectDataListener != null) {
-            projectDataListener.onStart();
-        }
+    public ProjectUpload getData() {
+        ProjectUpload project = new ProjectUpload();
+
         try {
 
             String data = SharedPrefUtils.load("project_local");
@@ -38,40 +35,32 @@ public class ProjectModel {
             if (data.equals("")) {
                 return null;
             }
-            project = (new Gson()).fromJson(data, Project.class);
+            project = (new Gson()).fromJson(data, ProjectUpload.class);
 
         } catch (Exception e) {
             Logger.e(e.getMessage());
         } finally {
-            if (projectDataListener != null) {
-                projectDataListener.onFinish();
-            }
             return project;
         }
     }
 
-    private void saveLocalData(Project project, Context context, @Nullable ProjectDataListener projectDataListener) {
-        if (projectDataListener != null) {
-            projectDataListener.onStart();
+    public void saveLocalData(ProjectUpload project) {
+
+
+        try {
+            String data = (new Gson()).toJson(project);
+            SharedPrefUtils.save("project_local", data);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        String data = (new Gson()).toJson(project);
-        SharedPrefUtils.save("project_local", data);
-        if (projectDataListener != null) {
-            projectDataListener.onFinish();
-        }
     }
 
-    public void UploadData(Project project, Context context, @Nullable ProjectDataListener projectDataListener) {
+    public void UploadData(ProjectUpload project, Context context, @Nullable ProjectDataListener projectDataListener) {
 
-        if (thread != null) {
-            thread.interrupt();
-        }
 
-        thread = new Thread(() ->
-                saveLocalData(project, context, projectDataListener)
-        );
-        thread.start();
+
+
 
     }
 

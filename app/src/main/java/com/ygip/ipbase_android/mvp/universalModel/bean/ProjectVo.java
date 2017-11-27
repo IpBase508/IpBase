@@ -1,14 +1,22 @@
 package com.ygip.ipbase_android.mvp.universalModel.bean;
 
 
+import org.litepal.crud.DataSupport;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by jinbin on 2017-08-11 15:19.
  */
 @Data
-public class ProjectVo {
+@EqualsAndHashCode(callSuper = false)
+
+public class ProjectVo extends DataSupport implements Serializable {
+    int id;
     String projectId;
     String projectName;
     String detail;

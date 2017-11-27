@@ -60,12 +60,12 @@ public class ViewDelegateByLocky implements VDelegate {
 
     @Override
     public void toastShort(String msg) {
-        ToastUtils.show(context,msg);
+        ToastUtils.show(msg);
     }
 
     @Override
     public void toastLong(String msg) {
-        ToastUtils.showLong(context,msg);
+        ToastUtils.showLong(msg);
 
     }
 }

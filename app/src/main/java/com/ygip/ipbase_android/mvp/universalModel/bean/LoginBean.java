@@ -1,6 +1,5 @@
 package com.ygip.ipbase_android.mvp.universalModel.bean;
 
-import com.ygip.ipbase_android.mvp.universalModel.bean.UserVo;
 
 import lombok.Data;
 

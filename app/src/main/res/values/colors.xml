@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimaryLight">#ff815f</color>
     <color name="colorPrimary">#fe6941</color>
     <color name="colorPrimaryDark">#fe6941</color>
     <color name="colorAccent">#fe6941</color>
@@ -23,7 +24,9 @@
     <color name="graye6e">#e6e6e6</color>
 
     <color name="gray7f7">#7f7f7f</color>
+    <color name="red">#ff2200</color>
     <color name="holo_blue_dark">#ff0099cc</color>
     <color name="holo_blue_light">#ff33b5e5</color>
     <color name="black_overlay">#66000000</color>
+    <color name="black">#ff000000</color>
 </resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".mvp.universalView.WebActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_webview"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            app:titleTextColor="@color/white"
+            />
+        <ImageButton
+            android:src="@drawable/share"
+            android:tint="@color/white"
+            android:id="@+id/btn_right_web"
+            android:layout_margin="5dp"
+            android:scaleType="centerInside"
+            android:layout_gravity="center_vertical|right"
+            android:background="@drawable/btn_my_bg"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <ProgressBar
+            android:id="@+id/webview_progressbar"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:progress="100" />
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </WebView>
+    </LinearLayout>
+</LinearLayout>

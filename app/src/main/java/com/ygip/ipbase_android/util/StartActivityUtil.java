@@ -28,11 +28,11 @@ public class StartActivityUtil {
      * @param context
      * @param clazz
      */
-    public static void start(Activity context, Class clazz) {
+    public static void start(Context context, Class clazz) {
         intent = new Intent(context, clazz);
 
         getLogAdapter();
-        Logger.d(context.getLocalClassName()+" startActivity"+clazz.getName());
+        Logger.d("startActivity"+clazz.getName());
         context.startActivity(intent);
     }
 
@@ -54,7 +54,7 @@ public class StartActivityUtil {
      * @param clazz
      * @param data
      */
-    public static void startWithData(Activity context, Class clazz, Serializable data) {
+    public static void startWithData(Context context, Class clazz, Serializable data) {
         intent = new Intent(context, clazz);
         Bundle bundle = new Bundle();
         bundle.putSerializable("data", data);

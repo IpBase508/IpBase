@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/ll_dynamicitem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/touch_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:id="@+id/iv_dynamic_headimg"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+
+                android:scaleType="center"
+                android:src="@drawable/jidilogo" />
+
+            <ImageView
+                android:id="@+id/btn_iv_delete_dynamic"
+                android:layout_margin="1dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="right"
+                android:visibility="visible"
+                android:background="@drawable/touch_bg"
+                android:rotation="45"
+                android:scaleType="centerInside"
+                android:src="@drawable/add"
+                android:tint="@color/gray7f7" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/T3X3"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:maxWidth="180dp"
+                    android:text="动态名"
+                    android:textColor="@color/C2"
+                    android:textSize="@dimen/T3" />
+
+                <TextView
+                    android:id="@+id/tv_dynamic_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/shape_member_text"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:singleLine="true"
+                    android:text="这里是动态标题"
+                    android:textColor="@color/C6"
+                    android:textSize="@dimen/T3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/T3X3"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="负责人"
+                    android:textColor="@color/C2"
+                    android:textSize="@dimen/T3" />
+
+                <TextView
+                    android:id="@+id/tv_dynamic_leader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/shape_member_text"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:singleLine="true"
+                    android:text="hhhhhhhh"
+                    android:textColor="@color/C6"
+                    android:textSize="@dimen/T3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/T3X3"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="类型"
+                    android:textColor="@color/C2"
+                    android:textSize="@dimen/T3" />
+
+                <TextView
+                    android:id="@+id/tv_dynamic_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/shape_member_text"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:singleLine="true"
+                    android:text="hhhhhhhh"
+                    android:textColor="@color/C6"
+                    android:textSize="@dimen/T3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="完成时间"
+                    android:textColor="@color/C2"
+                    android:textSize="@dimen/T3" />
+
+                <TextView
+                    android:id="@+id/tv_publish_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:singleLine="true"
+                    android:text="hhhhhhhh"
+                    android:textColor="@color/gray7f7"
+                    android:textSize="@dimen/T3" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

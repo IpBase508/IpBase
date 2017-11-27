@@ -4,23 +4,141 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:orientation="vertical"
     tools:context="com.ygip.ipbase_android.mvp.mine.view.ChangeInfoActivity">
 
     <include layout="@layout/titlebar"></include>
 
     <LinearLayout
+        android:id="@+id/changeInfo_ll_idConfirm"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="wrap_content"
 
-        <com.ygip.ipbase_android.util.TimeButton
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp12"
+        android:paddingRight="@dimen/dp12">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/dp12"
+                android:text="身份验证:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/T3" />
+
+            <TextView
+                android:id="@+id/changeInfo_tv_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/dp12"
+                android:text="未通过"
+                android:textColor="@color/red"
+                android:textSize="@dimen/T3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/changeInfo_ll_btns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_my_selector"
-            android:text="获取按钮"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:persistentDrawingCache="animation"
+
+            >
+
+            <Button
+                android:id="@+id/changeInfo_btn_byPhone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp50"
+                android:background="@drawable/btn_my_bg"
+                android:text="通过手机短信验证"
+                android:textColor="@color/white"
+                android:textSize="@dimen/T3" />
+
+            <Button
+                android:id="@+id/changeInfo_btn_byPassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp50"
+                android:layout_marginTop="@dimen/dp12"
+                android:background="@drawable/btn_my_bg"
+                android:text="通过登录密码验证"
+                android:textColor="@color/white"
+                android:textSize="@dimen/T3" />
+
+            <LinearLayout
+                android:id="@+id/ll_checkByPwd_changeInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+            <TextView
+                android:text="输入密码"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+                <EditText
+                    android:gravity="center"
+                    android:hint="你的密码"
+                    android:inputType="textPassword"
+                    android:id="@+id/edt_pwd_changeInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/changeInfo_btn_byPassword_done"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp50"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:background="@drawable/btn_my_bg"
+                    android:text="验证"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/T3" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/changeInfo_ll_editAera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp12"
+
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp12"
+        android:paddingRight="@dimen/dp12">
+
+        <TextView
+            android:id="@+id/tv_changeInfo_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:gravity="center_vertical"
+            android:text="信息"
+            android:textSize="@dimen/T3" />
+
+        <EditText
+            android:id="@+id/edt_newinfo_changeinfo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:background="@android:drawable/editbox_background_normal"
+            android:textSize="@dimen/T3" />
+
+        <Button
+            android:id="@+id/changeInfo_btn_done"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp12"
+            android:background="@drawable/btn_my_bg"
+            android:text="确认更改"
             android:textColor="@color/white"
             android:textSize="@dimen/T3" />
     </LinearLayout>
+
 </LinearLayout>

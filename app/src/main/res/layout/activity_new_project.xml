@@ -19,8 +19,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="35sp"
@@ -37,14 +37,16 @@
                     android:textSize="15sp" />
 
                 <EditText
+                    android:singleLine="true"
                     android:id="@+id/newProject_projectName"
                     style="@style/AppTheme"
                     android:layout_width="match_parent"
                     android:layout_height="35sp"
-                    android:textSize="15sp"
-                    android:background="@android:drawable/editbox_background_normal" />
+                    android:background="@android:drawable/editbox_background_normal"
+                    android:textSize="15sp" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,6 +70,7 @@
                 </me.iwf.photopicker.widget.MultiPickResultView>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="35sp"
@@ -88,11 +91,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="30sp"
                     android:entries="@array/projectTypeSpinner"
-                    android:spinnerMode="dropdown"
                     android:gravity="center_horizontal"
-                    />
+                    android:spinnerMode="dropdown" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,47 +110,82 @@
                     android:layout_height="wrap_content"
                     android:text="项目成员"
                     android:textSize="15sp" />
+
                 <LinearLayout
                     android:id="@+id/newproject_ll_project_member"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                 </LinearLayout>
+
                 <ImageButton
                     android:id="@+id/newproject_ll_add_project_member"
 
-                    android:scaleType="center"
-                    android:src="@android:drawable/ic_menu_add"
-                    android:background="@android:color/white"
-                    android:tint="@color/C9"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="end"
-                    android:layout_width="35sp"
-                    android:layout_height="35sp" />
-
+                    android:background="@drawable/touch_bg"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/add"
+                    android:tint="@color/colorPrimary" />
 
 
             </LinearLayout>
-            <LinearLayout
-                android:gravity="center"
 
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="85sp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:layout_marginLeft="15dp"
+                android:text="完成时间"
+                android:textSize="15sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <DatePicker
                     android:id="@+id/newProject_DatePicker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:datePickerMode="spinner"
                     android:calendarViewShown="false"
-                    ></DatePicker>
+                    android:datePickerMode="spinner"></DatePicker>
 
-            </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/progressBar"
+
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center_horizontal|bottom"
+
+                    />
+
+                <ProgressBar
+                    android:id="@+id/progressBar_all_newproject"
+                    android:layout_gravity="center"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+
+            </FrameLayout>
+
+            <EditText
+                android:layout_margin="5dp"
+                android:id="@+id/edt_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background_normal"
+                android:gravity="top"
+                android:hint="项目介绍"
+                android:minHeight="150dp"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
         </LinearLayout>
-
 
 
     </ScrollView>

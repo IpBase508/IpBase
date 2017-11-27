@@ -27,10 +27,12 @@ import com.ygip.ipbase_android.mvp.mine.adapter.MineAdapter;
 import com.ygip.ipbase_android.mvp.mine.presenter.MineCommon;
 import com.ygip.ipbase_android.mvp.mine.presenter.MinePresenter;
 import com.ygip.ipbase_android.mvp.universalModel.AKey;
+import com.ygip.ipbase_android.util.PopupList;
 import com.ygip.ipbase_android.util.StartActivityUtil;
 import com.ygip.ipbase_android.util.ToastUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,7 +76,9 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
     private ArrayList<String> data = new ArrayList<>();
     private EventHandler eventHandler;
     static boolean phoneNumberChecked=false;
-    private RegisterPage registerPage;
+    public static Boolean requireRefresh=false;
+
+
     @Override
     public void initData(Bundle savedInstanceState) {
         toolbar.setTitle("我的");
@@ -97,10 +101,6 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
                 }
             }
         };
-
-
-
-
     }
 
 
@@ -116,11 +116,12 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
         recyclerViewMine.setAdapter(adapter);
         recyclerViewMine.setItemAnimator(new DefaultItemAnimator());
         recyclerViewMine.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+        updateData();
+
     }
 
     public void permission() {
-        RxPermissions rxPermissions = new RxPermissions(context);
-        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+        getRxPermissions().request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
             @Override
             public void accept(@NonNull Boolean aBoolean) throws Exception {
 
@@ -168,6 +169,7 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
 
     @OnClick(R.id.iv_mine_head)
     public void onIvMineHeadClicked() {
+
         Intent intent = new Intent();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //4.4及以上
@@ -176,23 +178,32 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
             intent.setAction(Intent.ACTION_GET_CONTENT);
         }
         intent.setType("image/*");
-        startActivityForResult(intent, PICK_IMAGE_REQUEST_CODE);
+        startActivityForResult(Intent.createChooser(intent, "更换头像"), PICK_IMAGE_REQUEST_CODE);
     }
 
-//    @OnClick(R.id.toolbar)
-//    public void onToolbarClicked() {
-//    }
 
+    private void updateData(){
+        data = getP().getMineData(MineAdapter.MINE);
+        if (adapter!=null) {
+            adapter.updateData(data);
+        }else {
+            Logger.e("adapter is null");
+        }
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {//懒加载数据
-        if (isVisibleToUser) {
-            data = getP().getMineData(MineAdapter.MINE);
-            adapter.updateData(data);
-
-        }
 
         super.setUserVisibleHint(isVisibleToUser);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Logger.d("onResume");
+        if (requireRefresh) {
+            updateData();
+        }
     }
 
     @Override
