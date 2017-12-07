@@ -36,41 +36,34 @@ import cn.droidlover.xrecyclerview.XRecyclerContentLayout;
 public class ProjectPresenter extends XPresent<ProjectsFragment> {
 
     private static List<ProjectVo> projects;
-    private UniversalModel universalModel;
+    private UniversalModel<List<ProjectVo>> universalModel;
     private Gson gson = UniversalModel.getGson();
 
     public static List<ProjectVo> getProjects() {
         return projects;
     }
 
-    private OnResponseListener responseListener = new OnResponseListener<ProjectVo>() {
-        @Override
-        public void onFinish(UniversalResponseBean responseBean, Exception e) {
-
-        }
-    };
 
     public void loadData() {
-        universalModel = new UniversalModel<List<Object>>();
+        Type type = new TypeToken<List<ProjectVo>>() {
+        }.getType();
+        universalModel = new UniversalModel<>(type);
         projects = new ArrayList<ProjectVo>();
-        universalModel.getData(ApiUrl.Get.GET_PROJECT_URL, new String[]{"all=true"}, new OnResponseListener<List<Object>>() {
+        universalModel.getData(ApiUrl.Get.GET_PROJECT_URL, new String[]{"all=true"}, new OnResponseListener<List<ProjectVo>>() {
             @Override
-            public void onFinish(UniversalResponseBean<List<Object>> responseBean, Exception e) {
+            public void onFinish(UniversalResponseBean<List<ProjectVo>> responseBean, Exception e) {
                 if (e == null) {
                     try {
-                        String json = gson.toJson(responseBean.getData());
 
-                        Type type = new TypeToken<ArrayList<ProjectVo>>() {
-                        }.getType();
 
-                        projects = gson.fromJson(json, type);
+                        projects =responseBean.getData();
                         getV().setProjects(projects);
                         save2db(projects);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }else {
-                    getV().getActivity().runOnUiThread(()-> ToastUtils.show("刷新失败"));
+                    ToastUtils.show("刷新失败，显示缓存内容\n"+(e==null?" ":e.getMessage()));
                     getV().setProjects(getLocalProjects());
                     Logger.d(e.getMessage());
                 }
@@ -105,7 +98,7 @@ public class ProjectPresenter extends XPresent<ProjectsFragment> {
         return projects;
     }
 
-
-
-
+    public void onDestory(){
+        universalModel.cancelTask();
+    }
 }

@@ -1,11 +1,8 @@
 package com.ygip.ipbase_android.mvp.projects.model;
 
-import android.content.Context;
-import android.support.annotation.Nullable;
-
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
-import com.ygip.ipbase_android.mvp.projects.listener.ProjectDataListener;
+import com.ygip.ipbase_android.mvp.universalModel.UniversalModel;
 import com.ygip.ipbase_android.util.SharedPrefUtils;
 
 /**
@@ -29,13 +26,12 @@ public class ProjectModel {
         ProjectUpload project = new ProjectUpload();
 
         try {
-
             String data = SharedPrefUtils.load("project_local");
             Logger.d(data);
             if (data.equals("")) {
                 return null;
             }
-            project = (new Gson()).fromJson(data, ProjectUpload.class);
+            project = (UniversalModel.getGson()).fromJson(data, ProjectUpload.class);
 
         } catch (Exception e) {
             Logger.e(e.getMessage());
@@ -45,8 +41,6 @@ public class ProjectModel {
     }
 
     public void saveLocalData(ProjectUpload project) {
-
-
         try {
             String data = (new Gson()).toJson(project);
             SharedPrefUtils.save("project_local", data);
@@ -55,14 +49,5 @@ public class ProjectModel {
         }
 
     }
-
-    public void UploadData(ProjectUpload project, Context context, @Nullable ProjectDataListener projectDataListener) {
-
-
-
-
-
-    }
-
 
 }

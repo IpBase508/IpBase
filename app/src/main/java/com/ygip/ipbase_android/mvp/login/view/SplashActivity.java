@@ -23,7 +23,9 @@ import com.ygip.ipbase_android.util.ToastUtils;
 import butterknife.BindView;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
 
-
+/**
+ * 启动画面
+ */
 
 public class SplashActivity extends XActivity<LoginPresent> implements ICommon{
 
@@ -79,5 +81,11 @@ public class SplashActivity extends XActivity<LoginPresent> implements ICommon{
     protected void onStop() {
         finish();
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        getP().onDestory();
+        super.onDestroy();
     }
 }

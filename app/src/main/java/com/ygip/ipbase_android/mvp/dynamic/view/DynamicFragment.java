@@ -35,6 +35,7 @@ import cn.droidlover.xrecyclerview.XRecyclerView;
 
 /**
  * Created by XQM on 2017/7/23.
+ * 动态
  */
 
 public class DynamicFragment extends XFragment<DynamicPresenter> {
@@ -159,6 +160,7 @@ public class DynamicFragment extends XFragment<DynamicPresenter> {
 
     @Override
     public void onDestroyView() {
+        getP().onDestory();
         super.onDestroyView();
         unbinder.unbind();
     }

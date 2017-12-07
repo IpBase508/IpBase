@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by LockyLuo on 2017/11/4.
+ * 精简成员列表
  */
 
 public class MemberListAdapter extends BaseAdapter {

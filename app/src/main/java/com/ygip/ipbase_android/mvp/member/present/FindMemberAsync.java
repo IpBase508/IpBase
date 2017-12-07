@@ -14,6 +14,7 @@ import org.litepal.crud.DataSupport;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,7 +26,7 @@ import java.util.Set;
 
 public class FindMemberAsync extends AsyncTask<OnLoadListener, Integer, List<UserVo>> {
     private OnLoadListener onLoadListener;
-    private static List<UserVo> data;
+    private List<UserVo> data;
     private int condition = -1;
     private String param;
 
@@ -81,6 +82,7 @@ public class FindMemberAsync extends AsyncTask<OnLoadListener, Integer, List<Use
                     set.addAll(data);
                     data.clear();
                     data.addAll(set);
+                    Collections.sort(data);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

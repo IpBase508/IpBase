@@ -1,11 +1,9 @@
 package com.ygip.ipbase_android.mvp.universalPresenter;
 
-/**
- * Created by LockyLuo on 2017/11/4.
- */
-
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.ygip.ipbase_android.util.ToastUtils;
 
@@ -17,19 +15,20 @@ import java.net.URL;
 import java.util.Date;
 
 
-
-/***
+/**
+ * Created by LockyLuo on 2017/11/4.
  * 功能：用线程保存图片
- *
  */
+
 public class SaveImage extends AsyncTask<String, Void, String> {
     private String imgurl = "";
+
     @Override
     protected String doInBackground(String... params) {
         String result = "";
         try {
-            imgurl=params[0];
-            if (imgurl==null)
+            imgurl = params[0];
+            if (imgurl == null)
                 return null;
             String sdcard = Environment.getExternalStorageDirectory().toString();
             File file = new File(sdcard + "/Download");
@@ -63,6 +62,8 @@ public class SaveImage extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        ToastUtils.show(result);
+        new Handler(Looper.getMainLooper()).post(()->{
+            ToastUtils.show(result);
+        });
     }
 }

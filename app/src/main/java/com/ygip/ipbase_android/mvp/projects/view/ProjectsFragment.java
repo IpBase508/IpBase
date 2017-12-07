@@ -49,6 +49,7 @@ import scut.carson_ho.searchview.SearchView;
 
 /**
  * Created by lockyluo on 2017/7/28.
+ * 项目列表
  */
 
 public class ProjectsFragment extends XFragment<ProjectPresenter> {
@@ -267,7 +268,7 @@ public class ProjectsFragment extends XFragment<ProjectPresenter> {
             @Override
             public void onItemLongClick(int position, ProjectVo model, int tag, ProjectAdapter.ViewHolder holder) {
                 super.onItemLongClick(position, model, tag, holder);
-                MyVibrator.vibrate(context);
+//                MyVibrator.vibrate(context);
                 ToastUtils.show(context, "long click");
             }
         });
@@ -328,6 +329,7 @@ public class ProjectsFragment extends XFragment<ProjectPresenter> {
 
     @Override
     public void onDestroyView() {
+        getP().onDestory();
         super.onDestroyView();
         unbinder.unbind();
     }

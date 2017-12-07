@@ -16,9 +16,7 @@ import com.ygip.ipbase_android.mvp.universalModel.UniversalModel;
 import com.ygip.ipbase_android.mvp.universalModel.bean.ProjectImageVo;
 import com.ygip.ipbase_android.mvp.universalModel.bean.ProjectTeamVo;
 import com.ygip.ipbase_android.mvp.universalModel.bean.ProjectVo;
-import com.ygip.ipbase_android.mvp.universalModel.bean.UserVo;
 import com.ygip.ipbase_android.mvp.universalView.WebActivity;
-import com.ygip.ipbase_android.util.DensityUtils;
 import com.ygip.ipbase_android.util.StartActivityUtil;
 import com.ygip.ipbase_android.util.ToastUtils;
 
@@ -32,6 +30,10 @@ import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.kit.Kits;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
 import me.iwf.photopicker.widget.MultiPickResultView;
+
+/**
+ * 项目详情
+ */
 
 public class ProjectDetailActivity extends XActivity<ProjectDetailPresenter> {
     @BindView(R.id.iv_project_detail_headimg)

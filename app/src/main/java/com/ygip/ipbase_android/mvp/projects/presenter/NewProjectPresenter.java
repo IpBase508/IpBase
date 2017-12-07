@@ -129,4 +129,8 @@ public class NewProjectPresenter extends XPresent<NewProjectActivity> {
         }
         projectModel.saveLocalData(project);
     }
+
+    public void onDestory(){
+        universalModel.cancelTask();
+    }
 }

@@ -55,6 +55,10 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import scut.carson_ho.searchview.SearchView;
 
+/**
+ * 主界面Activity
+ */
+
 public class MainActivity extends XActivity<MainPresent> {
     @BindView(R.id.viewPager)
     ViewPager viewPager;
@@ -404,7 +408,6 @@ public class MainActivity extends XActivity<MainPresent> {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitBy2Click(); //调用双击退出函数
         }
@@ -414,6 +417,7 @@ public class MainActivity extends XActivity<MainPresent> {
     @Override
     protected void onDestroy() {
         instance=null;
+        getP().onDestory();
         super.onDestroy();
     }
 }

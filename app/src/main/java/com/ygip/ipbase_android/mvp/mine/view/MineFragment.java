@@ -48,6 +48,7 @@ import io.reactivex.functions.Consumer;
 
 /**
  * Created by lockyluo on 2017/7/28.
+ * 我的界面
  */
 
 public class MineFragment extends XFragment<MinePresenter> implements MineCommon{
@@ -200,7 +201,6 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
     @Override
     public void onResume() {
         super.onResume();
-        Logger.d("onResume");
         if (requireRefresh) {
             updateData();
         }
@@ -215,6 +215,7 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
 
     @Override
     public void onDestroyView() {
+        getP().onDestory();
         super.onDestroyView();
         unbinder.unbind();
     }

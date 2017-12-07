@@ -28,6 +28,7 @@ import cn.droidlover.xdroidmvp.mvp.XActivity;
 
 /**
  * Created by XQM on 2017/9/24.
+ * 注册
  */
 
 public class RegisterActivity extends XActivity<RegisterPresent> {
@@ -206,7 +207,12 @@ public class RegisterActivity extends XActivity<RegisterPresent> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        getP().onDestory();
+        super.onDestroy();
     }
 }

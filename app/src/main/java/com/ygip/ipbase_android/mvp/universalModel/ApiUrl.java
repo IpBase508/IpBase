@@ -6,7 +6,7 @@ package com.ygip.ipbase_android.mvp.universalModel;
  */
 
 public class ApiUrl {
-    private static final String HTTP_URL = "http://139.199.220.49:8888/base/api/";
+    private static final String HTTP_URL = "http://182.254.222.51:8888/base/api/";
 
 
     public class Get {

@@ -427,4 +427,8 @@ public class MinePresenter extends XPresent<MineCommon> {
         });
     }
 
+    public void onDestory(){
+        universalModel.cancelTask();
+    }
+
 }

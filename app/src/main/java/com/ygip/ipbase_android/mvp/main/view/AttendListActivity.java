@@ -7,6 +7,10 @@ import com.ygip.ipbase_android.mvp.mine.presenter.MinePresenter;
 
 import cn.droidlover.xdroidmvp.mvp.XActivity;
 
+/**
+ * 签到情况列表
+ */
+
 public class AttendListActivity extends XActivity<MinePresenter> {
 
     @Override
@@ -24,9 +28,10 @@ public class AttendListActivity extends XActivity<MinePresenter> {
         return new MinePresenter();
     }
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attend_list);
+    protected void onDestroy() {
+        getP().onDestory();
+        super.onDestroy();
     }
 }

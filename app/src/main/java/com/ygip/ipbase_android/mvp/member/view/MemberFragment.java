@@ -52,6 +52,7 @@ import scut.carson_ho.searchview.SearchView;
 
 /**
  * Created by XQM on 2017/7/23.
+ * 成员列表
  */
 
 public class MemberFragment extends XFragment<MemberPresenter> {
@@ -209,6 +210,8 @@ public class MemberFragment extends XFragment<MemberPresenter> {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
                     doSearch(depts[position]);//按部门搜索
+                }else {
+                    setMembers(getP().getLocalMembers());
                 }
             }
 
@@ -292,6 +295,7 @@ public class MemberFragment extends XFragment<MemberPresenter> {
 
     @Override
     public void onDestroyView() {
+        getP().onDestory();
         super.onDestroyView();
         unbinder.unbind();
     }

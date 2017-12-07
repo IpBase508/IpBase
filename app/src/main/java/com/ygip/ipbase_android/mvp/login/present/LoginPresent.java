@@ -28,9 +28,7 @@ public class LoginPresent extends XPresent<ICommon> {
         @Override
         public void onFinish(UniversalResponseBean responseBean, Exception e) {
             if(e!=null){//失败信息e
-                activity.runOnUiThread(()->{
-                    getV().show(e==null?"登录失败":e.getMessage());
-                });
+                getV().show(e==null?"登录失败":"登录失败\n"+e.getMessage());
                 if(UniversalModel.getFirstLogin()){
                     getV().startActivity(LoginActivity.class);
                 }else {
@@ -38,13 +36,11 @@ public class LoginPresent extends XPresent<ICommon> {
                 }
 
             }else {
-                activity.runOnUiThread(()->{
-                    try {
-                        getV().show("欢迎 " + UniversalModel.getUser().getMemberName());
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                });
+                try {
+                    getV().show("欢迎 " + UniversalModel.getUser().getMemberName());
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
                 getV().startActivity(MainActivity.class);
                 activity.finish();
             }
@@ -92,5 +88,9 @@ public class LoginPresent extends XPresent<ICommon> {
             }
         }
         return null;
+    }
+
+    public void onDestory(){
+        universalModel.cancelTask();
     }
 }

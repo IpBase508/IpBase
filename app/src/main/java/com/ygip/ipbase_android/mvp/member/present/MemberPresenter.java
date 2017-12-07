@@ -15,6 +15,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.orhanobut.logger.Logger;
+import com.ygip.ipbase_android.App;
 import com.ygip.ipbase_android.R;
 import com.ygip.ipbase_android.mvp.member.view.MemberFragment;
 import com.ygip.ipbase_android.mvp.mine.presenter.MinePresenter;
@@ -39,6 +40,7 @@ import org.litepal.tablemanager.Connector;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -64,17 +66,16 @@ public class MemberPresenter extends XPresent<MemberFragment> {
 
 
     public void loadMembers(Boolean callRefreshView) {
-        universalModel = new UniversalModel<>();
+        Type type = new TypeToken<ArrayList<UserVo>>() {
+        }.getType();
+        universalModel = new UniversalModel<>(type);
         memberList = new ArrayList<>();
-        universalModel.getData(ApiUrl.Get.GET_USER_URL, null, new OnResponseListener<List<UserVo>>() {
+        universalModel.getData(ApiUrl.Get.GET_USER_URL, new String[]{"all=true"}, new OnResponseListener<List<UserVo>>() {
             @Override
             public void onFinish(UniversalResponseBean<List<UserVo>> responseBean, Exception e) {
                 if (e == null) {
                     try {
-                        String data = gson.toJson(responseBean.getData());
-                        Type type = new TypeToken<ArrayList<UserVo>>() {
-                        }.getType();
-                        memberList = gson.fromJson(data, type);
+                        memberList = responseBean.getData();
                         if (memberList != null) {
                             memberList = sort(memberList);
                             if (callRefreshView) {
@@ -89,7 +90,7 @@ public class MemberPresenter extends XPresent<MemberFragment> {
                         e1.printStackTrace();
                     }
                 } else {
-                    getV().getActivity().runOnUiThread(() -> ToastUtils.show("刷新失败"));
+                    ToastUtils.show("刷新失败，显示缓存内容\n"+(e==null?"":e.getMessage()));
                     getV().setMembers(getLocalMembers());
                     Logger.d(e.getMessage());
                 }
@@ -97,16 +98,20 @@ public class MemberPresenter extends XPresent<MemberFragment> {
         });
     }
 
-    public List<UserVo> sort(List<UserVo> memberList) {
-        String[] departments = getV().getResources().getStringArray(R.array.departments);
+    public static List<UserVo> sort(List<UserVo> memberList) {
+        String[] departments = App.getContext().getResources().getStringArray(R.array.departments);
         List<UserVo> sortList = new ArrayList<>();
 
         for (int i = 1; i < departments.length; i++) {
+            List<UserVo> tempSortList=new ArrayList<>();
             for (UserVo user : memberList) {
                 if (user.getDepartment().equals(departments[i])) {
-                    sortList.add(user);
+                    tempSortList.add(user);
                 }
             }
+
+            Collections.sort(tempSortList);
+            sortList.addAll(tempSortList);
         }
         memberListCache = sortList;
         return sortList;
@@ -140,10 +145,13 @@ public class MemberPresenter extends XPresent<MemberFragment> {
         context.finish();
     }
 
-    public static List<UserVo> getLocalMembers() {
+    public List<UserVo> getLocalMembers() {
         memberList = DataSupport.findAll(UserVo.class);
+        memberList=sort(memberList);
         return memberList;
     }
+
+
 
     public void batchImportMembers(Uri uri) {
         File file = FileUtils.Uri2File(getV().getActivity(), uri);
@@ -158,7 +166,7 @@ public class MemberPresenter extends XPresent<MemberFragment> {
                     @Override
                     public void onFinish(FileResponseBean fileResponseBean, Exception e) {
                         if (e == null && !TextUtils.isEmpty(fileResponseBean.getFile_path())) {
-                            HashMap<String, String> map = new HashMap<String, String>();
+                            HashMap<String, String> map = new HashMap<>();
                             map.put("excelUrl", fileResponseBean.getFile_path());
 
                             universalModel.postData(ApiUrl.Post.POST_USER_BATCH_IMPORT_URL, map, new OnResponseListener() {
@@ -167,11 +175,11 @@ public class MemberPresenter extends XPresent<MemberFragment> {
                                     try {
                                         if (e == null && responseBean != null) {
                                             if (responseBean.getCode() == 200) {
-                                                new Handler(Looper.getMainLooper()).post(() -> ToastUtils.show("导入成功"));
+                                                ToastUtils.show("导入成功");
                                             } else
-                                                new Handler(Looper.getMainLooper()).post(() -> ToastUtils.show("导入失败"));
+                                                ToastUtils.show("导入失败");
                                         } else
-                                            new Handler(Looper.getMainLooper()).post(() -> ToastUtils.show("导入失败"+e.getMessage()));
+                                            ToastUtils.show("导入失败"+e.getMessage());
                                     } catch (Exception e1) {
                                         e1.printStackTrace();
                                     }
@@ -179,7 +187,7 @@ public class MemberPresenter extends XPresent<MemberFragment> {
                             });
                         } else {
                             Logger.d(e.getMessage());
-                            new Handler(Looper.getMainLooper()).post(() -> ToastUtils.show("上传失败"));
+                            ToastUtils.show("上传失败");
                         }
 
                     }
@@ -222,5 +230,9 @@ public class MemberPresenter extends XPresent<MemberFragment> {
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
         View view = layoutInflater.inflate(R.layout.spinnerview, null);
         return view;
+    }
+
+    public void onDestory(){
+        universalModel.cancelTask();
     }
 }

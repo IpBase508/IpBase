@@ -1,6 +1,7 @@
 package com.ygip.ipbase_android;
 
-import android.support.multidex.MultiDexApplication;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.mob.MobSDK;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -24,10 +25,16 @@ public class App extends LitePalApplication {
         super.onCreate();
         instance = this;
         MobSDK.init(instance, AKey.s1,AKey.s2);//短信sdk
-        if(androidLogAdapter==null){
+        if(androidLogAdapter==null){//初始化logger
             androidLogAdapter=new AndroidLogAdapter(getFormatStrategy());
             Logger.addLogAdapter(androidLogAdapter);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     private FormatStrategy getFormatStrategy(){
@@ -35,9 +42,6 @@ public class App extends LitePalApplication {
                 .newBuilder()
                 .tag("locky Log").build();
         return  formatStrategy;
-    }
-    public static AndroidLogAdapter getAndroidLogAdapter() {
-        return androidLogAdapter;
     }
 
     public static App getInstance(){

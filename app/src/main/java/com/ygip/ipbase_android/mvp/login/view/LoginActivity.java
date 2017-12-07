@@ -41,6 +41,7 @@ import cn.droidlover.xdroidmvp.mvp.XActivity;
 
 /**
  * Created by XQM on 2017/7/22.
+ * 登录
  */
 
 public class LoginActivity extends XActivity<LoginPresent> implements ICommon {
@@ -231,6 +232,12 @@ public class LoginActivity extends XActivity<LoginPresent> implements ICommon {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        getP().onDestory();
+        super.onDestroy();
+    }
+
     @OnClick(R.id.btn_register)
     public void onBtnRegisterClicked() {
         StartActivityUtil.startForResult(context, RegisterActivity.class, REQUEST_CODE);
@@ -247,13 +254,6 @@ public class LoginActivity extends XActivity<LoginPresent> implements ICommon {
 
     @OnClick(R.id.login_type)
     public void onLoginTypeClicked() {
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 
 

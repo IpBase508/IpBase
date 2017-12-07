@@ -45,6 +45,10 @@ import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
 import me.iwf.photopicker.widget.MultiPickResultView;
 
+/**
+ * 新建项目
+ */
+
 public class NewProjectActivity extends XActivity<NewProjectPresenter> {
 
     ViewDelegateByLocky vDelegate;
@@ -381,6 +385,7 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
 
     @Override
     protected void onDestroy() {
+        getP().onDestory();
         super.onDestroy();
         isSaved = false;
     }

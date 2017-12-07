@@ -2,6 +2,7 @@ package com.ygip.ipbase_android.mvp.universalModel;
 
 /**
  * Created by LockyLuo on 2017/9/20.
+ * key
  */
 
 public class AKey {

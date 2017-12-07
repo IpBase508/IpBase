@@ -1,5 +1,7 @@
 package com.ygip.ipbase_android.mvp.universalModel.bean;
 
+import android.support.annotation.NonNull;
+
 import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
@@ -13,7 +15,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class UserVo extends DataSupport implements Serializable {
+public class UserVo extends DataSupport implements Serializable,Comparable<UserVo> {
     int id;
     String userId;
     String memberName;
@@ -26,4 +28,9 @@ public class UserVo extends DataSupport implements Serializable {
     Long updateTime=0L;
     Boolean delete;
     Integer userLevel=0;
+
+    @Override
+    public int compareTo(@NonNull UserVo o) {
+        return this.grade.compareTo(o.grade);
+    }
 }

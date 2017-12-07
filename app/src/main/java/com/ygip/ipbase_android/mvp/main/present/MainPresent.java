@@ -80,7 +80,7 @@ public class MainPresent extends XPresent<MainActivity> {
 
     public Boolean checkLocation(Context context){
         String[] mac508= Mac508.mac;
-        wlanMac= NetworkAddressUtils.getMacM().get("wlan0");
+        wlanMac= NetworkAddressUtils.getMacM().get("wlan0");//这里有问题，获取的是手机设备的mac，应该获取连接到的WIFI的mac
         if (TextUtils.isEmpty(wlanMac))
         {
             Logger.e("wlanmac is null");
@@ -105,6 +105,10 @@ public class MainPresent extends XPresent<MainActivity> {
             return true;
         }
         return false;
+    }
+
+    public void onDestory(){
+        universalModel.cancelTask();
     }
 
 }

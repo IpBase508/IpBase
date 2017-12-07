@@ -32,6 +32,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
 
+/**
+ * 修改个人信息的通用界面
+ */
+
 public class ChangeInfoActivity extends XActivity<MinePresenter> implements MineCommon {
 
 
@@ -214,8 +218,13 @@ public class ChangeInfoActivity extends XActivity<MinePresenter> implements Mine
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        getP().onDestory();
+        super.onDestroy();
     }
 
     @OnClick(R.id.changeInfo_btn_byPassword)

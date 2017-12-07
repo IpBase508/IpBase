@@ -41,26 +41,23 @@ public class DynamicPresenter extends XPresent<DynamicFragment>{
     }
 
     public void loadDynamics(Boolean callRefreshView){
-        universalModel = new UniversalModel<List<DynamicVo>>();
+        Type type = new TypeToken<List<DynamicVo>>() {
+        }.getType();
+        universalModel = new UniversalModel<>(type);
         dynamics = new ArrayList<DynamicVo>();
         universalModel.getData(ApiUrl.Get.GET_DYNAMIC_URL, new String[]{"all=true"}, new OnResponseListener<List<DynamicVo>>() {
             @Override
             public void onFinish(UniversalResponseBean<List<DynamicVo>> responseBean, Exception e) {
                 if (e == null) {
                     try {
-                        String json = gson.toJson(responseBean.getData());
-
-                        Type type = new TypeToken<ArrayList<DynamicVo>>() {
-                        }.getType();
-
-                        dynamics = gson.fromJson(json, type);
+                        dynamics = responseBean.getData();
                         getV().setDynamics(dynamics);
                         save2db(dynamics);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }else {
-                    getV().getActivity().runOnUiThread(()-> ToastUtils.show("刷新失败"));
+                    ToastUtils.show("刷新失败，显示缓存内容\n"+(e==null?" ":e.getMessage()));
                     getV().setDynamics(getLocaldynamics());
                     Logger.d(e.getMessage());
                 }
@@ -98,9 +95,7 @@ public class DynamicPresenter extends XPresent<DynamicFragment>{
         return dynamics;
     }
 
-
-
-
-
-
+    public void onDestory(){
+        universalModel.cancelTask();
+    }
 }

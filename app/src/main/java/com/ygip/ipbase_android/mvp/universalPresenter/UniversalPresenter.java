@@ -77,7 +77,7 @@ public class UniversalPresenter {
         }
     };
 
-    public static JsonObject User2Object(UserVo userVo) {
+    public static JsonObject User2JsonObject(UserVo userVo) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("userId", userVo.getUserId());
         if (userVo.getMemberName() != null)
@@ -99,7 +99,7 @@ public class UniversalPresenter {
 
     public void putUserData(UserVo userVo) {//更新user信息
         UniversalModel universalModel = new UniversalModel();
-        JsonObject jsonObject = User2Object(userVo);
+        JsonObject jsonObject = User2JsonObject(userVo);
         Logger.d(jsonObject);
         universalModel.putData(ApiUrl.Put.PUT_USER_URL, jsonObject, onPutMemberListener);
     }

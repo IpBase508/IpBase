@@ -30,6 +30,10 @@ import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
 import cn.smssdk.SMSSDK;
 
+/**
+ * 修改密码界面
+ */
+
 public class ChangePasswordActivity extends XActivity<MinePresenter> implements MineCommon {
 
     @BindView(R.id.titlebar_tv_title)
@@ -199,6 +203,7 @@ public class ChangePasswordActivity extends XActivity<MinePresenter> implements 
         phone = null;
         title = null;
         changePasswordBtnGetsms.onDestory();
+        getP().onDestory();
         super.onDestroy();
     }
 

@@ -53,6 +53,9 @@ public class RegisterPresent extends XPresent<RegisterActivity> {
                 }
             }
         });
+    }
 
+    public void onDestory(){
+        universalModel.cancelTask();
     }
 }

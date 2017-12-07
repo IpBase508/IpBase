@@ -1,6 +1,8 @@
 package com.ygip.ipbase_android.mvp.universalModel.bean;
 
 
+import android.support.annotation.NonNull;
+
 import org.litepal.crud.DataSupport;
 
 import lombok.Data;
@@ -15,7 +17,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 
-public class ProjectVo extends DataSupport implements Serializable {
+public class ProjectVo extends DataSupport implements Serializable,Comparable<ProjectVo> {
     int id;
     String projectId;
     String projectName;
@@ -32,4 +34,9 @@ public class ProjectVo extends DataSupport implements Serializable {
     Boolean delete;
     List<String> userIds;
     List<ProjectTeamVo> projectTeamVoList;
+
+    @Override
+    public int compareTo(@NonNull ProjectVo o) {
+        return -this.createTime.compareTo(o.createTime);
+    }
 }
