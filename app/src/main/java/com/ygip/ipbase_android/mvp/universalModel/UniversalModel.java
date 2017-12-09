@@ -181,7 +181,7 @@ public class UniversalModel<T>{
             map.put("memberName", loginUser.getMemberName());
         }
         map.put("password", loginUser.getPassword());
-        Logger.d(map);
+//        Logger.d(map);
 
         requestBody = RequestBody.create(JSON, gson.toJson(map));
         request = requestBuilder.post(requestBody).build();
