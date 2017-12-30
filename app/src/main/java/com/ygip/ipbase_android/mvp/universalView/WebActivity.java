@@ -123,7 +123,7 @@ public class WebActivity extends AppCompatActivity {
                         break;
                     case WebView.HitTestResult.EMAIL_TYPE: // 处理Email
                         break;
-                    case WebView.HitTestResult.GEO_TYPE: // TODO
+                    case WebView.HitTestResult.GEO_TYPE: //
                         break;
                     case WebView.HitTestResult.SRC_ANCHOR_TYPE: // 超链接
                         // Log.d(DEG_TAG, "超链接");
@@ -180,7 +180,6 @@ public class WebActivity extends AppCompatActivity {
 //        settings.setUseWideViewPort(true);
 //        settings.setLoadWithOverviewMode(true);
         //支持屏幕缩放
-//
         settings.setSupportZoom(true);
         settings.setBuiltInZoomControls(true);
         //不显示webview缩放按钮
