@@ -98,7 +98,7 @@ public class ProjectDetailActivity extends XActivity<ProjectDetailPresenter> {
             try {
                 List<ProjectTeamVo> members = project.getProjectTeamVoList();
                 for (ProjectTeamVo member : members) {
-                    if (member.getUserVo()!=null) {
+                    if (member.getUserVo() != null) {
                         TextView tv = new TextView(context);
                         tv.setTextColor(ContextCompat.getColor(context, R.color.black));
                         tv.setPadding(5, 5, 5, 5);

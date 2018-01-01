@@ -86,25 +86,25 @@ public class ChangeInfoActivity extends XActivity<MinePresenter> implements Mine
 
     void initView() {
         llCheckByPwdChangeInfo.setVisibility(View.GONE);
-        titlebarTvTitle.setText(title==null?"修改信息":"修改"+title);
+        titlebarTvTitle.setText(title == null ? "修改信息" : "修改" + title);
         titlebarLlLeft.setVisibility(View.VISIBLE);
         setConfirm(isConfirmed);
     }
 
-    void doChange(){
-        if (title!=null) {
-            UserVo userVo=new UserVo();
+    void doChange() {
+        if (title != null) {
+            UserVo userVo = new UserVo();
             userVo.setUserId(UniversalModel.getUser().getUserId());
-            switch (title){
-                case "姓名":{
+            switch (title) {
+                case "姓名": {
                     userVo.setMemberName(edtNewinfoChangeinfo.getText().toString().trim());
                     break;
                 }
-                case "年级":{
+                case "年级": {
                     userVo.setGrade(edtNewinfoChangeinfo.getText().toString().trim());
                     break;
                 }
-                case "手机号":{
+                case "手机号": {
                     userVo.setPhoneNumber(edtNewinfoChangeinfo.getText().toString().trim());
                     break;
                 }
@@ -223,7 +223,9 @@ public class ChangeInfoActivity extends XActivity<MinePresenter> implements Mine
 
     @Override
     protected void onDestroy() {
-        getP().onDestory();
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroy();
     }
 
@@ -235,21 +237,21 @@ public class ChangeInfoActivity extends XActivity<MinePresenter> implements Mine
 
     @OnClick(R.id.changeInfo_btn_byPassword_done)
     public void onChangeInfoBtnByPasswordDoneClicked() {
-        String pwd=edtPwdChangeInfo.getText().toString().trim();
-        if (TextUtils.isEmpty(pwd)){
+        String pwd = edtPwdChangeInfo.getText().toString().trim();
+        if (TextUtils.isEmpty(pwd)) {
             ToastUtils.show("密码为空");
             return;
         }
         try {
-            pwd= AES.Encrypt(pwd, AKey.s);
+            pwd = AES.Encrypt(pwd, AKey.s);
         } catch (Exception e) {
             e.printStackTrace();
-            pwd=null;
+            pwd = null;
         }
-        if (pwd!=null){
-            if (pwd.equals(UniversalModel.getLocalUser().getPassword())){
+        if (pwd != null) {
+            if (pwd.equals(UniversalModel.getLocalUser().getPassword())) {
                 setConfirm(true);
-            }else {
+            } else {
                 setConfirm(false);
                 ToastUtils.show("密码错误");
             }
@@ -258,13 +260,13 @@ public class ChangeInfoActivity extends XActivity<MinePresenter> implements Mine
 
     @OnClick(R.id.changeInfo_btn_done)
     public void onChangeInfoBtnDoneClicked() {
-        if (TextUtils.isEmpty(edtNewinfoChangeinfo.getText())){
+        if (TextUtils.isEmpty(edtNewinfoChangeinfo.getText())) {
             ToastUtils.show("新信息不能为空");
             return;
         }
-        if (isConfirmed){
+        if (isConfirmed) {
             doChange();
-        }else {
+        } else {
             ToastUtils.show("请先验证身份");
         }
     }

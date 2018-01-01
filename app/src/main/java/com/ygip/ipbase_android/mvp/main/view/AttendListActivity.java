@@ -31,7 +31,9 @@ public class AttendListActivity extends XActivity<MinePresenter> {
 
     @Override
     protected void onDestroy() {
-        getP().onDestory();
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroy();
     }
 }

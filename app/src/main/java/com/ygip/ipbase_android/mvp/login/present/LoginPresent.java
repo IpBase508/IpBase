@@ -22,20 +22,20 @@ import cn.droidlover.xdroidmvp.mvp.XPresent;
  */
 
 public class LoginPresent extends XPresent<ICommon> {
-    public UniversalModel universalModel=new UniversalModel();
+    public UniversalModel universalModel = new UniversalModel();
     public Activity activity;
-    public OnResponseListener responseListener=new OnResponseListener() {
+    public OnResponseListener responseListener = new OnResponseListener() {
         @Override
         public void onFinish(UniversalResponseBean responseBean, Exception e) {
-            if(e!=null){//失败信息e
-                getV().show(e==null?"登录失败":"登录失败\n"+e.getMessage());
-                if(UniversalModel.getFirstLogin()){
+            if (e != null) {//失败信息e
+                getV().show(e == null ? "登录失败" : "登录失败\n" + e.getMessage());
+                if (UniversalModel.getFirstLogin()) {
                     getV().startActivity(LoginActivity.class);
-                }else {
+                } else {
                     getV().startActivity(MainActivity.class);
                 }
 
-            }else {
+            } else {
                 try {
                     getV().show("欢迎 " + UniversalModel.getUser().getMemberName());
                 } catch (Exception e1) {
@@ -47,28 +47,27 @@ public class LoginPresent extends XPresent<ICommon> {
         }
     };
 
-    public void login(Activity activity, LoginUser loginUser){
-        this.activity=activity;
-        if (loginUser ==null) {
+    public void login(Activity activity, LoginUser loginUser) {
+        this.activity = activity;
+        if (loginUser == null) {
             loginUser = getLocalUser();
-            if (loginUser !=null)
-            {
-                universalModel.login(getLocalUser(),responseListener);
-            }else
+            if (loginUser != null) {
+                universalModel.login(getLocalUser(), responseListener);
+            } else
                 getV().startActivity(LoginActivity.class);
         } else {
-            universalModel.login(loginUser,responseListener);
+            universalModel.login(loginUser, responseListener);
         }
     }
 
-    public LoginUser getLocalUser(){
+    public LoginUser getLocalUser() {
         UserVo userVo;
-        String user=SharedPrefUtils.load("loginUser");
-        if(user!=null){
+        String user = SharedPrefUtils.load("loginUser");
+        if (user != null) {
             try {
-                userVo=(new Gson()).fromJson(user,UserVo.class);
-                LoginUser loginUser =new LoginUser();
-                if(userVo==null)
+                userVo = (new Gson()).fromJson(user, UserVo.class);
+                LoginUser loginUser = new LoginUser();
+                if (userVo == null)
                     return null;
                 loginUser.setPhoneNumber(userVo.getPhoneNumber());
                 loginUser.setMemberName(userVo.getMemberName());
@@ -76,7 +75,7 @@ public class LoginPresent extends XPresent<ICommon> {
 //                if(loginUser.getPhoneNumber()!=null){
 //                    loginUser.setMemberName(null);
 //                }else
-                    if(loginUser.getMemberName()!=null){
+                if (loginUser.getMemberName() != null) {
                     loginUser.setPhoneNumber(null);
                 }
 
@@ -90,7 +89,9 @@ public class LoginPresent extends XPresent<ICommon> {
         return null;
     }
 
-    public void onDestory(){
-        universalModel.cancelTask();
+    public void onDestory() {
+        if (universalModel != null) {
+            universalModel.cancelTask();
+        }
     }
 }

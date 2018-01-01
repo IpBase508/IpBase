@@ -54,16 +54,14 @@ public class ProjectPresenter extends XPresent<ProjectsFragment> {
             public void onFinish(UniversalResponseBean<List<ProjectVo>> responseBean, Exception e) {
                 if (e == null) {
                     try {
-
-
-                        projects =responseBean.getData();
+                        projects = responseBean.getData();
                         getV().setProjects(projects);
                         save2db(projects);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
-                }else {
-                    ToastUtils.show("刷新失败，显示缓存内容\n"+(e==null?" ":e.getMessage()));
+                } else {
+                    ToastUtils.show("刷新失败，显示缓存内容\n" + (e == null ? " " : e.getMessage()));
                     getV().setProjects(getLocalProjects());
                     Logger.d(e.getMessage());
                 }
@@ -93,12 +91,14 @@ public class ProjectPresenter extends XPresent<ProjectsFragment> {
         }
     }
 
-    public List<ProjectVo> getLocalProjects(){
-        projects=DataSupport.findAll(ProjectVo.class);
+    public List<ProjectVo> getLocalProjects() {
+        projects = DataSupport.findAll(ProjectVo.class);
         return projects;
     }
 
-    public void onDestory(){
-        universalModel.cancelTask();
+    public void onDestory() {
+        if (universalModel != null) {
+            universalModel.cancelTask();
+        }
     }
 }

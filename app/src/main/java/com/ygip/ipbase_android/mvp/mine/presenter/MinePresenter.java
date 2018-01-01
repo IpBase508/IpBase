@@ -73,7 +73,7 @@ public class MinePresenter extends XPresent<MineCommon> {
                         if (responseBean.getData() != null) {
                             Type type = new TypeToken<UserVo>() {
                             }.getType();
-                            Gson gson=UniversalModel.getGson();
+                            Gson gson = UniversalModel.getGson();
                             try {
                                 UniversalModel.setUser(gson.fromJson(gson.toJson(responseBean.getData()), type));
                             } catch (JsonSyntaxException e1) {
@@ -82,7 +82,7 @@ public class MinePresenter extends XPresent<MineCommon> {
                             new Handler(Looper.getMainLooper()).post(() -> {
                                 ToastUtils.show("修改成功");
                             });
-                            MineFragment.requireRefresh=true;
+                            MineFragment.requireRefresh = true;
                         } else {
                             new Handler(Looper.getMainLooper()).post(() -> {
                                 ToastUtils.show(responseBean.getMsg());
@@ -257,7 +257,7 @@ public class MinePresenter extends XPresent<MineCommon> {
     public void putUserData(UserVo userVo) {//更新user信息
         JsonObject jsonObject = User2Object(userVo);
         Logger.d(jsonObject);
-        universalModel.putData(ApiUrl.Put.PUT_USER_URL, jsonObject,onPutListener);
+        universalModel.putData(ApiUrl.Put.PUT_USER_URL, jsonObject, onPutListener);
     }
 
     public void loadHead(CircleImageView iv) {
@@ -380,7 +380,7 @@ public class MinePresenter extends XPresent<MineCommon> {
 
     public void getData() {//-----------get
         universalModel = new UniversalModel<ArrayList<UserVo>>();
-        universalModel.getData(ApiUrl.Get.GET_USER_URL, new String[]{"all=true","condition=吃瓜群众"}, new OnResponseListener<ArrayList<UserVo>>() {
+        universalModel.getData(ApiUrl.Get.GET_USER_URL, new String[]{"all=true", "condition=吃瓜群众"}, new OnResponseListener<ArrayList<UserVo>>() {
             @Override
             public void onFinish(UniversalResponseBean<ArrayList<UserVo>> responseBean, Exception e) {
                 if (e == null) {
@@ -427,8 +427,10 @@ public class MinePresenter extends XPresent<MineCommon> {
         });
     }
 
-    public void onDestory(){
-        universalModel.cancelTask();
+    public void onDestory() {
+        if (universalModel != null) {
+            universalModel.cancelTask();
+        }
     }
 
 }

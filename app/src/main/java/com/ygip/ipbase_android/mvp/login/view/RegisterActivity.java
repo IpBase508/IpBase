@@ -104,7 +104,6 @@ public class RegisterActivity extends XActivity<RegisterPresent> {
         });
 
 
-
         edtRegisterPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -204,6 +203,7 @@ public class RegisterActivity extends XActivity<RegisterPresent> {
     }
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,7 +212,9 @@ public class RegisterActivity extends XActivity<RegisterPresent> {
 
     @Override
     protected void onDestroy() {
-        getP().onDestory();
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroy();
     }
 }

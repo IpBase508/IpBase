@@ -329,7 +329,9 @@ public class ProjectsFragment extends XFragment<ProjectPresenter> {
 
     @Override
     public void onDestroyView() {
-        getP().onDestory();
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroyView();
         unbinder.unbind();
     }

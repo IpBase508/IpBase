@@ -27,6 +27,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".mvp.login.view.SplashActivity"
+            android:resizeableActivity="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask">
             <intent-filter>
@@ -36,12 +37,15 @@
         </activity>
         <activity
             android:name=".mvp.login.view.LoginActivity"
+            android:resizeableActivity="true"
             android:launchMode="singleTask" />
         <activity
             android:name=".mvp.login.view.RegisterActivity"
+            android:resizeableActivity="true"
             android:launchMode="singleTask" />
         <activity
             android:name=".mvp.main.view.MainActivity"
+            android:resizeableActivity="true"
             android:launchMode="singleTask" />
         <activity
             android:name=".mvp.projects.view.ProjectDetailActivity"

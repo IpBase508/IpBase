@@ -373,7 +373,7 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
         });
     }
 
-    public void toast(String s,Boolean succeed) {
+    public void toast(String s, Boolean succeed) {
         runOnUiThread(() -> {
             ToastUtils.show(TextUtils.isEmpty(s) ? "" : s);
             progressBarAllNewproject.setVisibility(View.GONE);
@@ -385,7 +385,9 @@ public class NewProjectActivity extends XActivity<NewProjectPresenter> {
 
     @Override
     protected void onDestroy() {
-        getP().onDestory();
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroy();
         isSaved = false;
     }

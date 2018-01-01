@@ -131,7 +131,6 @@ public class ChangePasswordActivity extends XActivity<MinePresenter> implements 
     }
 
 
-
     @OnClick(R.id.change_password_btn_confirm)
     public void onChangePasswordBtnConfirmClicked() {
         String phone = changePasswordEdtPhoneNumber.getText().toString().trim();
@@ -203,7 +202,9 @@ public class ChangePasswordActivity extends XActivity<MinePresenter> implements 
         phone = null;
         title = null;
         changePasswordBtnGetsms.onDestory();
-        getP().onDestory();
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroy();
     }
 

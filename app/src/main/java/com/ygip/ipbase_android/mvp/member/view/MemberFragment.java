@@ -118,7 +118,7 @@ public class MemberFragment extends XFragment<MemberPresenter> {
                 setSearchview(View.VISIBLE);
             }
         }
-        (new Handler(Looper.getMainLooper())).postDelayed(() -> {
+        (new Handler(Looper.getMainLooper())).post(() -> {
 
             if (isVisibleToUser) {
                 if (members.size() == 0 || requireRefresh) {
@@ -127,7 +127,7 @@ public class MemberFragment extends XFragment<MemberPresenter> {
                     requireRefresh = false;
                 }
             }
-        }, 100);
+        });
     }
 
     @Override
@@ -210,7 +210,7 @@ public class MemberFragment extends XFragment<MemberPresenter> {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
                     doSearch(depts[position]);//按部门搜索
-                }else {
+                } else {
                     setMembers(getP().getLocalMembers());
                 }
             }
@@ -295,7 +295,9 @@ public class MemberFragment extends XFragment<MemberPresenter> {
 
     @Override
     public void onDestroyView() {
-        getP().onDestory();
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroyView();
         unbinder.unbind();
     }

@@ -8,173 +8,179 @@
 
     >
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/C6"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_forget_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:background="@drawable/touch_bg"
-                android:padding="15dp"
-                android:text="忘记密码?"
-                android:textColor="@color/colorPrimary" />
-
-            <ImageView
-                android:id="@+id/img_login"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="80dp"
-                android:background="@drawable/touch_bg"
-                android:clickable="true" />
-        </FrameLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="@dimen/dp12"
-                android:layout_marginRight="@dimen/dp12"
-                android:src="@drawable/login_account_icon" />
-
-            <com.wrapp.floatlabelededittext.FloatLabeledEditText
-                android:id="@+id/edt_account_bg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp12"
-                android:layout_toRightOf="@id/image"
-                float:fletPaddingBottom="5dp"
-                float:fletTextAppearance="@style/floatlabelededittext">
-
-                <EditText
-                    android:id="@+id/edt_account"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="手机号"
-                    android:textColor="@color/C2"
-                    android:textColorHint="@color/C3"
-                    android:textSize="@dimen/T3"
-                    android:theme="@style/MyEditText" />
-            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/image1"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="@dimen/dp12"
-                android:layout_marginRight="@dimen/dp12"
-                android:src="@drawable/login_account_icon" />
-
-            <com.wrapp.floatlabelededittext.FloatLabeledEditText
-                android:id="@+id/edt_password_bg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp12"
-                android:layout_toRightOf="@id/image1"
-                float:fletPaddingBottom="5dp"
-                float:fletTextAppearance="@style/floatlabelededittext">
-
-                <EditText
-
-                    android:id="@+id/edt_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="密码"
-                    android:inputType="textPassword"
-                    android:textColor="@color/C2"
-                    android:textColorHint="@color/C3"
-                    android:textSize="@dimen/T3"
-                    android:theme="@style/MyEditText" />
-            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-        </RelativeLayout>
-
-        <RadioGroup
-            android:id="@+id/login_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp10"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radio_button_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp10"
-                android:text="手机号"
-                android:textColor="@color/gray7f7" />
-
-            <RadioButton
-                android:id="@+id/radio_button_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="姓名"
-                android:textColor="@color/gray7f7" />
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/dp12"
-            android:layout_marginRight="@dimen/dp12"
-            android:background="@color/C9"
-            android:gravity="center"
-            android:text="登录"
-            android:textColor="@color/C6"
-            android:textSize="@dimen/T3" />
-
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/dp12"
-            android:layout_marginRight="@dimen/dp12"
-            android:layout_marginTop="10dp"
-            android:background="@color/holo_blue_light"
-            android:gravity="center"
-            android:text="注册"
-            android:textColor="@color/C6"
-            android:textSize="@dimen/T3" />
-
+        >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:gravity="bottom"
+            android:layout_height="match_parent"
+            android:background="@color/C6"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <include layout="@layout/copyright"></include>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_forget_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:background="@drawable/touch_bg"
+                    android:padding="15dp"
+                    android:text="忘记密码?"
+                    android:textColor="@color/colorPrimary" />
+
+                <ImageView
+                    android:id="@+id/img_login"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="80dp"
+                    android:background="@drawable/touch_bg"
+                    android:clickable="true" />
+            </FrameLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/dp12"
+                    android:layout_marginRight="@dimen/dp12"
+                    android:src="@drawable/login_account_icon" />
+
+                <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                    android:id="@+id/edt_account_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp12"
+                    android:layout_toRightOf="@id/image"
+                    float:fletPaddingBottom="5dp"
+                    float:fletTextAppearance="@style/floatlabelededittext">
+
+                    <EditText
+                        android:id="@+id/edt_account"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="手机号"
+                        android:textColor="@color/C2"
+                        android:textColorHint="@color/C3"
+                        android:textSize="@dimen/T3"
+                        android:theme="@style/MyEditText" />
+                </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/dp12"
+                    android:layout_marginRight="@dimen/dp12"
+                    android:src="@drawable/login_account_icon" />
+
+                <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                    android:id="@+id/edt_password_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp12"
+                    android:layout_toRightOf="@id/image1"
+                    float:fletPaddingBottom="5dp"
+                    float:fletTextAppearance="@style/floatlabelededittext">
+
+                    <EditText
+
+                        android:id="@+id/edt_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="密码"
+                        android:inputType="textPassword"
+                        android:textColor="@color/C2"
+                        android:textColorHint="@color/C3"
+                        android:textSize="@dimen/T3"
+                        android:theme="@style/MyEditText" />
+                </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            </RelativeLayout>
+
+            <RadioGroup
+                android:id="@+id/login_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_button_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:text="手机号"
+                    android:textColor="@color/gray7f7" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="姓名"
+                    android:textColor="@color/gray7f7" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dp12"
+                android:layout_marginRight="@dimen/dp12"
+                android:background="@color/C9"
+                android:gravity="center"
+                android:text="登录"
+                android:textColor="@color/C6"
+                android:textSize="@dimen/T3" />
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dp12"
+                android:layout_marginRight="@dimen/dp12"
+                android:layout_marginTop="10dp"
+                android:background="@color/holo_blue_light"
+                android:gravity="center"
+                android:text="注册"
+                android:textColor="@color/C6"
+                android:textSize="@dimen/T3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <include layout="@layout/copyright"></include>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 
     <ProgressBar
         android:id="@+id/progressBar_login"

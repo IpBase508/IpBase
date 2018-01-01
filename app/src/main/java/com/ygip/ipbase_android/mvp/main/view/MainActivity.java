@@ -2,7 +2,6 @@ package com.ygip.ipbase_android.mvp.main.view;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -17,25 +16,24 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 import com.orhanobut.logger.Logger;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.ygip.ipbase_android.App;
 import com.ygip.ipbase_android.R;
 import com.ygip.ipbase_android.mvp.dynamic.view.DynamicFragment;
 import com.ygip.ipbase_android.mvp.main.present.MainPresent;
 import com.ygip.ipbase_android.mvp.main.present.OnLoadListener;
 import com.ygip.ipbase_android.mvp.member.view.MemberFragment;
-import com.ygip.ipbase_android.mvp.mine.presenter.MinePresenter;
 import com.ygip.ipbase_android.mvp.mine.view.MineFragment;
 import com.ygip.ipbase_android.mvp.projects.view.ProjectsFragment;
 import com.ygip.ipbase_android.mvp.universalModel.UniversalModel;
 import com.ygip.ipbase_android.util.DialogUtils;
 import com.ygip.ipbase_android.util.ToastUtils;
-import com.ygip.ipbase_android.util.listener.OnActionListener;
 import com.ygip.ipbase_android.util.listener.OnDialogListener;
 
 import java.lang.annotation.Retention;
@@ -47,9 +45,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.base.XFragmentAdapter;
-import cn.droidlover.xdroidmvp.kit.SimpleCallback;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -99,20 +97,29 @@ public class MainActivity extends XActivity<MainPresent> {
     public static final int SUCCESS = 3;
     public static Boolean isSearchViewShow = false;
     public static SearchView searchView;
-    private int status=WAIT;
+    private int status = WAIT;
 
     public static Activity getInstance() {
         return instance;
     }
+
+
     public static void setSearchView(SearchView searchView, Boolean isSearchViewShow) {
         MainActivity.searchView = searchView;
         MainActivity.isSearchViewShow = isSearchViewShow;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
     }
 
     @IntDef({WAIT, LOADING, FAIL, SUCCESS})
     @Retention(RetentionPolicy.SOURCE)
     @interface AttendanceStatus {
     }//签到状态
+
 
     private void checkPermission() {
         PackageManager pm = getPackageManager();
@@ -137,7 +144,7 @@ public class MainActivity extends XActivity<MainPresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        instance=context;
+        instance = context;
 
         changeAttendanceStatus(WAIT);
         checkPermission();
@@ -196,7 +203,7 @@ public class MainActivity extends XActivity<MainPresent> {
     @Override
     protected void onResume() {
         super.onResume();
-        if (viewPager.getCurrentItem()==3&&MineFragment.requireRefresh){
+        if (viewPager.getCurrentItem() == 3 && MineFragment.requireRefresh) {
             fragments.get(3).onResume();
         }
     }
@@ -259,7 +266,7 @@ public class MainActivity extends XActivity<MainPresent> {
 
     @OnClick(R.id.progressbar_signin)
     public void onProgressbarSigninClicked() {
-        if (status==SUCCESS) {
+        if (status == SUCCESS) {
             ToastUtils.show("已签到");
             return;
         }
@@ -267,7 +274,7 @@ public class MainActivity extends XActivity<MainPresent> {
             ToastUtils.show("请连接到基地WIFI后开始签到");
             return;
         }
-        if (status==LOADING) {
+        if (status == LOADING) {
             ToastUtils.show("已开始签到");
             return;
         }
@@ -317,8 +324,8 @@ public class MainActivity extends XActivity<MainPresent> {
     }
 
     private void changeAttendanceStatus(@AttendanceStatus int status) {//签到状态
-        this.status=status;
-        new Handler(getMainLooper()).post(()->{
+        this.status = status;
+        new Handler(getMainLooper()).post(() -> {
             switch (status) {
                 case WAIT: {
                     tvSignin.setText("签到");
@@ -354,14 +361,13 @@ public class MainActivity extends XActivity<MainPresent> {
         });
     }
 
-    public static void showLogOut(String s){
-        if (instance==null)
-        {
-            new Handler(Looper.getMainLooper()).post(()->ToastUtils.show(s));
+    public static void showLogOut(String s) {
+        if (instance == null) {
+            new Handler(Looper.getMainLooper()).post(() -> ToastUtils.show(s));
             Logger.e("instance is null");
             return;
         }
-        instance.runOnUiThread(()->{
+        instance.runOnUiThread(() -> {
             DialogUtils.dialogDefault(instance, s, new OnDialogListener() {
                 @Override
                 public void positive() {
@@ -416,8 +422,10 @@ public class MainActivity extends XActivity<MainPresent> {
 
     @Override
     protected void onDestroy() {
-        instance=null;
-        getP().onDestory();
+        instance = null;
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroy();
     }
 }

@@ -108,7 +108,9 @@ public class MainPresent extends XPresent<MainActivity> {
     }
 
     public void onDestory(){
-        universalModel.cancelTask();
+        if (universalModel != null) {
+            universalModel.cancelTask();
+        }
     }
 
 }

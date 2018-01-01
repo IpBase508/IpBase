@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <include layout="@layout/titlebar"/>
-<cn.droidlover.xrecyclerview.XRecyclerContentLayout
-    android:id="@+id/recyclerContentLayout_dynamic"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</cn.droidlover.xrecyclerview.XRecyclerContentLayout>
+    <include layout="@layout/titlebar" />
+
+    <cn.droidlover.xrecyclerview.XRecyclerContentLayout
+        android:id="@+id/recyclerContentLayout_dynamic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </cn.droidlover.xrecyclerview.XRecyclerContentLayout>
 </LinearLayout>

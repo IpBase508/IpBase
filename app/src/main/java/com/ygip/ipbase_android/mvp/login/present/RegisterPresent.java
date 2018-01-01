@@ -23,7 +23,7 @@ public class RegisterPresent extends XPresent<RegisterActivity> {
     private UniversalModel universalModel;
     private Gson gson = UniversalModel.getGson();
 
-    public void register(String memberName, String password, String phoneNumber, String department,String grade) {
+    public void register(String memberName, String password, String phoneNumber, String department, String grade) {
         Map<String, String> registermap = new HashMap<>();
         registermap.put("memberName", memberName);
         registermap.put("password", password);
@@ -43,10 +43,10 @@ public class RegisterPresent extends XPresent<RegisterActivity> {
                         if (userVo != null) {
                             getV().showSuccess("注册成功", userVo);
                         } else
-                            getV().showFail(responseBean!=null?responseBean.getMsg():"");
+                            getV().showFail(responseBean != null ? responseBean.getMsg() : "");
                     } catch (Exception e1) {
                         e1.printStackTrace();
-                        getV().showFail(responseBean!=null?responseBean.getMsg():"");
+                        getV().showFail(responseBean != null ? responseBean.getMsg() : "");
                     }
                 } else {
                     getV().showFail(e != null ? e.getMessage() : "未知错误");
@@ -55,7 +55,9 @@ public class RegisterPresent extends XPresent<RegisterActivity> {
         });
     }
 
-    public void onDestory(){
-        universalModel.cancelTask();
+    public void onDestory() {
+        if (universalModel != null) {
+            universalModel.cancelTask();
+        }
     }
 }

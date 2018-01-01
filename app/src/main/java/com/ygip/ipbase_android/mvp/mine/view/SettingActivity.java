@@ -30,7 +30,7 @@ import cn.droidlover.xdroidmvp.mvp.XActivity;
  * 设置界面
  */
 
-public class SettingActivity extends XActivity<MinePresenter> implements MineCommon{
+public class SettingActivity extends XActivity<MinePresenter> implements MineCommon {
     @BindView(R.id.titlebar_tv_title)
     TextView titlebarTvTitle;
     @BindView(R.id.titlebar_ll_left)
@@ -45,15 +45,15 @@ public class SettingActivity extends XActivity<MinePresenter> implements MineCom
     RecyclerView recyclerViewSetting;
     private MineAdapter adapter;
     private ArrayList<String> data = new ArrayList<>();
-    private boolean isChange=false;
+    private boolean isChange = false;
 
     @Override
     public void initData(Bundle savedInstanceState) {
         initView();
-        data=getP().getMineData(MineAdapter.SETTING);
+        data = getP().getMineData(MineAdapter.SETTING);
 
         if (adapter == null) {
-            adapter = new MineAdapter(data,MineAdapter.SETTING,context);
+            adapter = new MineAdapter(data, MineAdapter.SETTING, context);
         } else {
             adapter.updateData(data);
         }
@@ -64,17 +64,16 @@ public class SettingActivity extends XActivity<MinePresenter> implements MineCom
         recyclerViewSetting.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
     }
 
-    void initView(){
+    void initView() {
         titlebarTvTitle.setText("设置中心");
         titlebarLlLeft.setVisibility(View.VISIBLE);
         titlebarLlRight.setVisibility(View.VISIBLE);
     }
 
 
-
     @Override
     protected void onResume() {
-        data=getP().getMineData(MineAdapter.SETTING);
+        data = getP().getMineData(MineAdapter.SETTING);
         adapter.updateData(data);
         super.onResume();
     }
@@ -96,12 +95,14 @@ public class SettingActivity extends XActivity<MinePresenter> implements MineCom
 
     @Override
     public void startActivity(Class clazz) {
-        StartActivityUtil.start(context,clazz);
+        StartActivityUtil.start(context, clazz);
     }
 
     @Override
     protected void onDestroy() {
-        getP().onDestory();
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroy();
     }
 

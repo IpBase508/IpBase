@@ -28,7 +28,7 @@ import cn.droidlover.xdroidmvp.mvp.XPresent;
  * Created by LockyLuo on 2017/11/2.
  */
 
-public class DynamicPresenter extends XPresent<DynamicFragment>{
+public class DynamicPresenter extends XPresent<DynamicFragment> {
     private UniversalModel<List<DynamicVo>> universalModel;
     private Gson gson = UniversalModel.getGson();
     private static List<DynamicVo> dynamics;
@@ -40,7 +40,7 @@ public class DynamicPresenter extends XPresent<DynamicFragment>{
         return dynamics;
     }
 
-    public void loadDynamics(Boolean callRefreshView){
+    public void loadDynamics(Boolean callRefreshView) {
         Type type = new TypeToken<List<DynamicVo>>() {
         }.getType();
         universalModel = new UniversalModel<>(type);
@@ -56,8 +56,8 @@ public class DynamicPresenter extends XPresent<DynamicFragment>{
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
-                }else {
-                    ToastUtils.show("刷新失败，显示缓存内容\n"+(e==null?" ":e.getMessage()));
+                } else {
+                    ToastUtils.show("刷新失败，显示缓存内容\n" + (e == null ? " " : e.getMessage()));
                     getV().setDynamics(getLocaldynamics());
                     Logger.d(e.getMessage());
                 }
@@ -65,8 +65,6 @@ public class DynamicPresenter extends XPresent<DynamicFragment>{
         });
 
     }
-
-
 
 
     public void save2db(List<DynamicVo> dynamics) {
@@ -90,12 +88,14 @@ public class DynamicPresenter extends XPresent<DynamicFragment>{
         }
     }
 
-    public List<DynamicVo> getLocaldynamics(){
-        dynamics=DataSupport.findAll(DynamicVo.class);
+    public List<DynamicVo> getLocaldynamics() {
+        dynamics = DataSupport.findAll(DynamicVo.class);
         return dynamics;
     }
 
-    public void onDestory(){
-        universalModel.cancelTask();
+    public void onDestory() {
+        if (universalModel != null) {
+            universalModel.cancelTask();
+        }
     }
 }

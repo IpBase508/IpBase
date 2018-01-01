@@ -51,7 +51,7 @@ import io.reactivex.functions.Consumer;
  * 我的界面
  */
 
-public class MineFragment extends XFragment<MinePresenter> implements MineCommon{
+public class MineFragment extends XFragment<MinePresenter> implements MineCommon {
     public final static int PICK_IMAGE_REQUEST_CODE = 1004;
 
     @BindView(R.id.iv_mine_head)
@@ -72,12 +72,11 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
     Unbinder unbinder;
 
 
-
     private MineAdapter adapter;
     private ArrayList<String> data = new ArrayList<>();
     private EventHandler eventHandler;
-    static boolean phoneNumberChecked=false;
-    public static Boolean requireRefresh=false;
+    static boolean phoneNumberChecked = false;
+    public static Boolean requireRefresh = false;
 
 
     @Override
@@ -86,17 +85,17 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
         data = new ArrayList<>();
         initView();
 
-        eventHandler=new EventHandler(){
+        eventHandler = new EventHandler() {
             @Override
             public void afterEvent(int event, int result, Object data) {
                 if (data instanceof Throwable) {
-                    Throwable throwable = (Throwable)data;
+                    Throwable throwable = (Throwable) data;
                     String msg = throwable.getMessage();
                     ToastUtils.show(msg);
                 } else {
                     if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                         // 处理
-                        phoneNumberChecked=true;
+                        phoneNumberChecked = true;
                         Logger.d(data);
                     }
                 }
@@ -145,7 +144,7 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
 
     @Override
     public void startActivity(Class clazz) {
-        StartActivityUtil.start(context,clazz);
+        StartActivityUtil.start(context, clazz);
     }
 
     @Override
@@ -183,11 +182,11 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
     }
 
 
-    private void updateData(){
+    private void updateData() {
         data = getP().getMineData(MineAdapter.MINE);
-        if (adapter!=null) {
+        if (adapter != null) {
             adapter.updateData(data);
-        }else {
+        } else {
             Logger.e("adapter is null");
         }
     }
@@ -215,7 +214,9 @@ public class MineFragment extends XFragment<MinePresenter> implements MineCommon
 
     @Override
     public void onDestroyView() {
-        getP().onDestory();
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroyView();
         unbinder.unbind();
     }

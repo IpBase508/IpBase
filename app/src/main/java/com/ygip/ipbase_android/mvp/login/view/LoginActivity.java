@@ -101,7 +101,7 @@ public class LoginActivity extends XActivity<LoginPresent> implements ICommon {
 
     @Override
     public void setStatusBarColor() {
-        super.setStatusBarColor();
+//        super.setStatusBarColor();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             Window window = getWindow();
@@ -225,8 +225,8 @@ public class LoginActivity extends XActivity<LoginPresent> implements ICommon {
         }
     }
 
-    public void show(String s){
-        new Handler(Looper.getMainLooper()).post(()->{
+    public void show(String s) {
+        new Handler(Looper.getMainLooper()).post(() -> {
             ToastUtils.show(s);
             progressBarLogin.setVisibility(View.GONE);
         });
@@ -234,7 +234,9 @@ public class LoginActivity extends XActivity<LoginPresent> implements ICommon {
 
     @Override
     protected void onDestroy() {
-        getP().onDestory();
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroy();
     }
 
@@ -260,6 +262,13 @@ public class LoginActivity extends XActivity<LoginPresent> implements ICommon {
     @OnClick(R.id.tv_forget_password)
     public void onTvForgetPasswordClicked() {
         StartActivityUtil.start(context, ChangePasswordActivity.class);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
+        setStatusBarColor();
     }
 
 

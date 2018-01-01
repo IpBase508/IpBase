@@ -63,10 +63,17 @@ public class DynamicFragment extends XFragment<DynamicPresenter> {
     private FindMemberAsync findMemberAsync;
     private XRecyclerView xRecyclerView;
 
+    @Override
+    public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
+        super.onMultiWindowModeChanged(isInMultiWindowMode);
+        getP().loadDynamics(true);
+    }
+
     public void setDynamics(List<DynamicVo> dynamics) {
         this.dynamics = dynamics;
         recyclerContentLayoutDynamic.postDelayed(() -> {
             adapter.setData(dynamics);
+            adapter.notifyDataSetChanged();
             recyclerContentLayoutDynamic.getSwipeRefreshLayout().setRefreshing(false);
         }, 100);
     }
@@ -160,7 +167,9 @@ public class DynamicFragment extends XFragment<DynamicPresenter> {
 
     @Override
     public void onDestroyView() {
-        getP().onDestory();
+        if (getP() != null) {
+            getP().onDestory();
+        }
         super.onDestroyView();
         unbinder.unbind();
     }

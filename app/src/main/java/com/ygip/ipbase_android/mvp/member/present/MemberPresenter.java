@@ -79,19 +79,25 @@ public class MemberPresenter extends XPresent<MemberFragment> {
                         if (memberList != null) {
                             memberList = sort(memberList);
                             if (callRefreshView) {
-                                getV().setMembers(memberList);
+                                if (getV()!=null) {
+                                    getV().setMembers(memberList);
+                                }
                             }
                             //持久化数据
                             save2db();
                         } else {
-                            getV().setMembers(getLocalMembers());
+                            if (getV()!=null) {
+                                getV().setMembers(getLocalMembers());
+                            }
                         }
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else {
-                    ToastUtils.show("刷新失败，显示缓存内容\n"+(e==null?"":e.getMessage()));
-                    getV().setMembers(getLocalMembers());
+                    ToastUtils.show("刷新失败，显示缓存内容\n" + (e == null ? "" : e.getMessage()));
+                    if (getV()!=null) {
+                        getV().setMembers(getLocalMembers());
+                    }
                     Logger.d(e.getMessage());
                 }
             }
@@ -103,7 +109,7 @@ public class MemberPresenter extends XPresent<MemberFragment> {
         List<UserVo> sortList = new ArrayList<>();
 
         for (int i = 1; i < departments.length; i++) {
-            List<UserVo> tempSortList=new ArrayList<>();
+            List<UserVo> tempSortList = new ArrayList<>();
             for (UserVo user : memberList) {
                 if (user.getDepartment().equals(departments[i])) {
                     tempSortList.add(user);
@@ -147,10 +153,9 @@ public class MemberPresenter extends XPresent<MemberFragment> {
 
     public List<UserVo> getLocalMembers() {
         memberList = DataSupport.findAll(UserVo.class);
-        memberList=sort(memberList);
+        memberList = sort(memberList);
         return memberList;
     }
-
 
 
     public void batchImportMembers(Uri uri) {
@@ -159,7 +164,7 @@ public class MemberPresenter extends XPresent<MemberFragment> {
         universalModel.postFileData(ApiUrl.Post.POST_FILE_URL, file, new ProgressListener() {
                     @Override
                     public void onProgress(long progressLength, long totalLength, boolean done) {
-                        new Handler(Looper.getMainLooper()).post(() -> ToastUtils.show("上传进度：%"+progressLength*100/totalLength));
+                        new Handler(Looper.getMainLooper()).post(() -> ToastUtils.show("上传进度：%" + progressLength * 100 / totalLength));
                     }
                 }
                 , new OnFileResponseListener() {
@@ -179,7 +184,7 @@ public class MemberPresenter extends XPresent<MemberFragment> {
                                             } else
                                                 ToastUtils.show("导入失败");
                                         } else
-                                            ToastUtils.show("导入失败"+e.getMessage());
+                                            ToastUtils.show("导入失败" + e.getMessage());
                                     } catch (Exception e1) {
                                         e1.printStackTrace();
                                     }
@@ -226,13 +231,15 @@ public class MemberPresenter extends XPresent<MemberFragment> {
         });
     }
 
-    public static View initChooseDeptSpinner(Activity activity){
+    public static View initChooseDeptSpinner(Activity activity) {
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
         View view = layoutInflater.inflate(R.layout.spinnerview, null);
         return view;
     }
 
-    public void onDestory(){
-        universalModel.cancelTask();
+    public void onDestory() {
+        if (universalModel != null) {
+            universalModel.cancelTask();
+        }
     }
 }

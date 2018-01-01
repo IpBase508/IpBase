@@ -27,25 +27,23 @@ import cn.droidlover.xdroidmvp.mvp.XPresent;
 public class NewProjectPresenter extends XPresent<NewProjectActivity> {
 
     private ProjectModel projectModel;
-    private UniversalModel<FileResponseBean> fileModel=new UniversalModel<>();
-    private UniversalModel universalModel=new UniversalModel();
-    private int count=0;
-    private int total=0;
+    private UniversalModel<FileResponseBean> fileModel = new UniversalModel<>();
+    private UniversalModel universalModel = new UniversalModel();
+    private int count = 0;
+    private int total = 0;
     public List<String> imagesUploaded = new ArrayList<>();
 
-    public ProjectUpload loadEditData(){
+    public ProjectUpload loadEditData() {
 
-        if(projectModel==null)
-        {
-            projectModel=ProjectModel.getInstance();
+        if (projectModel == null) {
+            projectModel = ProjectModel.getInstance();
         }
         return projectModel.getData();
     }
 
-    public void uploadProject(ProjectUpload project){
-        if(projectModel==null)
-        {
-            projectModel=ProjectModel.getInstance();
+    public void uploadProject(ProjectUpload project) {
+        if (projectModel == null) {
+            projectModel = ProjectModel.getInstance();
         }
         saveLocal(project);
         uploadImages(project);
@@ -53,48 +51,47 @@ public class NewProjectPresenter extends XPresent<NewProjectActivity> {
 
     }
 
-    public void uploadImages(ProjectUpload project){
-        List<String> imagesLocal=project.getImageUrl();
+    public void uploadImages(ProjectUpload project) {
+        List<String> imagesLocal = project.getImageUrl();
         imagesUploaded.clear();
-        count=0;
-        total=imagesLocal.size();
+        count = 0;
+        total = imagesLocal.size();
 //        imagesUploaded =new ArrayList<>();
 
-        if (imagesLocal==null)
-        {
+        if (imagesLocal == null) {
             Logger.e("uploadImages null");
             return;
         }
-        for (int i = 0; i <imagesLocal.size(); i++) {
-            File file=null;
+        for (int i = 0; i < imagesLocal.size(); i++) {
+            File file = null;
             try {
-                file=new File(imagesLocal.get(i));
+                file = new File(imagesLocal.get(i));
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (file==null)
-            {
-                Logger.e("file err",imagesLocal);
+            if (file == null) {
+                Logger.e("file err", imagesLocal);
                 return;
             }
-            fileModel.postFileData(ApiUrl.Post.POST_FILE_URL,file,new ProgressListener() {
+            fileModel.postFileData(ApiUrl.Post.POST_FILE_URL, file, new ProgressListener() {
                 @Override
                 public void onProgress(long progressLength, long totalLength, boolean done) {
-                    getV().setProgress(progressLength,totalLength);
-                }},new OnFileResponseListener() {
+                    getV().setProgress(progressLength, totalLength);
+                }
+            }, new OnFileResponseListener() {
                 @Override
                 public void onFinish(FileResponseBean fileResponseBean, Exception e) {
                     count++;
                     try {
                         imagesUploaded.add(fileResponseBean.getFile_path());
-                        Logger.d("count "+"total "+total);
+                        Logger.d("count " + "total " + total);
                         Logger.d(imagesLocal);
-                        if (count==total){
+                        if (count == total) {
                             project.setImageUrl(imagesUploaded);
                             uploadAll(project);
                         }
                     } catch (Exception e1) {
-                        getV().runOnUiThread(()-> ToastUtils.show("上传失败"));
+                        getV().runOnUiThread(() -> ToastUtils.show("上传失败"));
                         e1.printStackTrace();
                     }
                 }
@@ -102,35 +99,36 @@ public class NewProjectPresenter extends XPresent<NewProjectActivity> {
         }
     }
 
-    private void uploadAll(ProjectUpload project){
+    private void uploadAll(ProjectUpload project) {
         Logger.d(UniversalModel.getGson().toJson(project));
         universalModel.postData(ApiUrl.Post.POST_PROJECT_URL, project, new OnResponseListener() {
             @Override
             public void onFinish(UniversalResponseBean responseBean, Exception e) {
-                if (e==null) {
+                if (e == null) {
 
-                    if (responseBean.getCode()==200){
-                        getV().toast(responseBean.getMsg(),true);
-                        ProjectsFragment.requireRefresh=true;
-                    }else {
-                        getV().toast(responseBean.getMsg(),false);
+                    if (responseBean.getCode() == 200) {
+                        getV().toast(responseBean.getMsg(), true);
+                        ProjectsFragment.requireRefresh = true;
+                    } else {
+                        getV().toast(responseBean.getMsg(), false);
                     }
                 } else {
-                    getV().toast(e.getMessage(),false);
+                    getV().toast(e.getMessage(), false);
                 }
             }
         });
     }
 
-    public void saveLocal(ProjectUpload project){
-        if(projectModel==null)
-        {
-            projectModel=ProjectModel.getInstance();
+    public void saveLocal(ProjectUpload project) {
+        if (projectModel == null) {
+            projectModel = ProjectModel.getInstance();
         }
         projectModel.saveLocalData(project);
     }
 
-    public void onDestory(){
-        universalModel.cancelTask();
+    public void onDestory() {
+        if (universalModel != null) {
+            universalModel.cancelTask();
+        }
     }
 }

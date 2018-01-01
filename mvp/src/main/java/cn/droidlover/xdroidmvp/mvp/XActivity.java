@@ -2,11 +2,14 @@ package cn.droidlover.xdroidmvp.mvp;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -34,6 +37,8 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
 
     private Unbinder unbinder;
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,14 +55,13 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
             setContentView(getLayoutId());
             bindUI(null);
             bindEvent();
-            setStatusBarColor();
-
+//            setStatusBarColor();
         }
         initData(savedInstanceState);
     }
 
     public void setStatusBarColor(){
-        StatusBarUtils.setStatusBarColor(this, R.color.white);
+//        StatusBarUtils.setStatusBarColor(this, R.color.app_color);
     }
 
     @Override
